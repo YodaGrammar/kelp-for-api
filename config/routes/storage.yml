@@ -1,0 +1,3 @@
+kelp.storage:
+    path: /storage
+    controller: App\Controller\StorageController::homeAction
