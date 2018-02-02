@@ -1,0 +1,3 @@
+kelp.home:
+    path: /
+    controller: App\Controller\HomeController::homeAction
