@@ -1,0 +1,28 @@
+version: '2'
+services:
+    db:
+        image: mariadb:10.3
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: kelp
+            MYSQL_USER: kelp
+            MYSQL_PASSWORD: symfony
+    app:
+        image: dockerphp/nginx:7.2-stretch
+        depends_on:
+            - db
+        volumes:
+            - .:/app
+            - ./docker/nginx.conf:/etc/nginx/nginx.conf
+        ports:
+            - "443:443"
+    pma:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - "127.0.0.1:8081:82"

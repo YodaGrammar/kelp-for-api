@@ -5,6 +5,8 @@
 /var/
 /vendor/
 .idea/
+supervisord.*
+*.DS_Store
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
