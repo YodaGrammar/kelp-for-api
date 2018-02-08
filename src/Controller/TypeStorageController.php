@@ -6,17 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class HomeController
+ * Class TypeStorageController
  * @package App\Controller
  */
-class HomeController extends Controller
+class TypeStorageController extends Controller
 {
     /**
      * @return Response
      * @throws \LogicException
      */
-    public function homeAction():Response
+    public function listAction():Response
     {
-        return $this->render('home/home.html.twig');
+        return $this->renderView();
+    }
+
+    public function createAction()
+    {
+
     }
 }
