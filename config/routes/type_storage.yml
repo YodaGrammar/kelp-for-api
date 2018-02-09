@@ -1,0 +1,3 @@
+kelp.type_storage:
+    path: /type_storage
+    controller: App\Controller\TypeStorageController::listAction
