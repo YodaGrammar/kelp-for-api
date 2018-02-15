@@ -1,7 +1,7 @@
 <?php
-namespace Kelp\AppBundle\Form;
+namespace App\Form;
 
-use Kelp\AppBundle\DTO\SearchUserDTO;
+use App\DTO\SearchUserDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

@@ -1,5 +1,5 @@
 <?php
-namespace Kelp\AppBundle\DTO;
+namespace App\DTO;
 
 class SearchUserDTO
 {

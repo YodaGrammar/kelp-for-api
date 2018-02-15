@@ -1,11 +1,12 @@
 <?php
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SearchTypeStorageDTO
 {
     /**
-     *Assert\NotNull
+     *@Assert\NotNull
      */
     public $text;
 }
