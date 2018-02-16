@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\FormHandler\TypeStorageFilterFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,18 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
 class TypeStorageController extends Controller
 {
     /**
+     * @param Request $request
+     * @param TypeStorageFilterFormHandler $typeStorageFilterFormHandler
      * @return Response
-     * @throws \LogicException
      */
-    public function listAction():Response
+    public function listAction(Request $request, TypeStorageFilterFormHandler $typeStorageFilterFormHandler): Response
     {
-        return $this->render('type_storage/list.html.twig', []);
+        return $this->render('type_storage/list.html.twig', [
+            'pager' => $typeStorageFilterFormHandler->process($request),
+            'form'  => $typeStorageFilterFormHandler->getForm()->createView(),
+        ]);
     }
 
     /**
      * Creates a new program.
      *
-     * @param Request             $request            the current http request
+     * @param Request $request the current http request
      *
      * @return Response
      */
@@ -39,8 +44,9 @@ class TypeStorageController extends Controller
 //            return $this->redirectToRoute('app_program_list');
 //        }
 
-        return $this->render('type_stotage/create.html.twig', [
-            'form' => $programFormHandler->getForm()->createView(),
-        ]);
+        return $this->render('type_storage/list.html.twig', []);
+//        return $this->render('type_storage/create.html.twig', [
+//            'form' => $programFormHandler->getForm()->createView(),
+//        ]);
     }
 }
