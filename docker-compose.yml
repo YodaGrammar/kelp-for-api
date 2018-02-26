@@ -1,7 +1,8 @@
-version: '2'
+version: '3.3'
 services:
     db:
-        image: mariadb:10.3
+        image: mariadb
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: kelp
@@ -9,7 +10,7 @@ services:
             MYSQL_PASSWORD: symfony
     app:
         image: dockerphp/nginx:7.2-stretch
-        depends_on:
+        links:
             - db
         volumes:
             - .:/app
@@ -18,11 +19,12 @@ services:
             - "443:443"
     pma:
         image: phpmyadmin/phpmyadmin
-        depends_on:
+        restart: always
+        links:
             - db
         environment:
             PMA_HOST: db
             PMA_USER: root
             PMA_PASSWORD: root
         ports:
-            - "127.0.0.1:8081:82"
+          - 8080:80

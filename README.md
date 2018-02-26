@@ -3,7 +3,7 @@
 
 start docker project
 ```bash
-docker-compose up
+docker-compose up -d
 
 pour passer en mode console
 ```bash

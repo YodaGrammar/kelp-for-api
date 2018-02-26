@@ -1,18 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b.tarall
- * Date: 22/02/2018
- * Time: 12:40
- */
 
 namespace App\Mapper;
+
+use App\DTO\FilterTypeStorageDTO;
 use App\DTO\TypeStorageDTO;
 use App\Entity\Repository\TypeStorageRepository;
 use App\Entity\TypeStorage;
 use App\Factory\TypeStorageFactory;
 use Doctrine\Common\Persistence\ObjectManager;
-
 
 /**
  * Class TypeStorageDoctrineMapper
@@ -32,29 +27,39 @@ class TypeStorageMapper
      */
     protected $typeStorageFactory;
 
-
+    /**
+     * TypeStorageMapper constructor.
+     * @param ObjectManager $objectManager
+     * @param TypeStorageFactory $typeStorageFactory
+     */
     public function __construct(ObjectManager $objectManager, TypeStorageFactory $typeStorageFactory)
     {
-        $this->objectManager = $objectManager;
+        $this->objectManager      = $objectManager;
         $this->typeStorageFactory = $typeStorageFactory;
-
     }
 
     /**
      * @return TypeStorageRepository
      */
-    protected function getRepository():TypeStorageRepository
+    protected function getRepository(): TypeStorageRepository
     {
         return $this->objectManager->getRepository(TypeStorage::class);
     }
 
     /**
-     * @param string $text
-     * @return mixed
+     * @return array
      */
-    public function findAllByFilters(string $text = null)
+    public function findAll()
     {
-        return $this->getRepository()->findBySearch($text);
+        return $this->getRepository()->findAll();
+    }
+
+    /**
+     * @param FilterTypeStorageDTO|null $typeStorageDTO
+     */
+    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page)
+    {
+        return $this->getRepository()->findBySearch($typeStorageDTO->text);
     }
 
     /**
@@ -83,7 +88,7 @@ class TypeStorageMapper
     }
 
     /**
-     * @param string         $idTypeStorage
+     * @param string $idTypeStorage
      * @param TypeStorageDTO $dto
      */
     public function edit(string $idTypeStorage, TypeStorageDTO $dto)
