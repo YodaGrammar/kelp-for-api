@@ -1,7 +1,7 @@
 <?php
 namespace App\Form;
 
-use App\DTO\SearchTypeStorageDTO ;
+use App\DTO\FilterTypeStorageDTO ;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @package Kelp\AppBundle\Form
  */
-class SearchTypeStorageType extends AbstractType
+class FilterTypeStorageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -31,6 +31,6 @@ class SearchTypeStorageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data', SearchTypeStorageDTO::class);
+        $resolver->setDefault('data', FilterTypeStorageDTO::class);
     }
 }

@@ -3,7 +3,7 @@ namespace App\DTO;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class SearchTypeStorageDTO
+class FilterTypeStorageDTO
 {
     /**
      *@Assert\NotNull
