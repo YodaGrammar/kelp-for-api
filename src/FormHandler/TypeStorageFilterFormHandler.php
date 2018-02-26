@@ -72,7 +72,6 @@ class TypeStorageFilterFormHandler
      */
     public function process(Request $request)
     {
-        dump($this->typeStorageMapper->findAll());die;
         $filter = $this->filterTypeStorageDTOFactory;
 
 //        if (false === $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {

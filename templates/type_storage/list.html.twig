@@ -3,10 +3,35 @@
     {{ parent() }}
 {% endblock %}
 {% block content %}
-        <h1>Setting Type Storage</h1>
+        <h1>Type Storage</h1>
 
     <div class="card ">
         vos storage
+        <table>
+            <thead>
+                <th>
+                    <td>Label</td>
+                    <td>class</td>
+                    <td>Action</td>
+                </th>
+            </thead>
+            <tbody>
+            {% for typeStorage in pager %}
+                <tr>
+                    <td>
+                        {{ typeStorage.label }}
+                    </td>
+                    <td>
+                        {{ typeStorage.class }}
+                    </td>
+                    <td>
+                        action
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
     </div>
 
 {% endblock %}

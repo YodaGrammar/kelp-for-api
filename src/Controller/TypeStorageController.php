@@ -45,7 +45,7 @@ class TypeStorageController extends Controller
 //            return $this->redirectToRoute('app_program_list');
 //        }
 
-        return $this->render('type_storage/list.html.twig', []);
+        return $this->render('type_storage/create.html.twig', []);
 //        return $this->render('type_storage/create.html.twig', [
 //            'form' => $programFormHandler->getForm()->createView(),
 //        ]);

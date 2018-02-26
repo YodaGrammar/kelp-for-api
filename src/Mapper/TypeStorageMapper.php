@@ -56,10 +56,12 @@ class TypeStorageMapper
 
     /**
      * @param FilterTypeStorageDTO|null $typeStorageDTO
+     * @param $page
+     * @return mixed
      */
-    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page)
+    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page = null)
     {
-        return $this->getRepository()->findBySearch($typeStorageDTO->text);
+        return $this->getRepository()->findAllByFilters($typeStorageDTO->text, $page);
     }
 
     /**
