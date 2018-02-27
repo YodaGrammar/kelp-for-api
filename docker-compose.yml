@@ -8,6 +8,8 @@ services:
             MYSQL_DATABASE: kelp
             MYSQL_USER: kelp
             MYSQL_PASSWORD: symfony
+        ports:
+          - "3316:3306"
     app:
         image: dockerphp/nginx:7.2-stretch
         links:
@@ -27,4 +29,4 @@ services:
             PMA_USER: root
             PMA_PASSWORD: root
         ports:
-          - 8080:80
+          - "8080:80"

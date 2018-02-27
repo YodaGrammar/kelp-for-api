@@ -4,17 +4,19 @@ namespace App\Mapper;
 
 use App\DTO\FilterTypeStorageDTO;
 use App\DTO\TypeStorageDTO;
+use App\Entity\Repository\StorageRepository;
 use App\Entity\Repository\TypeStorageRepository;
 use App\Entity\TypeStorage;
+use App\Factory\StorageFactory;
 use App\Factory\TypeStorageFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class TypeStorageMapper
+ * Class StorageMapper
  *
  * @package Kelp\AppBundle\Mapper
  */
-class TypeStorageMapper
+class StorageMapper
 {
 
     /**
@@ -25,25 +27,25 @@ class TypeStorageMapper
     /**
      * @var TypeStorageFactory
      */
-    protected $typeStorageFactory;
+    protected $storageFactory;
 
     /**
-     * TypeStorageMapper constructor.
+     * StorageMapper constructor.
      * @param ObjectManager $objectManager
-     * @param TypeStorageFactory $typeStorageFactory
+     * @param StorageFactory $storageFactory
      */
-    public function __construct(ObjectManager $objectManager, TypeStorageFactory $typeStorageFactory)
+    public function __construct(ObjectManager $objectManager, StorageFactory $storageFactory)
     {
-        $this->objectManager      = $objectManager;
-        $this->typeStorageFactory = $typeStorageFactory;
+        $this->objectManager  = $objectManager;
+        $this->storageFactory = $storageFactory;
     }
 
     /**
-     * @return TypeStorageRepository
+     * @return StorageRepository
      */
-    protected function getRepository(): TypeStorageRepository
+    protected function getRepository(): StorageRepository
     {
-        return $this->objectManager->getRepository(TypeStorage::class);
+        return $this->objectManager->getRepository(Storage::class);
     }
 
     /**
