@@ -4,61 +4,137 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class User
- * @package App\Entity
  * @ORM\Table(name="kelp_user")
  * @ORM\Entity(repositoryClass="App\Entity\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
-     * @ORM\Id
      * @ORM\Column(type="integer")
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-     * Many User have Many Type Storage.
-     * @ORM\ManyToMany(targetEntity="TypeStorage")
-     * @ORM\JoinTable(name="kelp_user_type_storage",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="type_storage_id", referencedColumnName="id")}
-     *      )
+     * @ORM\Column(type="string", length=25, unique=true)
      */
-    protected $typeStorages;
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     /**
      * @ORM\OneToMany(targetEntity="Storage", mappedBy="user")
      **/
-    protected $storages;
+    private $storages;
 
-    /**
-     * User constructor.
-     */
     public function __construct()
     {
-        parent::__construct();
-        $this->typeStorages = new ArrayCollection();
-        $this->storages     = new ArrayCollection();
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid('', true));
+        /**
+         * User constructor.
+         */
+        $this->storages = new ArrayCollection();
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize([
+                             $this->id,
+                             $this->username,
+                             $this->password,
+                             // see section on salt below
+                             // $this->salt,
+                         ]);
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 
     /**
      * @return mixed
      */
-    public function getTypeStorages()
+    public function getId()
     {
-        return $this->typeStorages;
+        return $this->id;
     }
 
     /**
-     * @param mixed $typeStorages
+     * @param mixed $id
      */
-    public function setTypeStorages($typeStorages)
+    public function setId($id): void
     {
-        $this->typeStorages = $typeStorages;
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
     }
 
     /**
@@ -72,8 +148,24 @@ class User
     /**
      * @param mixed $storages
      */
-    public function setStorages($storages)
+    public function setStorages($storages): void
     {
         $this->storages = $storages;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }
