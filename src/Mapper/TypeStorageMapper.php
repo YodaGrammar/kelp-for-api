@@ -49,19 +49,20 @@ class TypeStorageMapper
     /**
      * @return array
      */
-    public function findAll()
+    public function findAll():array
     {
         return $this->getRepository()->findAll();
     }
 
     /**
      * @param FilterTypeStorageDTO|null $typeStorageDTO
-     * @param $page
+     * @param null $page
+     * @param null $maxPage
      * @return mixed
      */
-    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page = null)
+    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page = null, $maxPage = null)
     {
-        return $this->getRepository()->findAllByFilters($typeStorageDTO->text, $page);
+        return $this->getRepository()->findAllByFilters($typeStorageDTO->text, $page, $maxPage);
     }
 
     /**
@@ -71,12 +72,13 @@ class TypeStorageMapper
     {
         $typeStorage = $this->typeStorageFactory->newInstance($dto);
         $this->objectManager->persist($typeStorage);
-        $this->objectManager->flush($typeStorage);
+        $this->objectManager->flush();
     }
 
     /**
      * @param string $idTypeStorage
-     * @return TypeStorage
+     * @return TypeStorage|null|object
+     * @throws \LogicException
      */
     public function find(string $idTypeStorage)
     {
@@ -92,6 +94,7 @@ class TypeStorageMapper
     /**
      * @param string $idTypeStorage
      * @param TypeStorageDTO $dto
+     * @throws \LogicException
      */
     public function edit(string $idTypeStorage, TypeStorageDTO $dto)
     {
@@ -108,6 +111,7 @@ class TypeStorageMapper
 
     /**
      * @param $id
+     * @throws \LogicException
      */
     public function delete($id)
     {
