@@ -9,6 +9,7 @@ security:
                 # manager_name: customer
     firewalls:
         main:
+            anonymous: ~
             pattern:    ^/
             http_basic: ~
             provider: kelp_user

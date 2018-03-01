@@ -46,11 +46,11 @@ class StorageFilterFormHandler implements FormHandlerInterface
 
     /**
      * StorageFilterFormHandler constructor.
-     * @param FilterStorageDTOFactory $dtoFactory
-     * @param TypeStorageMapper $typeStorageMapper
-     * @param StorageMapper $storageMapper
-     * @param FormFactoryInterface $factory
-     * @param TokenStorageInterface $tokenStorage
+     * @param FilterStorageDTOFactory       $dtoFactory
+     * @param TypeStorageMapper             $typeStorageMapper
+     * @param StorageMapper                 $storageMapper
+     * @param FormFactoryInterface          $factory
+     * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
@@ -67,7 +67,7 @@ class StorageFilterFormHandler implements FormHandlerInterface
         $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class,
-            $this->filterStorageDTOFactory
+            $this->dtoFactory
         );
         $this->tokenStorage         = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
