@@ -72,11 +72,11 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
      */
     public function process(Request $request)
     {
-        $filter = $this->filterTypeStorageDTOFactory;
+        $filter = $this->dtoFactory;
 
-        if (false === $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
-            $filter->setUser($this->tokenStorage->getToken()->getUser());
-        }
+//        if (false === $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
+//            $filter->setUser($this->tokenStorage->getToken()->getUser());
+//        }
 
         $this->form->setData($filter);
         $this->form->handleRequest($request);
