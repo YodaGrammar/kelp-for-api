@@ -25,6 +25,7 @@ class SearchUserType extends AbstractType
             ->add('text', TextType::class, ['required' => false])
             ->add('role', TextType::class, ['required' => false])
             ->add('submit', SubmitType::class, ['label' => 'search']);
+        $options;
     }
 
     /**

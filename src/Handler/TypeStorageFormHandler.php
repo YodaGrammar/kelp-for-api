@@ -46,15 +46,23 @@ class TypeStorageFormHandler
 //     * @param EventDispatcherInterface $eventDispatcher
 //     * @param LoggerInterface          $logger
 //     */
-//    public function __construct(FormFactoryInterface $factory, UserManager $userManager, TokenStorageInterface $tokenStorage, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger)
+//    public function __construct(
+//        FormFactoryInterface $factory,
+//        UserManager $userManager,
+//        TokenStorageInterface $tokenStorage,
+//        EventDispatcherInterface $eventDispatcher,
+//        LoggerInterface $logger
+//    )
 //    {
-//        $this->form = $factory->createNamed('app_program', ProgramFormType::class, null, ['validation_groups' => ['program']]);
-//        $this->userManager = $userManager;
-//        $this->tokenStorage = $tokenStorage;
+//        $this->form            = $factory->createNamed('app_program',
+//                                                       ProgramFormType::class, null,
+//                                                       ['validation_groups' => ['program']]);
+//        $this->userManager     = $userManager;
+//        $this->tokenStorage    = $tokenStorage;
 //        $this->eventDispatcher = $eventDispatcher;
-//        $this->logger = $logger;
+//        $this->logger          = $logger;
 //    }
-//
+
 //    /**
 //     * process.
 //     *

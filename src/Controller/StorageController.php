@@ -20,11 +20,11 @@ class StorageController extends Controller
      *
      * @return Response
      */
-    public function listAction(Request $request, StorageFilterFormHandler $storageFilterFormHandler):Response
+    public function listAction(Request $request, StorageFilterFormHandler $formHandler):Response
     {
         return $this->render('storage/list.html.twig', [
-            'pager' => $storageFilterFormHandler->process($request),
-//            'form' => $programFilterFormHandler->getForm()->createView(),
+            'pager' => $formHandler->process($request),
+//            'form' => $formHandler->getForm()->createView(),
         ]);
     }
 }

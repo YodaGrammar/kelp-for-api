@@ -1,15 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b.tarall
- * Date: 01/03/2018
- * Time: 13:42
- */
 
 namespace App\DTOFactory;
 
+use App\DTO\UserDTO;
 
-class UserDTOFactory
+/**
+ * Class UserDTOFactory
+ * @package App\DTOFactory
+ */
+class UserDTOFactory implements DTOFactoryInterface
 {
-
+    /**
+     * @return UserDTO
+     */
+    public function newInstance():UserDTO
+    {
+        return new UserDTO();
+    }
 }

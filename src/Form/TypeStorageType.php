@@ -1,7 +1,6 @@
 <?php
 namespace App\Form;
 
-
 use App\DTO\TypeStorageDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -38,6 +37,7 @@ class TypeStorageType extends AbstractType
                 TextareaType::class,
                 ['required' => false]
             );
+        $options;
     }
 
     /**

@@ -26,6 +26,7 @@ class StorageType extends AbstractType
                 TextType::class,
                 ['required' => false]
             );
+        $options;
     }
 
     /**

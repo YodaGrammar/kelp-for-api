@@ -8,6 +8,8 @@ use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * Class StorageFilterFormHandler
@@ -40,44 +42,44 @@ class StorageFilterFormHandler implements FormHandlerInterface
     /**
      * @var FilterStorageDTOFactory
      */
-    protected $filterStorageDTOFactory;
+    protected $dtoFactory;
 
     /**
-     * TypeStorageFilterFormHandler constructor.
-     * @param FormFactoryInterface $factory
-     * @param FilterStorageDTOFactory $filterStorageDTOFactory
+     * StorageFilterFormHandler constructor.
+     * @param FilterStorageDTOFactory $dtoFactory
      * @param TypeStorageMapper $typeStorageMapper
      * @param StorageMapper $storageMapper
+     * @param FormFactoryInterface $factory
+     * @param TokenStorageInterface $tokenStorage
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
-                                FilterStorageDTOFactory $filterStorageDTOFactory,
-                                TypeStorageMapper $typeStorageMapper,
-                                StorageMapper $storageMapper,
-                                FormFactoryInterface $factory
-//                                TokenStorageInterface $tokenStorage,
-//                                AuthorizationCheckerInterface $authorizationChecker
-    )
-    {
-        $this->filterStorageDTOFactory = $filterStorageDTOFactory->newInstance();
-        $this->typeStorageMapper = $typeStorageMapper;
-        $this->storageMapper     = $storageMapper;
-        $this->form                        = $factory->createNamed(
+        FilterStorageDTOFactory $dtoFactory,
+        TypeStorageMapper $typeStorageMapper,
+        StorageMapper $storageMapper,
+        FormFactoryInterface $factory,
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $this->dtoFactory           = $dtoFactory->newInstance();
+        $this->typeStorageMapper    = $typeStorageMapper;
+        $this->storageMapper        = $storageMapper;
+        $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class,
             $this->filterStorageDTOFactory
         );
-//        $this->tokenStorage                = $tokenStorage;
-//        $this->authorizationChecker        = $authorizationChecker;
+        $this->tokenStorage         = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @param Request $request
      * @return array
      */
-    public function process(Request $request):array
+    public function process(Request $request): array
     {
 
         return ['typeStorages' => $this->typeStorageMapper->findAll()];
     }
-
 }

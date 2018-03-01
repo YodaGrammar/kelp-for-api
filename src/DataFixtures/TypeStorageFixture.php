@@ -39,5 +39,4 @@ class TypeStorageFixture extends Fixture
         }
         $manager->flush();
     }
-
 }

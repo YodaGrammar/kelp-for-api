@@ -13,13 +13,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class UserDTO
  *
- * @package Kelp\AppBundle\DTO
+ * @package App\DTO
  */
 class UserDTO
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Type("array")
+     * @Assert\Email()
      */
-    public $roles;
+    public $email;
+
+    /**
+     * @Assert\NotBlank()
+     */
+    public $username;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    public $plainPassword;
 }

@@ -8,8 +8,12 @@
 
 namespace App\FormHandler;
 
+use Symfony\Component\HttpFoundation\Request;
 
-class TypeStorageFormHandler
+class TypeStorageFormHandler implements FormHandlerInterface
 {
-
+    public function process(Request $request)
+    {
+        // TODO: Implement process() method.
+    }
 }

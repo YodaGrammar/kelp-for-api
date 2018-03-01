@@ -13,7 +13,7 @@ class FilterTypeStorageDTOFactory implements DTOFactoryInterface
     /**
      * @return FilterTypeStorageDTO
      */
-    public function newInstance()
+    public function newInstance():FilterTypeStorageDTO
     {
         return new FilterTypeStorageDTO();
     }

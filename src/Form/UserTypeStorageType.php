@@ -43,6 +43,7 @@ class UserTypeStorageType extends AbstractType
                 'expanded' => true,
             ]
         );
+        $options;
     }
 
     /**

@@ -13,8 +13,10 @@ use App\Form\FilterTypeStorageType;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class TypeStorageFilterFormHandler
+class TypeStorageFilterFormHandler implements FormHandlerInterface
 {
     use FormHandlerTrait;
 
@@ -36,47 +38,45 @@ class TypeStorageFilterFormHandler
     /**
      * @var FilterTypeStorageDTOFactory
      */
-    protected $filterTypeStorageDTOFactory;
+    protected $dtoFactory;
 
     /**
      * TypeStorageFilterFormHandler constructor.
      * @param FormFactoryInterface $factory
-     * @param FilterTypeStorageDTOFactory $filterTypeStorageDTOFactory
+     * @param FilterTypeStorageDTOFactory $dtoFactory
      * @param TypeStorageMapper $typeStorageMapper
+     * @param TokenStorageInterface $tokenStorage
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(FormFactoryInterface $factory,
-                                FilterTypeStorageDTOFactory $filterTypeStorageDTOFactory,
-                                TypeStorageMapper $typeStorageMapper
-//                                TokenStorageInterface $tokenStorage,
-//                                AuthorizationCheckerInterface $authorizationChecker
-    )
-    {
-
-        $this->filterTypeStorageDTOFactory = $filterTypeStorageDTOFactory->newInstance();
+    public function __construct(
+        FormFactoryInterface $factory,
+        FilterTypeStorageDTOFactory $dtoFactory,
+        TypeStorageMapper $typeStorageMapper,
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $this->dtoFactory = $dtoFactory->newInstance();
         $this->form                        = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class,
-            $this->filterTypeStorageDTOFactory
+            $this->dtoFactory
         );
         $this->typeStorageMapper           = $typeStorageMapper;
-//        $this->tokenStorage                = $tokenStorage;
-//        $this->authorizationChecker        = $authorizationChecker;
+        $this->tokenStorage                = $tokenStorage;
+        $this->authorizationChecker        = $authorizationChecker;
     }
 
     /**
-     * Process.
-     *
      * @param Request $request
-     *
-     * @return Pagerfanta
+     * @return mixed
      */
     public function process(Request $request)
     {
         $filter = $this->filterTypeStorageDTOFactory;
 
-//        if (false === $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
-//            $filter->setUser($this->tokenStorage->getToken()->getUser());
-//        }
+        if (false === $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
+            $filter->setUser($this->tokenStorage->getToken()->getUser());
+        }
 
         $this->form->setData($filter);
         $this->form->handleRequest($request);
@@ -87,5 +87,4 @@ class TypeStorageFilterFormHandler
 
         return $this->typeStorageMapper->findAllByFilters($filter, $request->get('page', 1));
     }
-
 }
