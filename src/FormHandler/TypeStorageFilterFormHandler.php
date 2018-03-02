@@ -20,6 +20,8 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
 {
     use FormHandlerTrait;
 
+    private const MAX_PAGE = 15;
+
     /**
      * @var TypeStorageMapper
      */
@@ -70,7 +72,7 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
      * @param Request $request
      * @return mixed
      */
-    public function process(Request $request)
+    public function process(Request $request):array
     {
         $filter = $this->dtoFactory;
 
@@ -84,7 +86,16 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $filter = $this->form->getData();
         }
+        $typeStorages = $this->typeStorageMapper->findAllByFilters($filter, $request->get('page', 1),self::MAX_PAGE);
 
-        return $this->typeStorageMapper->findAllByFilters($filter, $request->get('page', 1));
+        $pagination = [
+            'page'        => $request->get('page', 1),
+            'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
+            'nomRoute'    => 'kelp.type_storage',
+            'paramsRoute' => [],
+        ];
+
+        return ['pagination' => $pagination,
+                'typeStorages' => $typeStorages ];
     }
 }
