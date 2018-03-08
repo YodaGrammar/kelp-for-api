@@ -44,6 +44,9 @@ class User implements UserInterface, \Serializable
      **/
     private $storages;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->isActive = true;
@@ -55,11 +58,25 @@ class User implements UserInterface, \Serializable
         $this->storages = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function getUsername()
     {
         return $this->username;
     }
 
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return null|string
+     */
     public function getSalt()
     {
         // you *may* need a real salt depending on your encoder
@@ -67,16 +84,33 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword()
     {
         return $this->password;
     }
 
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return array
+     */
     public function getRoles()
     {
         return ['ROLE_USER'];
     }
 
+    /**
+     *
+     */
     public function eraseCredentials()
     {
     }
@@ -84,13 +118,15 @@ class User implements UserInterface, \Serializable
     /** @see \Serializable::serialize() */
     public function serialize()
     {
-        return serialize([
-                             $this->id,
-                             $this->username,
-                             $this->password,
-                             // see section on salt below
-                             // $this->salt,
-                         ]);
+        return serialize(
+            [
+                $this->id,
+                $this->username,
+                $this->password,
+                // see section on salt below
+                // $this->salt,
+            ]
+        );
     }
 
     /** @see \Serializable::unserialize() */

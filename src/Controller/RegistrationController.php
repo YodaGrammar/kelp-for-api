@@ -10,8 +10,9 @@
 // src/Controller/RegistrationController.php
 namespace App\Controller;
 
-use App\Form\UserType;
+use App\DTO\UserDTO;
 use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,25 +32,28 @@ class RegistrationController extends Controller
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         // 1) build the form
-        $user = new User();
+        $user = new UserDTO();
         $form = $this->createForm(UserType::class, $user);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $registerUser = new User();
+            $registerUser->setEmail($user->email);
+            $registerUser->setUsername($user->username);
             // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+            $password = $passwordEncoder->encodePassword($registerUser, $user->plainPassword);
+            $registerUser->setPassword($password);
 
             // 4) save the User!
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($user);
-//            $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($registerUser);
+            $em->flush();
 
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('replace_with_some_route');
+            return $this->redirectToRoute('kelp.home');
         }
 
         return $this->render(

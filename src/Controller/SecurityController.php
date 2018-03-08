@@ -12,27 +12,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Class SecurityController
+ * @package App\Controller
+ */
 class SecurityController extends Controller
 {
-
-    public function loginAction()
+    /**
+     * @param Request             $request
+     * @param AuthenticationUtils $authUtils
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function loginAction(Request $request, AuthenticationUtils $authUtils)
     {
-        return $this->render('security/login.html.twig', []);
-    }
+        // get the login error if there is one
+        $error = $authUtils->getLastAuthenticationError();
 
-//    public function loginAction(Request $request, AuthenticationUtils $authUtils)
-//    {
-//        // get the login error if there is one
-//        $error = $authUtils->getLastAuthenticationError();
-//
-//        // last username entered by the user
-//        $lastUsername = $authUtils->getLastUsername();
-//
-//        $request;
-//
-//        return $this->render('security/login.html.twig', array(
-//            'last_username' => $lastUsername,
-//            'error'         => $error,
-//        ));
-//    }
+        // last username entered by the user
+        $lastUsername = $authUtils->getLastUsername();
+
+        $request;
+
+        return $this->render('security/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
+    }
 }

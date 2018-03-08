@@ -24,6 +24,7 @@
         "sebastian/phpcpd": "^4.0",
         "squizlabs/php_codesniffer": "^3.2",
         "symfony/dotenv": "^4.0",
+        "symfony/profiler-pack": "^1.0",
         "symfony/var-dumper": "^4.0",
         "symfony/web-server-bundle": "^4.0"
     },
