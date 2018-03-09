@@ -1,0 +1,3 @@
+kelp.product.add:
+    path: /product/add/{id}
+    controller: App\Controller\ProductController::createAction

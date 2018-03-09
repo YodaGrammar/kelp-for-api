@@ -1,3 +1,15 @@
-kelp.storage:
+kelp.storage.list:
     path: /storage
     controller: App\Controller\StorageController::listAction
+
+kelp.storage.create:
+    path: /storage/create/{id}
+    controller: App\Controller\StorageController::createAction
+
+kelp.storage.edit:
+    path: /storage/edit/{id}
+    controller: App\Controller\StorageController::editAction
+
+kelp.storage.delete:
+    path: /storage/delete/{id}
+    controller: App\Controller\StorageController::editAction

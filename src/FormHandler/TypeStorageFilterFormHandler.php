@@ -20,12 +20,12 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
 {
     use FormHandlerTrait;
 
-    private const MAX_PAGE = 15;
+    private const MAX_PAGE = 10;
 
     /**
      * @var TypeStorageMapper
      */
-    protected $typeStorageMapper;
+    protected $mapper;
 
     /**
      * @var TokenStorageInterface
@@ -44,41 +44,37 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
 
     /**
      * TypeStorageFilterFormHandler constructor.
-     * @param FormFactoryInterface $factory
-     * @param FilterTypeStorageDTOFactory $dtoFactory
-     * @param TypeStorageMapper $typeStorageMapper
-     * @param TokenStorageInterface $tokenStorage
+     * @param FormFactoryInterface          $factory
+     * @param FilterTypeStorageDTOFactory   $dtoFactory
+     * @param TypeStorageMapper             $mapper
+     * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FormFactoryInterface $factory,
         FilterTypeStorageDTOFactory $dtoFactory,
-        TypeStorageMapper $typeStorageMapper,
+        TypeStorageMapper $mapper,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->dtoFactory = $dtoFactory->newInstance();
-        $this->form                        = $factory->createNamed(
+        $this->dtoFactory           = $dtoFactory->newInstance();
+        $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class,
             $this->dtoFactory
         );
-        $this->typeStorageMapper           = $typeStorageMapper;
-        $this->tokenStorage                = $tokenStorage;
-        $this->authorizationChecker        = $authorizationChecker;
+        $this->mapper               = $mapper;
+        $this->tokenStorage         = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @param Request $request
      * @return mixed
      */
-    public function process(Request $request):array
+    public function process(Request $request): array
     {
         $filter = $this->dtoFactory;
-
-//        if (false === $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
-//            $filter->setUser($this->tokenStorage->getToken()->getUser());
-//        }
 
         $this->form->setData($filter);
         $this->form->handleRequest($request);
@@ -86,16 +82,18 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $filter = $this->form->getData();
         }
-        $typeStorages = $this->typeStorageMapper->findAllByFilters($filter, $request->get('page', 1),self::MAX_PAGE);
+        $typeStorages = $this->mapper->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
             'page'        => $request->get('page', 1),
             'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.type_storage',
+            'nomRoute'    => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
-        return ['pagination' => $pagination,
-                'typeStorages' => $typeStorages ];
+        return [
+            'pagination'   => $pagination,
+            'typeStorages' => $typeStorages,
+        ];
     }
 }

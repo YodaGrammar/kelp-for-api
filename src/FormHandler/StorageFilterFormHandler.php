@@ -8,8 +8,7 @@ use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class StorageFilterFormHandler
@@ -35,11 +34,6 @@ class StorageFilterFormHandler implements FormHandlerInterface
     protected $tokenStorage;
 
     /**
-     * @var AuthorizationCheckerInterface
-     */
-    protected $authorizationChecker;
-
-    /**
      * @var FilterStorageDTOFactory
      */
     protected $dtoFactory;
@@ -51,15 +45,13 @@ class StorageFilterFormHandler implements FormHandlerInterface
      * @param StorageMapper                 $storageMapper
      * @param FormFactoryInterface          $factory
      * @param TokenStorageInterface         $tokenStorage
-     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FilterStorageDTOFactory $dtoFactory,
         TypeStorageMapper $typeStorageMapper,
         StorageMapper $storageMapper,
         FormFactoryInterface $factory,
-        TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authorizationChecker
+        TokenStorageInterface $tokenStorage
     ) {
         $this->dtoFactory           = $dtoFactory->newInstance();
         $this->typeStorageMapper    = $typeStorageMapper;
@@ -70,7 +62,6 @@ class StorageFilterFormHandler implements FormHandlerInterface
             $this->dtoFactory
         );
         $this->tokenStorage         = $tokenStorage;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -79,7 +70,9 @@ class StorageFilterFormHandler implements FormHandlerInterface
      */
     public function process(Request $request): array
     {
-
-        return ['typeStorages' => $this->typeStorageMapper->findAll()];
+        return [
+            'typeStorages' => $this->typeStorageMapper->findAll(),
+            'storages' => $this->storageMapper->findAllByUser($this->tokenStorage->getToken()->getUser()),
+        ];
     }
 }

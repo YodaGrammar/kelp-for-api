@@ -32,7 +32,7 @@ class TypeStorageController extends Controller
      */
     public function createAction()
     {
-//        $program = new Program();
+//        $program = new S();
 //        $program->setCreatedBy($userManager->findOneById($this->getUser()->getId()));
 //
 //        if ($programFormHandler->process($request, $program)) {

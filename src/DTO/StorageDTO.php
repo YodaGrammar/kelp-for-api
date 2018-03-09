@@ -11,19 +11,64 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class StorageDTO
 {
+    protected $id;
+
     /**
      * @Assert\NotBlank()
      * @Assert\Regex(pattern="/\D/")
      */
-    public $label;
+    protected $label;
 
     /**
      * @Assert\Type("object")
      */
-    public $user;
+    protected $typeStorage;
 
     /**
-     * @Assert\Type("object")
+     * @return mixed
      */
-    public $typeStorage;
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param mixed $label
+     */
+    public function setLabel($label): void
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeStorage()
+    {
+        return $this->typeStorage;
+    }
+
+    /**
+     * @param mixed $typeStorage
+     */
+    public function setTypeStorage($typeStorage): void
+    {
+        $this->typeStorage = $typeStorage;
+    }
 }

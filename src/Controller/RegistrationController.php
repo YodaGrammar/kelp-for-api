@@ -46,14 +46,14 @@ class RegistrationController extends Controller
             $registerUser->setPassword($password);
 
             // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($registerUser);
-            $em->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($registerUser);
+            $entityManager->flush();
 
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('kelp.home');
+            return $this->redirectToRoute('kel');
         }
 
         return $this->render(

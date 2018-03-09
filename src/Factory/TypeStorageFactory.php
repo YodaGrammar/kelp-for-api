@@ -11,7 +11,7 @@ namespace App\Factory;
 use App\Entity\TypeStorage;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class TypeStorageFactory implements EntityFactoryInterface
+class TypeStorageFactory
 {
     /** @var ObjectManager */
     protected $objectManager;
@@ -25,17 +25,17 @@ class TypeStorageFactory implements EntityFactoryInterface
         $this->objectManager = $objectManager;
     }
 
-    /**
-     * @param array $data
-     * @param null $id
-     * @return TypeStorage
-     */
-    public function newInstance($data, $id = null):TypeStorage
-    {
-        $typeStorage = new TypeStorage();
-        $typeStorage->setLabel();
-        $typeStorage->setClass();
-
-        return $typeStorage;
-    }
+//    /**
+//     * @param array $data
+//     * @param null $id
+//     * @return TypeStorage
+//     */
+//    public function newInstance($data, $id = null):TypeStorage
+//    {
+//        $typeStorage = new TypeStorage();
+//        $typeStorage->setLabel();
+//        $typeStorage->setClass();
+//
+//        return $typeStorage;
+//    }
 }

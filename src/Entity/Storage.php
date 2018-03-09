@@ -32,7 +32,7 @@ class Storage
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="storage")
+     * @ORM\ManyToOne(targetEntity="TypeStorage")
      * @ORM\JoinColumn(name="type_storage_id", referencedColumnName="id")
      **/
     private $typeStorage;

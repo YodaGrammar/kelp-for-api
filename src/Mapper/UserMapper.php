@@ -2,20 +2,18 @@
 
 namespace App\Mapper;
 
-use App\DTO\StorageDTO;
 use App\Entity\Repository\StorageRepository;
-use App\Entity\Storage;
 use App\Entity\User;
 use App\Factory\StorageFactory;
+use App\Factory\TypeStorageFactory;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * Class StorageMapper
  *
  * @package Kelp\AppBundle\Mapper
  */
-class StorageMapper
+class UserMapper
 {
 
     /**
@@ -24,13 +22,13 @@ class StorageMapper
     protected $objectManager;
 
     /**
-     * @var StorageFactory
+     * @var TypeStorageFactory
      */
     protected $storageFactory;
 
     /**
      * StorageMapper constructor.
-     * @param ObjectManager  $objectManager
+     * @param ObjectManager $objectManager
      * @param StorageFactory $storageFactory
      */
     public function __construct(ObjectManager $objectManager, StorageFactory $storageFactory)
@@ -40,11 +38,11 @@ class StorageMapper
     }
 
     /**
-     * @return ObjectRepository|StorageRepository
+     * @return StorageRepository
      */
-    protected function getRepository():ObjectRepository
+    protected function getRepository(): StorageRepository
     {
-        return $this->objectManager->getRepository(Storage::class);
+        return $this->objectManager->getRepository(User::class);
     }
 
     /**
@@ -56,24 +54,33 @@ class StorageMapper
     }
 
     /**
-     * @param User $user
-     * @return mixed
+     * @param $id
+     * @return null|object
      */
-    public function findAllByUser(User $user)
+    public function findOneByid($id)
     {
-        return $this->getRepository()->findBy(['user' => $user]);
+        return $this->getRepository()->find($id);
     }
 
-    /**
-     * @param StorageDTO $dto
-     * @throws \App\Exception\NotFoundException
-     */
-    public function add(StorageDTO $dto)
-    {
-        $typeStorage = $this->storageFactory->newInstance($dto);
-        $this->objectManager->persist($typeStorage);
-        $this->objectManager->flush($typeStorage);
-    }
+//    /**
+//     * @param FilterTypeStorageDTO|null $typeStorageDTO
+//     * @param $page
+//     * @return mixed
+//     */
+//    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page = null)
+//    {
+//        return $this->getRepository()->findAllByFilters($typeStorageDTO->text, $page);
+//    }
+//
+//    /**
+//     * @param TypeStorageDTO $dto
+//     */
+//    public function add(TypeStorageDTO $dto)
+//    {
+//        $typeStorage = $this->typeStorageFactory->newInstance($dto);
+//        $this->objectManager->persist($typeStorage);
+//        $this->objectManager->flush($typeStorage);
+//    }
 //
 //    /**
 //     * @param string $idTypeStorage
