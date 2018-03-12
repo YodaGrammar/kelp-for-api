@@ -2,6 +2,7 @@
 
 namespace App\DTO;
 
+use App\Entity\Storage;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,64 +12,32 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class StorageDTO
 {
-    protected $id;
+    /**
+     * @var
+     */
+    public $id;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Regex(pattern="/\D/")
      */
-    protected $label;
+    public $label;
 
     /**
      * @Assert\Type("object")
      */
-    protected $typeStorage;
+    public $typeStorage;
 
     /**
-     * @return mixed
+     * StorageDTO constructor.
+     * @param Storage $storage
      */
-    public function getId()
+    public function __construct(Storage $storage = null)
     {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    /**
-     * @param mixed $label
-     */
-    public function setLabel($label): void
-    {
-        $this->label = $label;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeStorage()
-    {
-        return $this->typeStorage;
-    }
-
-    /**
-     * @param mixed $typeStorage
-     */
-    public function setTypeStorage($typeStorage): void
-    {
-        $this->typeStorage = $typeStorage;
+        if ($storage) {
+            $this->id          = $storage->getId();
+            $this->label       = $storage->getLabel();
+            $this->typeStorage = $storage->getTypeStorage();
+        }
     }
 }

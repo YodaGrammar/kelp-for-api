@@ -53,7 +53,7 @@ class StorageController extends Controller
                 'success',
                 $translator->trans(
                     'storage.create.flash_message.validated',
-                    ['%name%' => $storageDTO->getLabel()]
+                    ['%name%' => $storageDTO->label]
                 )
             );
 
@@ -84,13 +84,13 @@ class StorageController extends Controller
         StorageDTOFactory $dtoFactory
     ): Response {
         $storageDTO = $dtoFactory->newInstance($storage);
-
+            $formHandler->getForm()->setData($storageDTO);
         if ($formHandler->process($request, $storageDTO)) {
             $this->addFlash(
                 'success',
                 $translator->trans(
-                    'storage.create.flash_message.validated',
-                    ['%name%' => $storageDTO->getLabel()]
+                    'storage.edit.flash_message.validated',
+                    ['%name%' => $storageDTO->label]
                 )
             );
 
@@ -98,10 +98,15 @@ class StorageController extends Controller
         }
 
         return $this->render(
-            'storage/create.html.twig',
+            'storage/edit.html.twig',
             [
                 'form' => $formHandler->getForm()->createView(),
             ]
         );
+    }
+
+    public function deleteAction(Storage $storage)
+    {
+
     }
 }

@@ -57,9 +57,9 @@
                                                             <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.edit',{'id':typeStorage.id }) }}">
                                                                 <i class="fas  fa-pencil-alt"></i>
                                                             </a>
-                                                            <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.delete',{'id':typeStorage.id }) }}">
+                                                            <button type="button" class="btn-delete btn  {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" title="Editer" data-url="{{ path('kelp.storage.delete',{'id':typeStorage.id }) }}">
                                                                 <i class="far  fa-trash-alt"></i>
-                                                            </a>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -71,7 +71,7 @@
                         {% else %}
                             <div class="mt-3">
                                 <h5 class="card-title">Add a new storage</h5>
-                                <p class="card-text">Now you have no storage add one for can add product in it</p>
+                                <p class="card-text">Now you dont have storage add one for can add product in it</p>
                                 <a href="{{ path('kelp.storage.create',{'id':typeStorage.id }) }}"
                                    class="btn {{ 'btn-' ~ typeStorage.class }} btn-block btn-sm">Add a Storage</i></a>
                             </div>
@@ -84,6 +84,12 @@
         {% endfor %}
 
     </div>
+
+    {% set modal_parameters = {
+        delete_title: 'Suppression d\'un storage',
+        delete_question: 'Etes-vous sûr de vouloir supprimer ce storage?'
+    } %}
+    {% include'modal/delete.html.twig' with modal_parameters only %}
 {% endblock %}
 
 

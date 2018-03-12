@@ -31,12 +31,6 @@ class StorageFormHandler
      */
     protected $mapper;
 
-
-    /**
-     * @var StorageDTOFactory
-     */
-    protected $dto;
-
     /**
      * TypeStorageFilterFormHandler constructor.
      * @param FormFactoryInterface $factory
@@ -48,30 +42,32 @@ class StorageFormHandler
         StorageDTOFactory $dtoFactory,
         StorageMapper $mapper
     ) {
-        $this->dto    = $dtoFactory->newInstance();
         $this->form   = $factory->createNamed(
-            'kelp_type_storage_filter',
+            'kelp_storage',
             StorageType::class,
-            $this->dto
+            null
         );
         $this->mapper = $mapper;
     }
 
     /**
-     * @param Request $request
+     * @param Request    $request
+     * @param StorageDTO $storageDTO
      * @return bool
      */
-    public function process(Request $request)
+    public function process(Request $request, StorageDTO $storageDTO = null): bool
     {
+        $this->form->setData($storageDTO);
         $this->form->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $function = 'edit';
-            if (!$this->dto->getId()) {
-                $this->dto->setTypeStorage($request->get('id'));
-                $function = 'add';
+
+            if (!$storageDTO->id) {
+                $storageDTO->typeStorage = $request->get('id');
+                $function                = 'add';
             }
-            $this->mapper->$function($this->dto);
+            $this->mapper->$function($storageDTO);
 
             return true;
         }

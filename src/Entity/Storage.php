@@ -38,6 +38,12 @@ class Storage
     private $typeStorage;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @var boolean
+     **/
+    private $active;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -91,5 +97,21 @@ class Storage
     public function setTypeStorage($typeStorage)
     {
         $this->typeStorage = $typeStorage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
     }
 }

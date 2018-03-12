@@ -1,0 +1,24 @@
+$modalDelete = $('#modal_delete');
+
+$body.on('click', '.btn-delete', function () {
+
+    var deleteUrl = $(this).data('url');
+    $modalDelete.data('url', deleteUrl);
+    $modalDelete.modal('show');
+
+});
+
+$body.on('click', '#submit_delete', function () {
+    var url = $modalDelete.data('url');
+
+    $.ajax({
+        url: url,
+        method: "DELETE"
+    }).done(function () {
+        //dont reload, cause if there is a search form, it can be a POST, and firefox show an alert
+        //window.location.reload();
+        window.location.assign(window.location.href);
+    }).fail(function () {
+        //maybe do something on failure
+    });
+});

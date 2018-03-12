@@ -40,9 +40,9 @@ class StorageFactory
     public function newInstance(StorageDTO $dto): Storage
     {
         $storage = new Storage();
-        $storage->setLabel($dto->getLabel());
+        $storage->setLabel($dto->label);
         $storage->setUser($this->tokenStorage->getToken()->getUser());
-        $typeStorage = $this->objectManager->getRepository(TypeStorage::class)->find($dto->getTypeStorage());
+        $typeStorage = $this->objectManager->getRepository(TypeStorage::class)->find($dto->typeStorage);
         if (!$typeStorage) {
             throw new NotFoundException('this type storage does not exist');
         }

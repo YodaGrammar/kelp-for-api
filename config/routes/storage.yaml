@@ -5,11 +5,17 @@ kelp.storage.list:
 kelp.storage.create:
     path: /storage/create/{id}
     controller: App\Controller\StorageController::createAction
+    requirements:
+        id: '\d+'
 
 kelp.storage.edit:
     path: /storage/edit/{id}
     controller: App\Controller\StorageController::editAction
+    requirements:
+        id: '\d+'
 
 kelp.storage.delete:
     path: /storage/delete/{id}
     controller: App\Controller\StorageController::editAction
+    requirements:
+            id: '\d+'

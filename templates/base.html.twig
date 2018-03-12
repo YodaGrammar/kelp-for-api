@@ -35,6 +35,7 @@
 
             var $body = $('body');
             {% block javascripts %}
+                {% include("@js/modal_delete.js.twig") %}
             {% endblock %}
         });
     </script>

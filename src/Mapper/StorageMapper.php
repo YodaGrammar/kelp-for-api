@@ -42,7 +42,7 @@ class StorageMapper
     /**
      * @return ObjectRepository|StorageRepository
      */
-    protected function getRepository():ObjectRepository
+    protected function getRepository(): ObjectRepository
     {
         return $this->objectManager->getRepository(Storage::class);
     }
@@ -70,10 +70,25 @@ class StorageMapper
      */
     public function add(StorageDTO $dto)
     {
-        $typeStorage = $this->storageFactory->newInstance($dto);
-        $this->objectManager->persist($typeStorage);
-        $this->objectManager->flush($typeStorage);
+        $storage = $this->storageFactory->newInstance($dto);
+        $this->objectManager->persist($storage);
+        $this->objectManager->flush();
     }
+
+    /**
+     * @param StorageDTO $dto
+     */
+    public function edit(StorageDTO $dto)
+    {
+        /** @var Storage $storage */
+        $storage = $this->getRepository()->find($dto->id);
+        if (!$storage) {
+            throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
+        }
+        $storage->setLabel($dto->label);
+        $this->objectManager->flush();
+    }
+
 //
 //    /**
 //     * @param string $idTypeStorage
