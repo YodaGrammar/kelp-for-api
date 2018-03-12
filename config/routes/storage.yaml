@@ -16,6 +16,6 @@ kelp.storage.edit:
 
 kelp.storage.delete:
     path: /storage/delete/{id}
-    controller: App\Controller\StorageController::editAction
+    controller: App\Controller\StorageController::deleteAction
     requirements:
             id: '\d+'

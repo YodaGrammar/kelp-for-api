@@ -61,7 +61,12 @@ class StorageMapper
      */
     public function findAllByUser(User $user)
     {
-        return $this->getRepository()->findBy(['user' => $user]);
+        return $this->getRepository()->findBy(
+            [
+                'user'   => $user,
+                'active' => true,
+            ]
+        );
     }
 
     /**
@@ -89,50 +94,17 @@ class StorageMapper
         $this->objectManager->flush();
     }
 
-//
-//    /**
-//     * @param string $idTypeStorage
-//     * @return TypeStorage
-//     */
-//    public function find(string $idTypeStorage)
-//    {
-//        /** @var TypeStorage $typeStorage */
-//        $typeStorage = $this->getRepository()->find($idTypeStorage);
-//        if (!$typeStorage) {
-//            throw new \LogicException(sprintf('impossible to find information for id %s', $idTypeStorage));
-//        }
-//
-//        return $typeStorage;
-//    }
-//
-//    /**
-//     * @param string $idTypeStorage
-//     * @param TypeStorageDTO $dto
-//     */
-//    public function edit(string $idTypeStorage, TypeStorageDTO $dto)
-//    {
-//        /** @var TypeStorage $typeStorage */
-//        $typeStorage = $this->getRepository()->find($idTypeStorage);
-//        if (!$typeStorage) {
-//            throw new \LogicException(sprintf('impossible to find information for id %s', $idTypeStorage));
-//        }
-//        $typeStorage->setLabel($dto->label);
-//        $typeStorage->setComment($dto->comment);
-//        $typeStorage->setClass($dto->class);
-//        $this->objectManager()->flush($typeStorage);
-//    }
-//
-//    /**
-//     * @param $id
-//     */
-//    public function delete($id)
-//    {
-//        /** @var TypeStorage $typeStorage */
-//        $typeStorage = $this->getRepository()->find($id);
-//        if (!$typeStorage) {
-//            throw new \LogicException(sprintf('impossible to find information for id %s', $id));
-//        }
-//        $typeStorage->setActive(false);
-//        $this->getManager()->flush($typeStorage);
-//    }
+    /**
+     * @param $id
+     */
+    public function delete($id)
+    {
+        /** @var Storage $storage */
+        $storage = $this->getRepository()->find($id);
+        if (!$storage) {
+            throw new \LogicException(sprintf('impossible to find information for id %s', $id));
+        }
+        $storage->setActive(false);
+        $this->objectManager->flush();
+    }
 }

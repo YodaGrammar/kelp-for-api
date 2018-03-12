@@ -6,6 +6,7 @@ use App\DTOFactory\StorageDTOFactory;
 use App\Entity\Storage;
 use App\FormHandler\StorageFilterFormHandler;
 use App\FormHandler\StorageFormHandler;
+use App\Mapper\StorageMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -105,8 +106,15 @@ class StorageController extends Controller
         );
     }
 
-    public function deleteAction(Storage $storage)
+    /**
+     * @param               $id
+     * @param StorageMapper $mapper
+     * @return string
+     */
+    public function deleteAction($id, StorageMapper $mapper)
     {
+        $mapper->delete($id);
 
+        return new Response($this->generateUrl('kelp.storage.list'));
     }
 }
