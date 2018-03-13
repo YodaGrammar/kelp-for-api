@@ -34,14 +34,10 @@ class StorageFormHandler
     /**
      * TypeStorageFilterFormHandler constructor.
      * @param FormFactoryInterface $factory
-     * @param StorageDTOFactory    $dtoFactory
      * @param StorageMapper        $mapper
      */
-    public function __construct(
-        FormFactoryInterface $factory,
-        StorageDTOFactory $dtoFactory,
-        StorageMapper $mapper
-    ) {
+    public function __construct(FormFactoryInterface $factory, StorageMapper $mapper)
+    {
         $this->form   = $factory->createNamed(
             'kelp_storage',
             StorageType::class,

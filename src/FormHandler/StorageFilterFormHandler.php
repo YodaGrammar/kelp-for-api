@@ -70,6 +70,7 @@ class StorageFilterFormHandler implements FormHandlerInterface
      */
     public function process(Request $request): array
     {
+        $request;
         return [
             'typeStorages' => $this->typeStorageMapper->findAll(),
             'storages' => $this->storageMapper->findAllByUser($this->tokenStorage->getToken()->getUser()),

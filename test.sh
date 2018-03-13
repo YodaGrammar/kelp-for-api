@@ -17,12 +17,12 @@ TEST_RES=""
 PHP=$1
 
 function runner {
-    TEST_RES=`$1`
+    TEST_RES=$($1)
     local TEST_RET=$?
 }
 
 function test {
-    TEST_RES=`$1`
+    TEST_RES=$($1)
     local TEST_RET=$?
 
     if [ $TEST_RET != 0 ]
