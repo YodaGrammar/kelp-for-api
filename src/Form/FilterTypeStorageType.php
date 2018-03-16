@@ -1,7 +1,7 @@
 <?php
 namespace App\Form;
 
-use App\DTO\FilterTypeStorageDTO ;
+use App\DTO\TypeStorageDTOFilter ;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,6 +32,6 @@ class FilterTypeStorageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data', FilterTypeStorageDTO::class);
+        $resolver->setDefault('data', TypeStorageDTOFilter::class);
     }
 }

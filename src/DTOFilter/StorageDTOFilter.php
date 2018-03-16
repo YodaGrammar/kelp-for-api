@@ -1,9 +1,9 @@
 <?php
-namespace App\DTO;
+namespace App\DTOFilter;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class FilterTypeStorageDTO
+class StorageDTOFilter
 {
     /**
      *@Assert\NotNull

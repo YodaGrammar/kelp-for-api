@@ -8,7 +8,7 @@
 
 namespace App\FormHandler;
 
-use App\DTOFactory\FilterTypeStorageDTOFactory;
+use App\DTOFilterFactory\TypeStorageDTOFilterFactory;
 use App\Form\FilterTypeStorageType;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -38,21 +38,21 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
     protected $authorizationChecker;
 
     /**
-     * @var FilterTypeStorageDTOFactory
+     * @var TypeStorageDTOFilterFactory
      */
     protected $dtoFactory;
 
     /**
      * TypeStorageFilterFormHandler constructor.
      * @param FormFactoryInterface          $factory
-     * @param FilterTypeStorageDTOFactory   $dtoFactory
+     * @param TypeStorageDTOFilterFactory   $dtoFactory
      * @param TypeStorageMapper             $mapper
      * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FormFactoryInterface $factory,
-        FilterTypeStorageDTOFactory $dtoFactory,
+        TypeStorageDTOFilterFactory $dtoFactory,
         TypeStorageMapper $mapper,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker

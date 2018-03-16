@@ -2,7 +2,7 @@
 
 namespace App\Mapper;
 
-use App\DTO\FilterTypeStorageDTO;
+use App\DTO\TypeStorageDTOFilter;
 use App\DTO\TypeStorageDTO;
 use App\Entity\Repository\TypeStorageRepository;
 use App\Entity\TypeStorage;
@@ -55,12 +55,12 @@ class TypeStorageMapper
     }
 
     /**
-     * @param FilterTypeStorageDTO|null $typeStorageDTO
-     * @param null $page
-     * @param null $maxPage
+     * @param TypeStorageDTOFilter|null $typeStorageDTO
+     * @param null                      $page
+     * @param null                      $maxPage
      * @return mixed
      */
-    public function findAllByFilters(FilterTypeStorageDTO $typeStorageDTO = null, $page = null, $maxPage = null)
+    public function findAllByFilters(TypeStorageDTOFilter $typeStorageDTO = null, $page = null, $maxPage = null)
     {
         return $this->getRepository()->findAllByFilters($typeStorageDTO->text, $page, $maxPage);
     }

@@ -17,7 +17,6 @@ use Doctrine\Common\Persistence\ObjectRepository;
  */
 class StorageMapper
 {
-
     /**
      * @var ObjectManager
      */

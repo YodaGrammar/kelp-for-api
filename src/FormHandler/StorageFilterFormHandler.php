@@ -2,7 +2,7 @@
 
 namespace App\FormHandler;
 
-use App\DTOFactory\FilterStorageDTOFactory;
+use App\DTOFilterFactory\StorageDTOFilterFactory;
 use App\Form\FilterTypeStorageType;
 use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
@@ -34,20 +34,20 @@ class StorageFilterFormHandler implements FormHandlerInterface
     protected $tokenStorage;
 
     /**
-     * @var FilterStorageDTOFactory
+     * @var StorageDTOFilterFactory
      */
     protected $dtoFactory;
 
     /**
      * StorageFilterFormHandler constructor.
-     * @param FilterStorageDTOFactory       $dtoFactory
+     * @param StorageDTOFilterFactory       $dtoFactory
      * @param TypeStorageMapper             $typeStorageMapper
      * @param StorageMapper                 $storageMapper
      * @param FormFactoryInterface          $factory
      * @param TokenStorageInterface         $tokenStorage
      */
     public function __construct(
-        FilterStorageDTOFactory $dtoFactory,
+        StorageDTOFilterFactory $dtoFactory,
         TypeStorageMapper $typeStorageMapper,
         StorageMapper $storageMapper,
         FormFactoryInterface $factory,
