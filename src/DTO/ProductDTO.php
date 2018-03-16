@@ -8,7 +8,14 @@
 
 namespace App\DTO;
 
+/**
+ * Class ProductDTO
+ * @package App\DTO
+ */
 class ProductDTO
 {
-
+    public $quantity;
+    public $type;
+    public $label;
+    public $date;
 }

@@ -8,6 +8,7 @@
 
 namespace App\Mapper;
 
+use App\Factory\ProductFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class ProductMapper

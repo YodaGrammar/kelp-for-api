@@ -8,16 +8,13 @@
 
 namespace App\FormHandler;
 
-use App\DTO\StorageDTO;
-use App\DTOFactory\StorageDTOFactory;
-use App\Entity\Product;
-use App\Form\StorageType;
-use App\Mapper\StorageMapper;
+use App\DTO\ProductDTO;
+use App\Form\ProductType;
+use App\Mapper\ProductMapper;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
+
 
 /**
  * Class StorageFormHandler
@@ -61,7 +58,6 @@ class ProductFormHandler
             $function = 'edit';
 
             if (!$productDTO->id) {
-                $productDTO->typeStorage = $request->get('id');
                 $function                = 'add';
             }
             $this->mapper->$function($productDTO);
