@@ -8,7 +8,6 @@
 
 namespace App\DTO;
 
-
 class ProductDTO
 {
 

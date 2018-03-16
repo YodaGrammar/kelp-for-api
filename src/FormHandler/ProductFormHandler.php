@@ -10,6 +10,7 @@ namespace App\FormHandler;
 
 use App\DTO\StorageDTO;
 use App\DTOFactory\StorageDTOFactory;
+use App\Entity\Product;
 use App\Form\StorageType;
 use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
@@ -32,38 +33,38 @@ class ProductFormHandler
     protected $mapper;
 
     /**
-     * TypeStorageFilterFormHandler constructor.
+     * ProductFormHandler constructor.
      * @param FormFactoryInterface $factory
-     * @param StorageMapper        $mapper
+     * @param ProductMapper        $mapper
      */
     public function __construct(FormFactoryInterface $factory, ProductMapper $mapper)
     {
         $this->form   = $factory->createNamed(
-            'kelp_storage',
-            StorageType::class,
+            'kelp_product',
+            ProductType::class,
             null
         );
         $this->mapper = $mapper;
     }
 
     /**
-     * @param Request    $request
-     * @param StorageDTO $storageDTO
+     * @param Request         $request
+     * @param ProductDTO|null $productDTO
      * @return bool
      */
-    public function process(Request $request, StorageDTO $storageDTO = null): bool
+    public function process(Request $request, ProductDTO $productDTO = null): bool
     {
-        $this->form->setData($storageDTO);
+        $this->form->setData($productDTO);
         $this->form->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $function = 'edit';
 
-            if (!$storageDTO->id) {
-                $storageDTO->typeStorage = $request->get('id');
+            if (!$productDTO->id) {
+                $productDTO->typeStorage = $request->get('id');
                 $function                = 'add';
             }
-            $this->mapper->$function($storageDTO);
+            $this->mapper->$function($productDTO);
 
             return true;
         }

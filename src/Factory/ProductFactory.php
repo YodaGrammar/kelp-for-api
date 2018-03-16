@@ -8,7 +8,6 @@
 
 namespace App\Factory;
 
-
 use App\Entity\Product;
 use App\Exception\NotFoundException;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -36,12 +35,11 @@ class ProductFactory
     /**
      * @param ProductDTO $dto
      * @return Product
-     * @throws NotFoundException
      */
     public function newInstance(ProductDTO $dto): Product
     {
         $product = new Product();
-//        $product->setLabel($dto->label);
+        $product->setLabel($dto->label);
 //        $product->setUser($this->tokenStorage->getToken()->getUser());
 //        $typeStorage = $this->objectManager->getRepository(TypeStorage::class)->find($dto->typeStorage);
 //        if (!$typeStorage) {

@@ -25,13 +25,11 @@ class ProductMapper
     /**
      * StorageMapper constructor.
      * @param ObjectManager  $objectManager
-     * @param StorageFactory $storageFactory
+     * @param ProductFactory $storageFactory
      */
     public function __construct(ObjectManager $objectManager, ProductFactory $productFactory)
     {
         $this->objectManager  = $objectManager;
-        $this->storageFactory = $storageFactory;
+        $this->productFactory = $productFactory;
     }
-
-
 }

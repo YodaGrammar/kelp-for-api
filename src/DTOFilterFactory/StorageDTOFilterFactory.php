@@ -4,7 +4,6 @@ namespace App\DTOFilterFactory;
 
 use App\DTOFilter\StorageDTOFilter;
 
-
 /**
  * Class FilterStorageDTOFactory
  * @package App\DTOFactory
