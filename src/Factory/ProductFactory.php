@@ -8,7 +8,9 @@
 
 namespace App\Factory;
 
+use App\DTO\ProductDTO;
 use App\Entity\Product;
+use App\Entity\Storage;
 use App\Exception\NotFoundException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
@@ -35,19 +37,26 @@ class ProductFactory
     /**
      * @param ProductDTO $dto
      * @return Product
+     * @throws NotFoundException
      */
     public function newInstance(ProductDTO $dto): Product
     {
         $product = new Product();
         $product->setLabel($dto->label);
-//        $product->setUser($this->tokenStorage->getToken()->getUser());
-//        $typeStorage = $this->objectManager->getRepository(TypeStorage::class)->find($dto->typeStorage);
-//        if (!$typeStorage) {
-//            throw new NotFoundException('this type storage does not exist');
-//        }
-//        $product->setTypeStorage($typeStorage);
-//        $this->objectManager->persist($storage);
-//        $this->objectManager->flush();
+
+        $storage = $this->objectManager->getRepository(Storage::class)->find($dto->storage);
+        if (!$storage) {
+            throw new NotFoundException('this storage does not exist');
+        }
+        $product->setStorage($storage);
+        $product->setQuantity($dto->quantity);
+        $product->setPackaging($dto->packaging);
+        if ($dto->date) {
+            $product->setDate($dto->date);
+        }
+        $product->setActive(true);
+        $this->objectManager->persist($product);
+        $this->objectManager->flush();
 
         return $product;
     }

@@ -1,5 +1,5 @@
 kelp.type_storage.list:
-    path: /type_storage/{page}
+    path: /type_storage/list/{page}
     controller: App\Controller\TypeStorageController::listAction
     defaults:
         page: 1

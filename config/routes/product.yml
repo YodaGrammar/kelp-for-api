@@ -1,3 +1,7 @@
 kelp.product.add:
     path: /product/add/{id}
     controller: App\Controller\ProductController::createAction
+
+kelp.product.list:
+    path: /product/list/{id}
+    controller: App\Controller\ProductController::listAction

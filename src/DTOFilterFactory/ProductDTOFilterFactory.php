@@ -2,19 +2,19 @@
 
 namespace App\DTOFilterFactory;
 
-use App\DTOFilter\StorageDTOFilter;
+use App\DTOFilter\ProductDTOFilter;
 
 /**
  * Class FilterStorageDTOFactory
  * @package App\DTOFactory
  */
-class StorageDTOFilterFactory implements DTOFilterFactoryInterface
+class ProductDTOFilterFactory implements DTOFilterFactoryInterface
 {
     /**
-     * @return StorageDTOFilter
+     * @return ProductDTOFilter
      */
-    public function newInstance():StorageDTOFilter
+    public function newInstance():ProductDTOFilter
     {
-        return new StorageDTOFilter();
+        return new ProductDTOFilter();
     }
 }

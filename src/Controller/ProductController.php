@@ -9,9 +9,11 @@
 namespace App\Controller;
 
 use App\DTOFactory\ProductDTOFactory;
+use App\FormHandler\ProductFilterFormHandler;
 use App\FormHandler\ProductFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -20,6 +22,22 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class ProductController extends Controller
 {
+
+    /**
+     * @param Request                  $request
+     * @param ProductFilterFormHandler $formHandler
+     * @return Response
+     */
+    public function listAction(Request $request, ProductFilterFormHandler $formHandler): Response
+    {
+        return $this->render(
+            'product/list.html.twig',
+            [
+                'pager' => $formHandler->process($request),
+                //            'form' => $formHandler->getForm()->createView(),
+            ]
+        );
+    }
 
     /**
      * @param Request             $request

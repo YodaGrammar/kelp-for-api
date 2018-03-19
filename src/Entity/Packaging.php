@@ -26,10 +26,10 @@ class Packaging
     private $label;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="packaging")
-     * @ORM\JoinColumn(name="packaging_id", referencedColumnName="id")
-     */
-    private $product;
+     *
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="packaging")
+     **/
+    private $products;
     /**
      * @return mixed
      */

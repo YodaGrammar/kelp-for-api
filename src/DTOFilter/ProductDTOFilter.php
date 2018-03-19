@@ -1,12 +1,8 @@
 <?php
 namespace App\DTOFilter;
 
-use Symfony\Component\Validator\Constraints as Assert;
 
-class StorageDTOFilter
+class ProductDTOFilter
 {
-    /**
-     *@Assert\NotNull
-     */
     public $text;
 }

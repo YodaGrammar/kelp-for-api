@@ -2,8 +2,8 @@
 
 namespace App\Mapper;
 
-use App\DTO\TypeStorageDTOFilter;
 use App\DTO\TypeStorageDTO;
+use App\DTOFilter\TypeStorageDTOFilter;
 use App\Entity\Repository\TypeStorageRepository;
 use App\Entity\TypeStorage;
 use App\Factory\TypeStorageFactory;

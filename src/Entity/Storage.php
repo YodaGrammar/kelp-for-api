@@ -27,15 +27,20 @@ class Storage
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="storages")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      **/
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="TypeStorage")
-     * @ORM\JoinColumn(name="type_storage_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="type_storage_id", referencedColumnName="id", nullable=false)
      **/
     private $typeStorage;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="storage")
+     */
+    private $products;
 
     /**
      * @ORM\Column(type="boolean")
@@ -114,4 +119,22 @@ class Storage
     {
         $this->active = $active;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products): void
+    {
+        $this->products = $products;
+    }
+
+
 }

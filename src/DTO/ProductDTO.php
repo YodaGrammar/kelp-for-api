@@ -17,6 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductDTO
 {
+    public $id;
+
     /**
      * @Assert\NotBlank()
      */
@@ -37,6 +39,8 @@ class ProductDTO
      */
     public $date;
 
+    public $storage;
+
     /**
      * ProductDTO constructor.
      * @param Product $product
@@ -44,9 +48,11 @@ class ProductDTO
     public function __construct(Product $product = null)
     {
         if ($product) {
+            $this->id        = $product->getId();
             $this->quantity  = $product->getQuantity();
             $this->packaging = $product->getPackaging();
             $this->label     = $product->getLabel();
+            $this->storage   = $product->getStorage();
             $this->date      = $product->get();
         }
     }

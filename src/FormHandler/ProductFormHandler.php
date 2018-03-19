@@ -57,7 +57,8 @@ class ProductFormHandler implements FormHandlerInterface
             $function = 'edit';
 
             if (!$productDTO->id) {
-                $function                = 'add';
+                $productDTO->storage = $request->get('id');
+                $function = 'add';
             }
             $this->mapper->$function($productDTO);
 

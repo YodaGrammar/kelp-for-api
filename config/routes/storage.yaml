@@ -1,5 +1,5 @@
 kelp.storage.list:
-    path: /storage
+    path: /storage/list
     controller: App\Controller\StorageController::listAction
 
 kelp.storage.create:

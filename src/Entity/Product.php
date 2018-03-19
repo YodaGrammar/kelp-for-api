@@ -26,8 +26,9 @@ class Product
     private $quantity;
 
     /**
-     * @ORM\OneToMany(targetEntity="Packaging", mappedBy="product")
-     **/
+     * @ORM\ManyToOne(targetEntity="Packaging", inversedBy="products")
+     * @ORM\JoinColumn(name="packaging_id", referencedColumnName="id", nullable=false)
+     */
     private $packaging;
 
     /**
@@ -37,8 +38,8 @@ class Product
     private $label;
 
     /**
-     * @ORM\OneToOne(targetEntity="Storage")
-     * @ORM\JoinColumn(name="storage_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Storage", inversedBy="products")
+     * @ORM\JoinColumn(name="storage_id", referencedColumnName="id", nullable=false)
      **/
     private $storage;
 

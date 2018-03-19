@@ -2,10 +2,10 @@
 
 namespace App\FormHandler;
 
+use App\DTOFilterFactory\ProductDTOFilterFactory;
 use App\DTOFilterFactory\StorageDTOFilterFactory;
 use App\Form\FilterTypeStorageType;
-use App\Mapper\StorageMapper;
-use App\Mapper\TypeStorageMapper;
+use App\Mapper\ProductMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -14,19 +14,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  * Class StorageFilterFormHandler
  * @package App\FormHandler
  */
-class StorageFilterFormHandler implements FormHandlerInterface
+class ProductFilterFormHandler implements FormHandlerInterface
 {
     use FormHandlerTrait;
 
     /**
-     * @var TypeStorageMapper
+     * @var ProductMapper
      */
-    protected $typeStorageMapper;
-
-    /**
-     * @var StorageMapper
-     */
-    protected $storageMapper;
+    protected $productMapper;
 
     /**
      * @var TokenStorageInterface
@@ -39,25 +34,22 @@ class StorageFilterFormHandler implements FormHandlerInterface
     protected $dtoFactory;
 
     /**
-     * StorageFilterFormHandler constructor.
-     * @param StorageDTOFilterFactory       $dtoFactory
-     * @param TypeStorageMapper             $typeStorageMapper
-     * @param StorageMapper                 $storageMapper
-     * @param FormFactoryInterface          $factory
-     * @param TokenStorageInterface         $tokenStorage
+     * ProductFilterFormHandler constructor.
+     * @param ProductDTOFilterFactory $dtoFactory
+     * @param ProductMapper           $productMapper
+     * @param FormFactoryInterface    $factory
+     * @param TokenStorageInterface   $tokenStorage
      */
     public function __construct(
-        StorageDTOFilterFactory $dtoFactory,
-        TypeStorageMapper $typeStorageMapper,
-        StorageMapper $storageMapper,
+        ProductDTOFilterFactory $dtoFactory,
+        ProductMapper $productMapper,
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
     ) {
         $this->dtoFactory           = $dtoFactory->newInstance();
-        $this->typeStorageMapper    = $typeStorageMapper;
-        $this->storageMapper        = $storageMapper;
+        $this->productMapper    = $productMapper;
         $this->form                 = $factory->createNamed(
-            'kelp_type_storage_filter',
+            'kelp_product_filter',
             FilterTypeStorageType::class,
             $this->dtoFactory
         );
@@ -66,14 +58,31 @@ class StorageFilterFormHandler implements FormHandlerInterface
 
     /**
      * @param Request $request
-     * @return array
+     * @return mixed
      */
     public function process(Request $request): array
     {
-        $request;
+        $filter = $this->dtoFactory;
+
+        $this->form->setData($filter);
+        $this->form->handleRequest($request);
+
+        if ($this->form->isSubmitted() && $this->form->isValid()) {
+            $filter = $this->form->getData();
+        }
+
+        $typeStorages = $this->productMapper->findAllByStorageAndByFilters($request->get('id'), $filter, $request->get('page', 1), self::MAX_PAGE);
+
+        $pagination = [
+            'page'        => $request->get('page', 1),
+            'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
+            'nomRoute'    => 'kelp.type_storage.list',
+            'paramsRoute' => [],
+        ];
+
         return [
-            'typeStorages' => $this->typeStorageMapper->findAll(),
-            'storages' => $this->storageMapper->findAllByUser($this->tokenStorage->getToken()->getUser()),
+            'pagination'   => $pagination,
+            'products' => $products,
         ];
     }
 }
