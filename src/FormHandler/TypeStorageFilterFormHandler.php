@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b.tarall
- * Date: 15/02/2018
- * Time: 13:26
- */
 
 namespace App\FormHandler;
 
@@ -44,11 +38,12 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
 
     /**
      * TypeStorageFilterFormHandler constructor.
-     * @param FormFactoryInterface          $factory
-     * @param TypeStorageDTOFilterFactory   $dtoFactory
-     * @param TypeStorageMapper             $mapper
-     * @param TokenStorageInterface         $tokenStorage
+     * @param FormFactoryInterface $factory
+     * @param FilterTypeStorageDTOFactory $dtoFactory
+     * @param TypeStorageMapper $mapper
+     * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
         FormFactoryInterface $factory,
@@ -56,7 +51,8 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
         TypeStorageMapper $mapper,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    )
+    {
         $this->dtoFactory           = $dtoFactory->newInstance();
         $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',
@@ -70,7 +66,9 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return array
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request): array
     {

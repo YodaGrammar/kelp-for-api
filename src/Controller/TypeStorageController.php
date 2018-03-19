@@ -18,6 +18,9 @@ class TypeStorageController extends Controller
      * @param Request $request
      * @param TypeStorageFilterFormHandler $formHandler
      * @return Response
+     * @throws \LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function listAction(Request $request, TypeStorageFilterFormHandler $formHandler): Response
     {
