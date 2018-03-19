@@ -15,12 +15,11 @@ use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Class StorageFormHandler
  * @package App\FormHandler
  */
-class ProductFormHandler
+class ProductFormHandler implements FormHandlerInterface
 {
     use FormHandlerTrait;
 

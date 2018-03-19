@@ -47,6 +47,7 @@ class StorageFactory
             throw new NotFoundException('this type storage does not exist');
         }
         $storage->setTypeStorage($typeStorage);
+        $storage->setActive(true);
         $this->objectManager->persist($storage);
         $this->objectManager->flush();
 

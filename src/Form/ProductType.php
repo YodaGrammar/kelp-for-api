@@ -8,9 +8,8 @@
 
 namespace App\Form;
 
-
 use App\DTO\ProductDTO;
-use App\Entity\TypeProduct;
+use App\Entity\Packaging;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -30,30 +29,47 @@ class ProductType extends AbstractType
             ->add(
                 'quantity',
                 TextType::class,
-                ['required' => false]
+                [
+                    'required' => false,
+                    'label'    => 'product.form.field.quantity',
+                ]
             )
             ->add(
-                'type',
-                EntityType::class, [
-                'class'   => TypeProduct::class,
-                'choice_label' => 'label',
-            ],
-                ['required' => false]
+                'packaging',
+                EntityType::class,
+                [
+                    'class'        => Packaging::class,
+                    'choice_label' => 'label',
+                    'required' => false,
+                    'label'    => 'product.form.field.packaging',
+                ]
             )
             ->add(
                 'label',
                 TextType::class,
-                ['required' => false]
+                [
+                    'required' => false,
+                    'label'    => 'product.form.field.label',
+                ]
             )
             ->add(
                 'date',
                 TextType::class,
-                ['required' => false]
+                [
+                    'required' => false,
+                    'label'    => 'product.form.field.date',
+                ]
             )
             ->add(
                 'save',
                 SubmitType::class,
-                ['attr' => ['class' => 'save']]
+                [
+                    'attr' => [
+                        'class' => 'save btn btn-primary',
+
+                    ],
+                    'label' => 'product.form.field.save',
+                ]
             );
         $options;
     }
@@ -63,6 +79,11 @@ class ProductType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data_class', ProductDTO::class);
+        $resolver
+            ->setDefaults([
+                'data_class'         => ProductDTO::class,
+                'translation_domain' => 'messages',
+            ]);
+
     }
 }

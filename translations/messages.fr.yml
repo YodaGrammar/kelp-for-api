@@ -1,0 +1,7 @@
+storage.create.flash_message.validated: messages
+storage.edit.flash_message.validated: messages
+product.form.field.date: 'Date de péremption'
+product.form.field.quantity: 'Quantité'
+product.form.field.packaging: 'Conditionnement'
+product.form.field.label: 'Produit'
+product.form.field.save: 'Enregistré'

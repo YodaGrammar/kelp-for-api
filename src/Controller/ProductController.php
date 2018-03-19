@@ -33,8 +33,7 @@ class ProductController extends Controller
         ProductFormHandler $formHandler,
         TranslatorInterface $translator,
         ProductDTOFactory $dtoFactory
-    )
-    {
+    ) {
         $productDTO = $dtoFactory->newInstance();
 
         if ($formHandler->process($request, $productDTO)) {
@@ -56,6 +55,4 @@ class ProductController extends Controller
             ]
         );
     }
-
-
 }
