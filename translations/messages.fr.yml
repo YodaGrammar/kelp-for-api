@@ -10,10 +10,13 @@ product:
   list:
     title: 'Produit'
     table:
-      date: 'Date de péremption'
-      label: 'Produit'
-      packaging: 'Conditionnement'
-      quantity: 'Quantité'
+      header:
+        date: 'Date de péremption'
+        label: 'Produit'
+        packaging: 'Conditionnement'
+        quantity: 'Quantité'
+      empty:
+        message: 'Pas de produit pour ce rangement'
   form:
     field:
       save: 'Enregistré'

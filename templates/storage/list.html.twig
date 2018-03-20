@@ -21,7 +21,7 @@
             {% endif %}
             <div class="col-sm-{{ classTypeStorage }}">
                 <div class="card mt-4 {{ 'border-' ~ typeStorage.class }} text-dark">
-                    <div class="card-header {{ 'alert-' ~ typeStorage.class }} text-center">
+                    <div class="card-header {{ 'alert-' ~ typeStorage.class }} text-center pt-1 pb-0">
                         <div class="row">
                             <div class="col-sm-4 offset-sm-4">
                                 <h4>
@@ -47,18 +47,18 @@
                                                    class="btn {{ 'btn-' ~ typeStorage.class }} btn-block btn-sm">Add a
                                                     Product</a>
                                             </div>
-                                            <div class="card-footer text-muted mt-0 mb-0">
+                                            <div class="card-footer text-muted mt-0 mb-0 pt-1 pb-1">
                                                 <div class="row">
-                                                    <div class="col-sm-4 offset-sm-4">
+                                                    <div class="col-sm-8 d-flex align-items-center justify-content-center">
                                                         {{ storage.label|capitalize }}
                                                     </div>
-                                                    <div class="col-sm-4 mr-0 pr-0 d-flex justify-content-end">
+                                                    <div class=" col-sm-4 mr-0 pr-0 d-flex justify-content-end">
                                                         <div class="btn-group">
-                                                            <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.edit',{'id':typeStorage.id }) }}">
-                                                                <i class="fas  fa-pencil-alt"></i>
-                                                            </a>
                                                             <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.product.list',{'id':storage.id }) }}">
                                                                 <i class="fas  fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.edit',{'id':typeStorage.id }) }}">
+                                                                <i class="fas  fa-pencil-alt"></i>
                                                             </a>
                                                             <button type="button" class="btn-delete btn btn-sm {{ 'btn-outline-' ~ typeStorage.class }}"
                                                                     title="Editer" data-url="{{ path('kelp.storage.delete',{'id':typeStorage.id }) }}">
