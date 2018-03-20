@@ -21,7 +21,7 @@ class TypeStorageFixture extends Fixture
     const TYPE_STORAGE = [
         ['label' => 'Froid', 'class' => 'primary', 'comment' => ' '],
         ['label' => 'Frais', 'class' => 'info', 'comment' => ' '],
-        ['label' => 'Sec', 'class' => 'light', 'comment' => ' '],
+        ['label' => 'Sec', 'class' => 'secondary', 'comment' => ' '],
         ['label' => 'Vin', 'class' => 'danger', 'comment' => ' ']
     ];
 
