@@ -47,10 +47,9 @@ class ProductMapper
         $this->objectManager->flush();
     }
 
-    public function findAllByStorageAndByFilters($request)
+    public function findAllByStorageAndByFilters($idStorage, $filter, $page, $maxPage)
     {
-        $this->objectManager->getRepository(Product::class)->findBy(
-            ['storage' => $request->get('id')], ['label' => 'DESC']
-        );
+        return $this->objectManager->getRepository(Product::class)
+                            ->findAllByStorageAndByFilters($idStorage, $filter, $page, $maxPage);
     }
 }

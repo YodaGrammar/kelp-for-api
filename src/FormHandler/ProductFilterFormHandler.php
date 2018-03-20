@@ -4,6 +4,7 @@ namespace App\FormHandler;
 
 use App\DTOFilterFactory\ProductDTOFilterFactory;
 use App\DTOFilterFactory\StorageDTOFilterFactory;
+use App\Form\FilterProductType;
 use App\Form\FilterTypeStorageType;
 use App\Mapper\ProductMapper;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ProductFilterFormHandler implements FormHandlerInterface
 {
     use FormHandlerTrait;
+
+    private const MAX_PAGE = 10;
 
     /**
      * @var ProductMapper
@@ -50,7 +53,7 @@ class ProductFilterFormHandler implements FormHandlerInterface
         $this->productMapper    = $productMapper;
         $this->form                 = $factory->createNamed(
             'kelp_product_filter',
-            FilterTypeStorageType::class,
+            FilterProductType::class,
             $this->dtoFactory
         );
         $this->tokenStorage         = $tokenStorage;
@@ -71,11 +74,16 @@ class ProductFilterFormHandler implements FormHandlerInterface
             $filter = $this->form->getData();
         }
 
-        $typeStorages = $this->productMapper->findAllByStorageAndByFilters($request->get('id'), $filter, $request->get('page', 1), self::MAX_PAGE);
+        $products = $this->productMapper->findAllByStorageAndByFilters(
+            $request->get('id'),
+            $filter,
+            $request->get('page', 1),
+            self::MAX_PAGE
+        );
 
         $pagination = [
             'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
+            'nbPages'     => ceil(count($products) / self::MAX_PAGE),
             'nomRoute'    => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];

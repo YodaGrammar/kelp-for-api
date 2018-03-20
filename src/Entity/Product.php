@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Product
  * @package App\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Entity\Repository\ProductRepository")
  * @ORM\Table(name="kelp_product")
  */
 class Product
@@ -44,7 +44,7 @@ class Product
     private $storage;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
     private $date;
@@ -130,7 +130,7 @@ class Product
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
+    public function getDate()
     {
         return $this->date;
     }

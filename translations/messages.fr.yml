@@ -1,7 +1,23 @@
-storage.create.flash_message.validated: messages
-storage.edit.flash_message.validated: messages
-product.form.field.date: 'Date de péremption'
-product.form.field.quantity: 'Quantité'
-product.form.field.packaging: 'Conditionnement'
-product.form.field.label: 'Produit'
-product.form.field.save: 'Enregistré'
+storage:
+  create:
+    flash_message:
+      validated: messages
+  edit:
+    flash_message:
+      validated: messages
+
+product:
+  list:
+    title: 'Produit'
+    table:
+      date: 'Date de péremption'
+      label: 'Produit'
+      packaging: 'Conditionnement'
+      quantity: 'Quantité'
+  form:
+    field:
+      save: 'Enregistré'
+      label: 'Produit'
+      packaging: 'Conditionnement'
+      quantity: 'Quantité'
+      date: 'Date de péremption'

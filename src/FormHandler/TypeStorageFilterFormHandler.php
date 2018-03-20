@@ -38,12 +38,11 @@ class TypeStorageFilterFormHandler implements FormHandlerInterface
 
     /**
      * TypeStorageFilterFormHandler constructor.
-     * @param FormFactoryInterface $factory
-     * @param FilterTypeStorageDTOFactory $dtoFactory
-     * @param TypeStorageMapper $mapper
-     * @param TokenStorageInterface $tokenStorage
+     * @param FormFactoryInterface          $factory
+     * @param TypeStorageDTOFilterFactory   $dtoFactory
+     * @param TypeStorageMapper             $mapper
+     * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
         FormFactoryInterface $factory,

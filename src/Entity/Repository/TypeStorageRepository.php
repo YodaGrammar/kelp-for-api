@@ -26,14 +26,14 @@ class TypeStorageRepository extends EntityRepository
                 ->setParameter('text', '%' . $text . '%');
         }
         if ($page) {
-            $builder
-                ->andWhere('tp.label like :text')
-                ->setParameter('text', '%' . $text . '%');
+//            $builder
+//                ->andWhere('tp.label like :text')
+//                ->setParameter('text', '%' . $text . '%');
         }
         if ($maxPage) {
-            $builder
-                ->andWhere('tp.label like :text')
-                ->setParameter('text', '%' . $text . '%');
+//            $builder
+//                ->andWhere('tp.label like :text')
+//                ->setParameter('text', '%' . $text . '%');
         }
         return $builder->getQuery()->getResult();
     }
