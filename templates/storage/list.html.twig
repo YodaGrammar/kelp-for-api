@@ -57,11 +57,11 @@
                                                             <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.product.list',{'id':storage.id }) }}">
                                                                 <i class="fas  fa-eye"></i>
                                                             </a>
-                                                            <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.edit',{'id':typeStorage.id }) }}">
+                                                            <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.edit',{'id':storage.id }) }}">
                                                                 <i class="fas  fa-pencil-alt"></i>
                                                             </a>
                                                             <button type="button" class="btn-delete btn btn-sm {{ 'btn-outline-' ~ typeStorage.class }}"
-                                                                    title="Editer" data-url="{{ path('kelp.storage.delete',{'id':typeStorage.id }) }}">
+                                                                    title="Editer" data-url="{{ path('kelp.storage.delete',{'id':storage.id }) }}">
                                                                 <i class="far  fa-trash-alt"></i>
                                                             </button>
                                                         </div>
