@@ -1,3 +1,6 @@
 kelp.login:
     path: /login
     controller: App\Controller\SecurityController::loginAction
+
+kelp.logout:
+    path: /logout
