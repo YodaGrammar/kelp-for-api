@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FormHandler;
+namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\StorageDTOFilterFactory;
 use App\Form\FilterTypeStorageType;
@@ -14,9 +14,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  * Class StorageFilterFormHandler
  * @package App\FormHandler
  */
-class StorageFilterFormHandler implements FormHandlerInterface
+class StorageFilterFormHandler implements FilterFormHandlerInterface
 {
-    use FormHandlerTrait;
+    use FilterFormHandlerTrait;
 
     /**
      * @var TypeStorageMapper

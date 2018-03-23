@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FormHandler;
+namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\TypeStorageDTOFilterFactory;
 use App\Form\FilterTypeStorageType;
@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class TypeStorageFilterFormHandler implements FormHandlerInterface
+class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
 {
-    use FormHandlerTrait;
+    use FilterFormHandlerTrait;
 
     private const MAX_PAGE = 10;
 

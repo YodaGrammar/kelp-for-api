@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FormHandler;
+namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\ProductDTOFilterFactory;
 use App\DTOFilterFactory\StorageDTOFilterFactory;
@@ -15,9 +15,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  * Class StorageFilterFormHandler
  * @package App\FormHandler
  */
-class ProductFilterFormHandler implements FormHandlerInterface
+class ProductFilterFormHandler implements FilterFormHandlerInterface
 {
-    use FormHandlerTrait;
+    use FilterFormHandlerTrait;
 
     private const MAX_PAGE = 10;
 
