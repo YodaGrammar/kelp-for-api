@@ -135,6 +135,4 @@ class Storage
     {
         $this->products = $products;
     }
-
-
 }

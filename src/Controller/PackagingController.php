@@ -29,5 +29,4 @@ class PackagingController extends Controller
             'form'  => $formHandler->getForm()->createView(),
         ]);
     }
-
 }

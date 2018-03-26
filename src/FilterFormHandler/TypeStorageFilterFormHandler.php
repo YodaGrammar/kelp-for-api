@@ -50,8 +50,7 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         TypeStorageMapper $mapper,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
-    )
-    {
+    ) {
         $this->dtoFactory           = $dtoFactory->newInstance();
         $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',

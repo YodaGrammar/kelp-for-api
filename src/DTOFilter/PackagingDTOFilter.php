@@ -1,7 +1,7 @@
 <?php
 namespace App\DTOFilter;
 
-class TypeStorageDTOFilter
+class PackagingDTOFilter
 {
     public $text;
 }

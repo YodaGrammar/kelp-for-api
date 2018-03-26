@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  * Class StorageFactory
  * @package App\Factory
  */
-class StorageFactory
+class StorageFactory implements FactoryInterface
 {
     /** @var ObjectManager */
     protected $objectManager;
@@ -37,7 +37,7 @@ class StorageFactory
      * @return Storage
      * @throws NotFoundException
      */
-    public function newInstance(StorageDTO $dto): Storage
+    public function newInstance($dto): Storage
     {
         $storage = new Storage();
         $storage->setLabel($dto->label);

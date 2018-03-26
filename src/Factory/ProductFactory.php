@@ -15,7 +15,7 @@ use App\Exception\NotFoundException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
-class ProductFactory
+class ProductFactory implements FactoryInterface
 {
     /** @var ObjectManager */
     protected $objectManager;
@@ -39,7 +39,7 @@ class ProductFactory
      * @return Product
      * @throws NotFoundException
      */
-    public function newInstance(ProductDTO $dto): Product
+    public function newInstance($dto): Product
     {
         $product = new Product();
         $product->setLabel($dto->label);

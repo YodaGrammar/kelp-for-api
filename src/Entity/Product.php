@@ -158,6 +158,4 @@ class Product
     {
         $this->active = $active;
     }
-
-
 }

@@ -86,6 +86,5 @@ class ProductType extends AbstractType
                 'data_class'         => ProductDTO::class,
                 'translation_domain' => 'messages',
             ]);
-
     }
 }

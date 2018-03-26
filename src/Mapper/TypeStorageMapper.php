@@ -16,7 +16,6 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class TypeStorageMapper
 {
-
     /**
      * @var ObjectManager
      */
@@ -67,12 +66,14 @@ class TypeStorageMapper
 
     /**
      * @param TypeStorageDTO $dto
+     * @return mixed
      */
     public function add(TypeStorageDTO $dto)
     {
         $typeStorage = $this->typeStorageFactory->newInstance($dto);
         $this->objectManager->persist($typeStorage);
         $this->objectManager->flush();
+        return $typeStorage;
     }
 
     /**
