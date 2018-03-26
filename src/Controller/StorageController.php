@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\DTOFactory\StorageDTOFactory;
 use App\Entity\Storage;
-use App\FormHandler\StorageFilterFormHandler;
+use App\FilterFormHandler\StorageFilterFormHandler;
 use App\FormHandler\StorageFormHandler;
 use App\Mapper\StorageMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

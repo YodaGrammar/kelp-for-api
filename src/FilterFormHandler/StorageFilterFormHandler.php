@@ -3,7 +3,7 @@
 namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\StorageDTOFilterFactory;
-use App\Form\FilterTypeStorageType;
+use App\FilterForm\FilterTypeStorageType;
 use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;

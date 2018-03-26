@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 use App\DTOFactory\ProductDTOFactory;
-use App\FormHandler\ProductFilterFormHandler;
+use App\FilterFormHandler\ProductFilterFormHandler;
 use App\FormHandler\ProductFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

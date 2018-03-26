@@ -8,6 +8,9 @@
 
 namespace App\Mapper;
 
+use App\Factory\PackagingFactory;
+use Doctrine\Common\Persistence\ObjectManager;
+
 class PackagingMapper
 {
     /**
@@ -18,16 +21,16 @@ class PackagingMapper
     /**
      * @var PackagingFactory
      */
-    protected $typeStorageFactory;
+    protected $packagingFactory;
 
     /**
-     * TypeStorageMapper constructor.
-     * @param ObjectManager $objectManager
-     * @param TypeStorageFactory $typeStorageFactory
+     * PackagingMapper constructor.
+     * @param ObjectManager    $objectManager
+     * @param PackagingFactory $packagingFactory
      */
-    public function __construct(ObjectManager $objectManager, TypeStorageFactory $typeStorageFactory)
+    public function __construct(ObjectManager $objectManager, PackagingFactory $packagingFactory)
     {
         $this->objectManager      = $objectManager;
-        $this->typeStorageFactory = $typeStorageFactory;
+        $this->packagingFactory = $packagingFactory;
     }
 }

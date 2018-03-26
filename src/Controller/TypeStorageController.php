@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\TypeStorage;
-use App\FormHandler\TypeStorageFilterFormHandler;
+use App\FilterFormHandler\TypeStorageFilterFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

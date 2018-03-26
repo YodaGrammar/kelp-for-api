@@ -1,5 +1,5 @@
 <?php
-namespace App\Form;
+namespace App\FilterForm;
 
 use App\DTO\TypeStorageDTOFilter ;
 use App\DTOFilter\PackagingDTOFilter;
