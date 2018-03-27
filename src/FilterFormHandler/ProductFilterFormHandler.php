@@ -4,8 +4,7 @@ namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\ProductDTOFilterFactory;
 use App\DTOFilterFactory\StorageDTOFilterFactory;
-use App\Form\FilterProductType;
-use App\Form\FilterTypeStorageType;
+use App\FilterForm\FilterProductType;
 use App\Mapper\ProductMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;

@@ -44,10 +44,16 @@ class Product
     private $storage;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      * @var \DateTime
      */
-    private $date;
+    private $datePeremption = null;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $dateAdd = null;
 
     /**
      * @ORM\Column(type="boolean")
@@ -130,17 +136,33 @@ class Product
     /**
      * @return \DateTime
      */
-    public function getDate()
+    public function getDatePeremption(): \DateTime
     {
-        return $this->date;
+        return $this->datePeremption;
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTime $datePeremption
      */
-    public function setDate(\DateTime $date): void
+    public function setDatePeremption(\DateTime $datePeremption): void
     {
-        $this->date = $date;
+        $this->datePeremption = $datePeremption;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateAdd(): \DateTime
+    {
+        return $this->dateAdd;
+    }
+
+    /**
+     * @param \DateTime $dateAdd
+     */
+    public function setDateAdd(\DateTime $dateAdd): void
+    {
+        $this->dateAdd = $dateAdd;
     }
 
     /**

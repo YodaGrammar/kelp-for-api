@@ -52,8 +52,9 @@ class ProductFactory implements FactoryInterface
         $product->setQuantity($dto->quantity);
         $product->setPackaging($dto->packaging);
         if ($dto->date) {
-            $product->setDate($dto->date);
+            $product->setDatePeremption($dto->date);
         }
+        $product->setDateAdd(new \DateTime());
         $product->setActive(true);
         $this->objectManager->persist($product);
         $this->objectManager->flush();

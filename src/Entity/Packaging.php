@@ -57,16 +57,16 @@ class Packaging
     /**
      * @return mixed
      */
-    public function getProduct()
+    public function getProducts()
     {
-        return $this->product;
+        return $this->products;
     }
 
     /**
-     * @param mixed $product
+     * @param mixed $products
      */
-    public function setProduct($product): void
+    public function setProduct($products): void
     {
-        $this->product = $product;
+        $this->products = $products;
     }
 }

@@ -11,10 +11,11 @@ product:
     title: 'Produit'
     table:
       header:
-        date: 'Date de péremption'
         label: 'Produit'
         packaging: 'Conditionnement'
         quantity: 'Quantité'
+        datePeremption: 'Date de péremption'
+        dateAdd: "Date d'ajout"
       empty:
         message: 'Pas de produit pour ce rangement'
   form:
