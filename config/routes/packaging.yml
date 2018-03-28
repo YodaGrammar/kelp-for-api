@@ -1,0 +1,11 @@
+kelp.packaging.add:
+    path: /packaging/add/{id}
+    controller: App\Controller\PackagingController::createAction
+
+kelp.packaging.list:
+    path: /packaging/list/{page}
+    controller: App\Controller\PackagingController::listAction
+    defaults:
+        page: 1
+    requirements:
+        page: '\d+'

@@ -8,6 +8,9 @@
 
 namespace App\Mapper;
 
+use App\DTOFilter\PackagingDTOFilter;
+use App\Entity\Packaging;
+use App\Entity\Repository\PackagingRepository;
 use App\Factory\PackagingFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -32,5 +35,24 @@ class PackagingMapper
     {
         $this->objectManager      = $objectManager;
         $this->packagingFactory = $packagingFactory;
+    }
+
+    /**
+     * @return PackagingRepository
+     */
+    protected function getRepository():PackagingRepository
+    {
+        return $this->objectManager->getRepository(Packaging::class);
+    }
+
+    /**
+     * @param PackagingDTOFilter $packagingDTO
+     * @param                    $page
+     * @param                    $maxPage
+     * @return mixed
+     */
+    public function findAllByFilters(PackagingDTOFilter $packagingDTO, $page, $maxPage)
+    {
+        return $this->getRepository()->findAllByFilters($packagingDTO->text, $page, $maxPage);
     }
 }

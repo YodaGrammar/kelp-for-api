@@ -31,3 +31,6 @@ product:
   edit:
     flash_message:
       validated: messages
+packaging:
+  list:
+    title: 'messages'

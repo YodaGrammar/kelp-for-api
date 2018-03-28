@@ -12,6 +12,7 @@ use App\FilterFormHandler\PackagingFilterFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PackagingController extends Controller
 {
@@ -25,9 +26,13 @@ class PackagingController extends Controller
      */
     public function listAction(Request $request, PackagingFilterFormHandler $formHandler): Response
     {
-        return $this->render('type_storage/list.html.twig', [
+        return $this->render('packaging/list.html.twig', [
             'pager' => $formHandler->process($request),
             'form'  => $formHandler->getForm()->createView(),
         ]);
+    }
+
+    public function createAction()
+    {
     }
 }

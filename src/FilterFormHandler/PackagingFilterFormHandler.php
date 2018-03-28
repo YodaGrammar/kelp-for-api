@@ -9,10 +9,10 @@
 namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\PackagingDTOFilterFactory;
-use App\Form\FilterPackagingType;
+use App\FilterForm\FilterPackagingType;
 use App\Mapper\PackagingMapper;
-use http\Env\Request;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
