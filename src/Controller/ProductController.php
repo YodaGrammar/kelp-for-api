@@ -58,7 +58,7 @@ class ProductController extends Controller
             $this->addFlash(
                 'success',
                 $translator->trans(
-                    'storage.create.flash_message.validated',
+                    'product.create.flash_message.validated',
                     ['%name%' => $productDTO->label]
                 )
             );

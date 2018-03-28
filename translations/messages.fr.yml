@@ -25,3 +25,9 @@ product:
       packaging: 'Conditionnement'
       quantity: 'Quantité'
       date: 'Date de péremption'
+  create:
+    flash_message:
+      validated: messages
+  edit:
+    flash_message:
+      validated: messages
