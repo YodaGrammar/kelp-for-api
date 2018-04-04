@@ -1965,16 +1965,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v4.0.6",
+            "version": "v4.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "26c2749671eb73602b4264e4a3221fb451dbc8d5"
+                "reference": "5a3f505b256a65978d1d4f924ed53ceb503d1d5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/26c2749671eb73602b4264e4a3221fb451dbc8d5",
-                "reference": "26c2749671eb73602b4264e4a3221fb451dbc8d5",
+                "url": "https://api.github.com/repos/symfony/form/zipball/5a3f505b256a65978d1d4f924ed53ceb503d1d5f",
+                "reference": "5a3f505b256a65978d1d4f924ed53ceb503d1d5f",
                 "shasum": ""
             },
             "require": {
@@ -2041,7 +2041,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "https://symfony.com",
-            "time": "2018-03-01T10:21:51+00:00"
+            "time": "2018-04-02T10:05:09+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -2434,12 +2434,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lts.git",
-                "reference": "396c5fca8d73d01186df37d7031321a3c0c2bf92"
+                "reference": "6de50b244bad631a71544b3cc3c8e206c0e5f991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lts/zipball/396c5fca8d73d01186df37d7031321a3c0c2bf92",
-                "reference": "396c5fca8d73d01186df37d7031321a3c0c2bf92",
+                "url": "https://api.github.com/repos/symfony/lts/zipball/6de50b244bad631a71544b3cc3c8e206c0e5f991",
+                "reference": "6de50b244bad631a71544b3cc3c8e206c0e5f991",
                 "shasum": ""
             },
             "conflict": {
@@ -2468,6 +2468,7 @@
                 "symfony/intl": ">=5",
                 "symfony/ldap": ">=5",
                 "symfony/lock": ">=5",
+                "symfony/messenger": ">=5",
                 "symfony/monolog-bridge": ">=5",
                 "symfony/options-resolver": ">=5",
                 "symfony/process": ">=5",
@@ -2518,7 +2519,7 @@
             ],
             "description": "Enforces Long Term Supported versions of Symfony components",
             "homepage": "https://symfony.com",
-            "time": "2017-10-19T02:16:32+00:00"
+            "time": "2018-04-03T05:04:16+00:00"
         },
         {
             "name": "symfony/options-resolver",
