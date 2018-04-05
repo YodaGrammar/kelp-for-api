@@ -22,22 +22,10 @@ class TypeStorageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = null)
     {
         $builder
-            ->add(
-                'label',
-                TextType::class,
-                ['required' => false]
-            )
-            ->add(
-                'class',
-                TextType::class,
-                ['required' => false]
-            )
-            ->add(
-                'comment',
-                TextareaType::class,
-                ['required' => false]
-            );
-        $options;
+            ->add('label', TextType::class, ['required' => false])
+            ->add('class', TextType::class, ['required' => false])
+            ->add('comment', TextareaType::class, ['required' => false])
+        ;
     }
 
     /**

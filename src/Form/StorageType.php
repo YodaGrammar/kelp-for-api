@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\DTO\StorageDTO;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,17 +22,8 @@ class StorageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = null)
     {
         $builder
-            ->add(
-                'label',
-                TextType::class,
-                ['required' => false]
-            )
-            ->add(
-                'save',
-                SubmitType::class,
-                ['attr' => ['class' => 'save']]
-            );
-        $options;
+            ->add('label', TextType::class, ['required' => false])
+        ;
     }
 
     /**
