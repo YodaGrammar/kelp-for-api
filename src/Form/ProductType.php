@@ -14,7 +14,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,53 +26,26 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = null)
     {
         $builder
-            ->add(
-                'quantity',
-                TextType::class,
-                [
+            ->add('quantity', TextType::class, [
                     'required' => false,
                     'label'    => 'product.form.field.quantity',
-                ]
-            )
-            ->add(
-                'packaging',
-                EntityType::class,
-                [
+            ])
+            ->add('packaging', EntityType::class, [
                     'class'        => Packaging::class,
                     'choice_label' => 'label',
                     'required' => false,
                     'label'    => 'product.form.field.packaging',
-                ]
-            )
-            ->add(
-                'label',
-                TextType::class,
-                [
+            ])
+            ->add('label', TextType::class, [
                     'required' => false,
                     'label'    => 'product.form.field.label',
-                ]
-            )
-            ->add(
-                'date',
-                DateType::class,
-                [
+            ])
+            ->add('date', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
                     'label'    => 'product.form.field.date',
-                ]
-            )
-            ->add(
-                'save',
-                SubmitType::class,
-                [
-                    'attr' => [
-                        'class' => 'save btn btn-primary',
-
-                    ],
-                    'label' => 'product.form.field.save',
-                ]
-            );
-        $options;
+            ])
+        ;
     }
 
     /**

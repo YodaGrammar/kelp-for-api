@@ -6,7 +6,6 @@
  * Time: 13:08
  */
 
-// src/Form/UserType.php
 namespace App\Form;
 
 use App\DTO\UserDTO;
@@ -29,15 +28,12 @@ class UserType extends AbstractType
                 'type'           => PasswordType::class,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
-            ]);
-
-        $options;
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-                                   'data_class' => UserDTO::class,
-                               ]);
+        $resolver->setDefault('data_class', UserDTO::class);
     }
 }

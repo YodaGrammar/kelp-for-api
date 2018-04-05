@@ -1,4 +1,7 @@
 storage:
+  form:
+    button:
+      save: 'Enregistrer'
   create:
     flash_message:
       validated: messages
@@ -19,6 +22,8 @@ product:
       empty:
         message: 'Pas de produit pour ce rangement'
   form:
+    button:
+      save: 'Enregistrer'
     field:
       save: 'Enregistré'
       label: 'Produit'
