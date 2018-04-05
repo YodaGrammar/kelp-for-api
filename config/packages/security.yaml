@@ -41,3 +41,4 @@ security:
          - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/storage, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/type_storage, roles: IS_AUTHENTICATED_FULLY }
