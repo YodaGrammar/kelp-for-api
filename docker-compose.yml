@@ -10,6 +10,8 @@ services:
             MYSQL_PASSWORD: symfony
         ports:
           - "3316:3306"
+        volumes:
+          - database:/var/lib/mysql
     app:
         image: dockerphp/nginx:7.2-stretch
         links:
@@ -30,3 +32,5 @@ services:
             PMA_PASSWORD: root
         ports:
           - "8080:80"
+volumes:
+  database: ~
