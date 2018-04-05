@@ -6,23 +6,34 @@
  * Time: 13:19
  */
 
-namespace App\Entity\Repository;
+namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Packaging;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Class PackagingRepository
  * @package App\Entity\Repository
  */
-class PackagingRepository extends EntityRepository
+class PackagingRepository extends ServiceEntityRepository
 {
+    /**
+     * PackagingRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Packaging::class);
+    }
+
     /**
      * @param null $filter
      * @param null $page
      * @param null $maxPage
      * @return mixed
      */
-    public function findAllByStorageAndByFilters($filter = null, $page = null, $maxPage = null)
+    public function findAllByFilters($filter = null, $page = null, $maxPage = null)
     {
         $builder = $this->createQueryBuilder('p');
 

@@ -10,7 +10,7 @@ namespace App\FilterFormHandler;
 
 use App\DTOFilterFactory\PackagingDTOFilterFactory;
 use App\FilterForm\FilterPackagingType;
-use App\Mapper\PackagingMapper;
+use App\Repository\PackagingRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -23,9 +23,9 @@ class PackagingFilterFormHandler
     private const MAX_PAGE = 10;
 
     /**
-     * @var PackagingMapper
+     * @var PackagingRepository
      */
-    protected $mapper;
+    protected $repository;
 
     /**
      * @var TokenStorageInterface
@@ -43,17 +43,17 @@ class PackagingFilterFormHandler
     protected $dtoFactory;
 
     /**
-     * TypeStorageFilterFormHandler constructor.
+     * PackagingFilterFormHandler constructor.
      * @param FormFactoryInterface          $factory
      * @param PackagingDTOFilterFactory     $dtoFactory
-     * @param PackagingMapper             $mapper
+     * @param PackagingRepository           $repository
      * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FormFactoryInterface $factory,
         PackagingDTOFilterFactory $dtoFactory,
-        PackagingMapper $mapper,
+        PackagingRepository $repository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
@@ -63,7 +63,7 @@ class PackagingFilterFormHandler
             FilterPackagingType::class,
             $this->dtoFactory
         );
-        $this->mapper               = $mapper;
+        $this->repository           = $repository;
         $this->tokenStorage         = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
@@ -71,8 +71,6 @@ class PackagingFilterFormHandler
     /**
      * @param Request $request
      * @return array
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request): array
     {
@@ -84,7 +82,7 @@ class PackagingFilterFormHandler
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $filter = $this->form->getData();
         }
-        $packaging = $this->mapper->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
+        $packaging = $this->repository->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
             'page'        => $request->get('page', 1),
@@ -94,8 +92,8 @@ class PackagingFilterFormHandler
         ];
 
         return [
-            'pagination'   => $pagination,
-            'packaging' => $packaging,
+            'pagination' => $pagination,
+            'packagings'  => $packaging,
         ];
     }
 }
