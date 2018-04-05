@@ -44,7 +44,7 @@ class Product
     private $storage;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
     private $datePeremption = null;
@@ -64,7 +64,7 @@ class Product
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -136,7 +136,7 @@ class Product
     /**
      * @return \DateTime
      */
-    public function getDatePeremption(): \DateTime
+    public function getDatePeremption(): ?\DateTime
     {
         return $this->datePeremption;
     }
