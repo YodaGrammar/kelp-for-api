@@ -38,4 +38,9 @@ product:
       validated: messages
 packaging:
   list:
-    title: 'messages'
+    title: 'Gestion des conditionnements'
+    table:
+      header:
+        label: 'Conditionnement'
+      empty:
+        message: 'Pas de conditionnement'

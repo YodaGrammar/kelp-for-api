@@ -4,6 +4,7 @@
 {% endblock %}
 {% block content %}
     <div class="row">
+        {% set countTypeStorage  = 0 %}
         {% for typeStorage in pager.typeStorages %}
             {% set count = 0 %}
             {% for storage in pager.storages if storage.typeStorage.id == typeStorage.id %}
@@ -19,8 +20,9 @@
                 {% set classTypeStorage = classTypeStorage * 3 %}
                 {% set classStorage = 4 %}
             {% endif %}
+            {% set countTypeStorage  = countTypeStorage + classTypeStorage %}
             <div class="col-sm-{{ classTypeStorage }}">
-                <div class="card mt-4 {{ 'border-' ~ typeStorage.class }} text-dark">
+                <div class="card {% if countTypeStorage > 12 %} mt-4 {% endif %}{{ 'border-' ~ typeStorage.class }} text-dark">
                     <div class="card-header {{ 'alert-' ~ typeStorage.class }} text-center pt-1 pb-0">
                         <div class="row">
                             <div class="col-sm-4 offset-sm-4">
