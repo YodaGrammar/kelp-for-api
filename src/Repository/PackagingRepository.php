@@ -8,6 +8,7 @@
 
 namespace App\Repository;
 
+use App\DTO\PackagingDTO;
 use App\Entity\Packaging;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -54,5 +55,16 @@ class PackagingRepository extends ServiceEntityRepository
         }
 
         return $builder->getQuery()->getResult();
+    }
+
+    public function edit(PackagingDTO $dto)
+    {
+        /** @var Packaging $packaging */
+        $packaging = $this->find($dto->id);
+        if (!$packaging) {
+            throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
+        }
+        $packaging->setLabel($dto->label);
+        $this->getEntityManager()->flush();
     }
 }

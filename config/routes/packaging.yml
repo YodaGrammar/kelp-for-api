@@ -9,3 +9,9 @@ kelp.packaging.list:
         page: 1
     requirements:
         page: '\d+'
+
+kelp.packaging.edit:
+    path: /packaging/edit/{id}
+    controller: App\Controller\PackagingController::editAction
+    requirements:
+        id: '\d+'

@@ -44,3 +44,11 @@ packaging:
         label: 'Conditionnement'
       empty:
         message: 'Pas de conditionnement'
+  edit:
+    flash_message:
+      validated: 'messages'
+  form:
+    field:
+      label: "label"
+    button:
+      save: 'messages'

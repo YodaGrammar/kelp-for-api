@@ -8,11 +8,15 @@
 
 namespace App\Controller;
 
+use App\DTOFactory\PackagingDTOFactory;
+use App\Entity\Packaging;
 use App\FilterFormHandler\PackagingFilterFormHandler;
+use App\FormHandler\PackagingFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PackagingController extends Controller
 {
@@ -32,7 +36,41 @@ class PackagingController extends Controller
         ]);
     }
 
-    public function createAction()
+    /**
+     * @param Packaging            $packaging
+     * @param Request              $request
+     * @param PackagingFormHandler $formHandler
+     * @param TranslatorInterface  $translator
+     * @param PackagingDTOFactory  $dtoFactory
+     * @return Response
+     */
+    public function editAction(
+        Packaging $packaging,
+        Request $request,
+        PackagingFormHandler $formHandler,
+        TranslatorInterface $translator,
+        PackagingDTOFactory $dtoFactory
+    ):Response
     {
+        $packagingDTO = $dtoFactory->newInstance($packaging);
+        $formHandler->getForm()->setData($packagingDTO);
+        if ($formHandler->process($request, $packagingDTO)) {
+            $this->addFlash(
+                'success',
+                $translator->trans(
+                    'packaging.edit.flash_message.validated',
+                    ['%name%' => $packagingDTO->label]
+                )
+            );
+
+            return $this->redirectToRoute('kelp.packaging.list');
+        }
+
+        return $this->render(
+            'packaging/edit.html.twig',
+            [
+                'form' => $formHandler->getForm()->createView(),
+            ]
+        );
     }
 }
