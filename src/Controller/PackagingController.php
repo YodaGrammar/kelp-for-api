@@ -43,6 +43,7 @@ class PackagingController extends Controller
      * @param TranslatorInterface  $translator
      * @param PackagingDTOFactory  $dtoFactory
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
      */
     public function editAction(
         Packaging $packaging,
@@ -50,8 +51,7 @@ class PackagingController extends Controller
         PackagingFormHandler $formHandler,
         TranslatorInterface $translator,
         PackagingDTOFactory $dtoFactory
-    ):Response
-    {
+    ):Response {
         $packagingDTO = $dtoFactory->newInstance($packaging);
         $formHandler->getForm()->setData($packagingDTO);
         if ($formHandler->process($request, $packagingDTO)) {
