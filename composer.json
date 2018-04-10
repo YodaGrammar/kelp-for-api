@@ -1,4 +1,6 @@
 {
+    "name" : "kelp",
+    "description":"kitchen helper",
     "type": "project",
     "license": "proprietary",
     "require": {
