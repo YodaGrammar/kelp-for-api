@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\DTOFactory\StorageDTOFactory;
 use App\Entity\Storage;
-use App\FilterFormHandler\StorageFilterFormHandler;
+use App\Factory\DTO\StorageDTOFactory;
+use App\FormHandler\Filter\StorageFilterFormHandler;
 use App\FormHandler\StorageFormHandler;
 use App\Mapper\StorageMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,9 +19,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 class StorageController extends Controller
 {
     /**
-     * @param Request                  $request
+     * @param Request $request
      * @param StorageFilterFormHandler $formHandler
      * @return Response
+     * @throws \LogicException
      */
     public function listAction(Request $request, StorageFilterFormHandler $formHandler): Response
     {
@@ -35,11 +36,13 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Request             $request
-     * @param StorageFormHandler  $formHandler
+     * @param Request $request
+     * @param StorageFormHandler $formHandler
      * @param TranslatorInterface $translator
-     * @param StorageDTOFactory   $dtoFactory
+     * @param StorageDTOFactory $dtoFactory
      * @return Response
+     * @throws \LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function createAction(
         Request $request,
@@ -70,12 +73,16 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Storage             $storage
-     * @param Request             $request
-     * @param StorageFormHandler  $formHandler
+     * @param Storage $storage
+     * @param Request $request
+     * @param StorageFormHandler $formHandler
      * @param TranslatorInterface $translator
-     * @param StorageDTOFactory   $dtoFactory
+     * @param StorageDTOFactory $dtoFactory
      * @return Response
+     * @throws \LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function editAction(
         Storage $storage,
@@ -107,9 +114,10 @@ class StorageController extends Controller
     }
 
     /**
-     * @param               $id
+     * @param $id
      * @param StorageMapper $mapper
-     * @return string
+     * @return Response
+     * @throws \LogicException
      */
     public function deleteAction($id, StorageMapper $mapper)
     {

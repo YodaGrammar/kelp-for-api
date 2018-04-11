@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\FilterFormHandler\TypeStorageFilterFormHandler;
+use App\FormHandler\Filter\TypeStorageFilterFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +31,7 @@ class TypeStorageController extends Controller
 
     /**
      * @return Response
+     * @throws \LogicException
      */
     public function createAction()
     {

@@ -8,10 +8,10 @@
 
 namespace App\Mapper;
 
-use App\DTOFilter\PackagingDTOFilter;
+use App\DTO\Filter\PackagingDTOFilter;
 use App\Entity\Packaging;
 use App\Repository\PackagingRepository;
-use App\EntityFactory\PackagingEntityFactory;
+use App\Factory\Entity\PackagingFactory;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 /**
@@ -33,9 +33,9 @@ class PackagingMapper
     /**
      * PackagingMapper constructor.
      * @param ManagerRegistry        $managerRegistry
-     * @param PackagingEntityFactory $packagingFactory
+     * @param PackagingFactory $packagingFactory
      */
-    public function __construct(ManagerRegistry $managerRegistry, PackagingEntityFactory $packagingFactory)
+    public function __construct(ManagerRegistry $managerRegistry, PackagingFactory $packagingFactory)
     {
         $this->managerRegistry  = $managerRegistry;
         $this->packagingFactory = $packagingFactory;

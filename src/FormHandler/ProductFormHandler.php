@@ -31,7 +31,8 @@ class ProductFormHandler implements FormHandlerInterface
     /**
      * ProductFormHandler constructor.
      * @param FormFactoryInterface $factory
-     * @param ProductMapper        $mapper
+     * @param ProductMapper $mapper
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(FormFactoryInterface $factory, ProductMapper $mapper)
     {
@@ -44,9 +45,11 @@ class ProductFormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Request         $request
+     * @param Request $request
      * @param ProductDTO|null $productDTO
      * @return bool
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request, ProductDTO $productDTO = null): bool
     {

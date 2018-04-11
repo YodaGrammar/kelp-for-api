@@ -8,9 +8,9 @@
 
 namespace App\Controller;
 
-use App\DTOFactory\PackagingDTOFactory;
 use App\Entity\Packaging;
-use App\FilterFormHandler\PackagingFilterFormHandler;
+use App\Factory\DTO\PackagingDTOFactory;
+use App\FormHandler\Filter\PackagingFilterFormHandler;
 use App\FormHandler\PackagingFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +24,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 class PackagingController extends Controller
 {
     /**
-     * @param Request                    $request
+     * @param Request $request
      * @param PackagingFilterFormHandler $formHandler
      * @return Response
      * @throws \LogicException
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function listAction(Request $request, PackagingFilterFormHandler $formHandler): Response
     {
@@ -40,13 +38,17 @@ class PackagingController extends Controller
     }
 
     /**
-     * @param Packaging            $packaging
-     * @param Request              $request
+     * @param Packaging $packaging
+     * @param Request $request
      * @param PackagingFormHandler $formHandler
-     * @param TranslatorInterface  $translator
-     * @param PackagingDTOFactory  $dtoFactory
+     * @param TranslatorInterface $translator
+     * @param PackagingDTOFactory $dtoFactory
      * @return Response
      * @throws \Doctrine\ORM\ORMException
+     * @throws \LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function editAction(
         Packaging $packaging,

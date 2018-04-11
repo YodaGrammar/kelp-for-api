@@ -63,6 +63,7 @@ class PackagingRepository extends ServiceEntityRepository
      * @param PackagingDTO $dto
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
      */
     public function edit(PackagingDTO $dto)
     {

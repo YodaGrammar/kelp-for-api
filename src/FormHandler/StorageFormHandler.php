@@ -9,14 +9,11 @@
 namespace App\FormHandler;
 
 use App\DTO\StorageDTO;
-use App\DTOFactory\StorageDTOFactory;
 use App\Form\StorageType;
 use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * Class StorageFormHandler
@@ -32,9 +29,10 @@ class StorageFormHandler
     protected $mapper;
 
     /**
-     * TypeStorageFilterFormHandler constructor.
+     * StorageFormHandler constructor.
      * @param FormFactoryInterface $factory
-     * @param StorageMapper        $mapper
+     * @param StorageMapper $mapper
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(FormFactoryInterface $factory, StorageMapper $mapper)
     {
@@ -47,9 +45,11 @@ class StorageFormHandler
     }
 
     /**
-     * @param Request    $request
-     * @param StorageDTO $storageDTO
+     * @param Request $request
+     * @param StorageDTO|null $storageDTO
      * @return bool
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request, StorageDTO $storageDTO = null): bool
     {

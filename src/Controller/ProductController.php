@@ -8,8 +8,8 @@
 
 namespace App\Controller;
 
-use App\DTOFactory\ProductDTOFactory;
-use App\FilterFormHandler\ProductFilterFormHandler;
+use App\Factory\DTO\ProductDTOFactory;
+use App\FormHandler\Filter\ProductFilterFormHandler;
 use App\FormHandler\ProductFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,9 +24,10 @@ class ProductController extends Controller
 {
 
     /**
-     * @param Request                  $request
+     * @param Request $request
      * @param ProductFilterFormHandler $formHandler
      * @return Response
+     * @throws \LogicException
      */
     public function listAction(Request $request, ProductFilterFormHandler $formHandler): Response
     {
@@ -40,11 +41,13 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Request             $request
-     * @param ProductFormHandler  $formHandler
+     * @param Request $request
+     * @param ProductFormHandler $formHandler
      * @param TranslatorInterface $translator
-     * @param ProductDTOFactory   $dtoFactory
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param ProductDTOFactory $dtoFactory
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws \LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function createAction(
         Request $request,

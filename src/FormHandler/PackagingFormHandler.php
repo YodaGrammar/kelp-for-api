@@ -35,11 +35,12 @@ class PackagingFormHandler implements FormHandlerInterface
     /**
      * PackagingFormHandler constructor.
      * @param FormFactoryInterface $factory
-     * @param PackagingRepository  $repository
+     * @param PackagingRepository $repository
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(FormFactoryInterface $factory, PackagingRepository $repository)
     {
-        $this->form   = $factory->createNamed(
+        $this->form       = $factory->createNamed(
             'kelp_packaging',
             PackagingType::class,
             null
@@ -48,10 +49,11 @@ class PackagingFormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Request           $request
+     * @param Request $request
      * @param PackagingDTO|null $packagingDTO
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request, PackagingDTO $packagingDTO = null): bool
     {
