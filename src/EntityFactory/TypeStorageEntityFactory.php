@@ -6,12 +6,11 @@
  * Time: 13:06
  */
 
-namespace App\Factory;
+namespace App\EntityFactory;
 
-use App\Entity\TypeStorage;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class TypeStorageFactory
+class TypeStorageEntityFactory implements EntityFactoryInterface
 {
     /** @var ObjectManager */
     protected $objectManager;
@@ -23,6 +22,11 @@ class TypeStorageFactory
     public function __construct(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
+    }
+
+    public function newInstance($dto)
+    {
+        // TODO: Implement newInstance() method.
     }
 
 //    /**

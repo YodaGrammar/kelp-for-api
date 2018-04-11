@@ -11,7 +11,11 @@
             <button type="button" class="btn btn-sm btn-secondary"><i class="fas fa-plus"></i></button>
         </div>
     </div>
-
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-responsive right-block save" name="button">{{ 'packaging.form.button.save'|trans }}</button>
+    {{ form_end(form) }}
     {#{{ dump(pager.packagings) }}#}
     <div>
         <table class="table table-striped table-bordered table-sm">

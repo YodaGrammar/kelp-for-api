@@ -6,9 +6,9 @@
  * Time: 10:34
  */
 
-namespace App\Factory;
+namespace App\EntityFactory;
 
-interface FactoryInterface
+interface EntityFactoryInterface
 {
     public function newInstance($dto);
 }

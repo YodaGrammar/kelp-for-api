@@ -10,39 +10,43 @@ namespace App\Mapper;
 
 use App\DTOFilter\PackagingDTOFilter;
 use App\Entity\Packaging;
-use App\Entity\Repository\PackagingRepository;
-use App\Factory\PackagingFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\PackagingRepository;
+use App\EntityFactory\PackagingEntityFactory;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 
+/**
+ * Class PackagingMapper
+ * @package App\Mapper
+ */
 class PackagingMapper
 {
     /**
-     * @var ObjectManager
+     * @var ManagerRegistry
      */
-    protected $objectManager;
+    protected $managerRegistry;
 
     /**
-     * @var PackagingFactory
+     * @var PackagingEntityFactory
      */
     protected $packagingFactory;
 
     /**
      * PackagingMapper constructor.
-     * @param ObjectManager    $objectManager
-     * @param PackagingFactory $packagingFactory
+     * @param ManagerRegistry        $managerRegistry
+     * @param PackagingEntityFactory $packagingFactory
      */
-    public function __construct(ObjectManager $objectManager, PackagingFactory $packagingFactory)
+    public function __construct(ManagerRegistry $managerRegistry, PackagingEntityFactory $packagingFactory)
     {
-        $this->objectManager      = $objectManager;
+        $this->managerRegistry  = $managerRegistry;
         $this->packagingFactory = $packagingFactory;
     }
 
     /**
      * @return PackagingRepository
      */
-    protected function getRepository():PackagingRepository
+    protected function getRepository(): PackagingRepository
     {
-        return $this->objectManager->getRepository(Packaging::class);
+        return $this->managerRegistry->getRepository(Packaging::class);
     }
 
     /**

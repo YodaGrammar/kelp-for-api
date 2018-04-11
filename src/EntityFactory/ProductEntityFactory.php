@@ -6,7 +6,7 @@
  * Time: 10:13
  */
 
-namespace App\Factory;
+namespace App\EntityFactory;
 
 use App\DTO\ProductDTO;
 use App\Entity\Product;
@@ -15,7 +15,7 @@ use App\Exception\NotFoundException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
-class ProductFactory implements FactoryInterface
+class ProductEntityFactory implements EntityFactoryInterface
 {
     /** @var ObjectManager */
     protected $objectManager;

@@ -1,6 +1,6 @@
-kelp.packaging.add:
-    path: /packaging/add/{id}
-    controller: App\Controller\PackagingController::createAction
+#kelp.packaging.add:
+#    path: /packaging/add/{id}
+#    controller: App\Controller\PackagingController::createAction
 
 kelp.packaging.list:
     path: /packaging/list/{page}

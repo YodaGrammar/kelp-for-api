@@ -6,7 +6,7 @@ use App\DTO\StorageDTO;
 use App\Entity\Repository\StorageRepository;
 use App\Entity\Storage;
 use App\Entity\User;
-use App\Factory\StorageFactory;
+use App\EntityFactory\StorageEntityFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 
@@ -23,16 +23,16 @@ class StorageMapper
     protected $objectManager;
 
     /**
-     * @var StorageFactory
+     * @var StorageFactoryEntity
      */
     protected $storageFactory;
 
     /**
      * StorageMapper constructor.
-     * @param ObjectManager  $objectManager
-     * @param StorageFactory $storageFactory
+     * @param ObjectManager        $objectManager
+     * @param StorageEntityFactory $storageFactory
      */
-    public function __construct(ObjectManager $objectManager, StorageFactory $storageFactory)
+    public function __construct(ObjectManager $objectManager, StorageEntityFactory $storageFactory)
     {
         $this->objectManager  = $objectManager;
         $this->storageFactory = $storageFactory;

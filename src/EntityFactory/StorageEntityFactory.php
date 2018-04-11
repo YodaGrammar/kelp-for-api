@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Factory;
+namespace App\EntityFactory;
 
 use App\DTO\StorageDTO;
 use App\Entity\Storage;
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  * Class StorageFactory
  * @package App\Factory
  */
-class StorageFactory implements FactoryInterface
+class StorageEntityFactory implements EntityFactoryInterface
 {
     /** @var ObjectManager */
     protected $objectManager;

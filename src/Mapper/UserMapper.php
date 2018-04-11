@@ -4,8 +4,8 @@ namespace App\Mapper;
 
 use App\Entity\Repository\StorageRepository;
 use App\Entity\User;
-use App\Factory\StorageFactory;
-use App\Factory\TypeStorageFactory;
+use App\EntityFactory\StorageFactoryEntity;
+use App\EntityFactory\TypeStorageEntityFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -22,16 +22,16 @@ class UserMapper
     protected $objectManager;
 
     /**
-     * @var TypeStorageFactory
+     * @var TypeStorageEntityFactory
      */
     protected $storageFactory;
 
     /**
      * StorageMapper constructor.
-     * @param ObjectManager $objectManager
-     * @param StorageFactory $storageFactory
+     * @param ObjectManager        $objectManager
+     * @param StorageFactoryEntity $storageFactory
      */
-    public function __construct(ObjectManager $objectManager, StorageFactory $storageFactory)
+    public function __construct(ObjectManager $objectManager, StorageFactoryEntity $storageFactory)
     {
         $this->objectManager  = $objectManager;
         $this->storageFactory = $storageFactory;

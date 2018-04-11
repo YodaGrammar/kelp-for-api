@@ -6,7 +6,7 @@ use App\DTO\TypeStorageDTO;
 use App\DTOFilter\TypeStorageDTOFilter;
 use App\Entity\Repository\TypeStorageRepository;
 use App\Entity\TypeStorage;
-use App\Factory\TypeStorageFactory;
+use App\EntityFactory\TypeStorageEntityFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -22,16 +22,16 @@ class TypeStorageMapper
     protected $objectManager;
 
     /**
-     * @var TypeStorageFactory
+     * @var TypeStorageEntityFactory
      */
     protected $typeStorageFactory;
 
     /**
      * TypeStorageMapper constructor.
-     * @param ObjectManager $objectManager
-     * @param TypeStorageFactory $typeStorageFactory
+     * @param ObjectManager            $objectManager
+     * @param TypeStorageEntityFactory $typeStorageFactory
      */
-    public function __construct(ObjectManager $objectManager, TypeStorageFactory $typeStorageFactory)
+    public function __construct(ObjectManager $objectManager, TypeStorageEntityFactory $typeStorageFactory)
     {
         $this->objectManager      = $objectManager;
         $this->typeStorageFactory = $typeStorageFactory;

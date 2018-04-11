@@ -15,13 +15,16 @@ use App\FormHandler\PackagingFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * Class PackagingController
+ * @package App\Controller
+ */
 class PackagingController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request                    $request
      * @param PackagingFilterFormHandler $formHandler
      * @return Response
      * @throws \LogicException
@@ -51,7 +54,7 @@ class PackagingController extends Controller
         PackagingFormHandler $formHandler,
         TranslatorInterface $translator,
         PackagingDTOFactory $dtoFactory
-    ):Response {
+    ): Response {
         $packagingDTO = $dtoFactory->newInstance($packaging);
         $formHandler->getForm()->setData($packagingDTO);
         if ($formHandler->process($request, $packagingDTO)) {

@@ -10,6 +10,7 @@ namespace App\Repository;
 
 use App\DTO\PackagingDTO;
 use App\Entity\Packaging;
+use App\Factory\PaginatorFactoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,13 +20,18 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class PackagingRepository extends ServiceEntityRepository
 {
+    /** @var PaginatorFactoryInterface  */
+    private $paginatorFactory;
+
     /**
      * PackagingRepository constructor.
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry           $registry
+     * @param PaginatorFactoryInterface $paginatorFactory
      */
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorFactoryInterface $paginatorFactory)
     {
         parent::__construct($registry, Packaging::class);
+        $this->paginatorFactory = $paginatorFactory;
     }
 
     /**
@@ -39,24 +45,25 @@ class PackagingRepository extends ServiceEntityRepository
         $builder = $this->createQueryBuilder('p');
 
         if ($filter->text) {
-//            $builder
-//                ->andWhere('p.label like :text')
-//                ->setParameter('text', '%' . $filter->text . '%');
+            $builder
+                ->andWhere('p.label like :text')
+                ->setParameter('text', '%' . $filter->text . '%');
         }
-        if ($page) {
-//            $builder
-//                ->andWhere('tp.label like :text')
-//                ->setParameter('text', '%' . $filter->text . '%');
+        $query = $builder->getQuery();
+        $paginator = [];
+        if ($query !== null) {
+            $firstResult = ($page - 1) * $maxPage;
+            $query->setFirstResult($firstResult)->setMaxResults($maxPage);
+            $paginator = $this->paginatorFactory->newInstance($query);
         }
-        if ($maxPage) {
-//            $builder
-//                ->andWhere('tp.label like :text')
-//                ->setParameter('text', '%' . $filter->text . '%');
-        }
-
-        return $builder->getQuery()->getResult();
+        return $paginator;
     }
 
+    /**
+     * @param PackagingDTO $dto
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function edit(PackagingDTO $dto)
     {
         /** @var Packaging $packaging */

@@ -10,7 +10,7 @@ namespace App\Mapper;
 
 use App\DTO\ProductDTO;
 use App\Entity\Product;
-use App\Factory\ProductFactory;
+use App\EntityFactory\ProductEntityFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class ProductMapper
@@ -21,16 +21,16 @@ class ProductMapper
     protected $objectManager;
 
     /**
-     * @var ProductFactory
+     * @var ProductEntityFactory
      */
     protected $productFactory;
 
     /**
      * ProductMapper constructor.
-     * @param ObjectManager  $objectManager
-     * @param ProductFactory $productFactory
+     * @param ObjectManager        $objectManager
+     * @param ProductEntityFactory $productFactory
      */
-    public function __construct(ObjectManager $objectManager, ProductFactory $productFactory)
+    public function __construct(ObjectManager $objectManager, ProductEntityFactory $productFactory)
     {
         $this->objectManager  = $objectManager;
         $this->productFactory = $productFactory;

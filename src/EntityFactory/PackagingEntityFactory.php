@@ -6,17 +6,17 @@
  * Time: 10:33
  */
 
-namespace App\Factory;
+namespace App\EntityFactory;
 
 use App\Entity\Packaging;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
- * Class PackagingFactory
+ * Class PackagingEntityFactory
  * @package App\Factory
  */
-class PackagingFactory implements FactoryInterface
+class PackagingEntityFactory implements EntityFactoryInterface
 {
     /** @var ObjectManager */
     protected $objectManager;
