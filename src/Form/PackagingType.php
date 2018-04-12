@@ -23,10 +23,9 @@ class PackagingType extends AbstractType
     {
         $builder
             ->add('label', TextType::class, [
-                    'required' => false,
-                    'label'    => 'packaging.form.field.label',
-            ])
-        ;
+                'required' => false,
+                'label'    => 'packaging.form.field.label',
+            ]);
     }
 
     /**
@@ -34,10 +33,9 @@ class PackagingType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'data_class'         => PackagingDTO::class,
-                'translation_domain' => 'messages',
-            ]);
+        $resolver->setDefaults([
+            'data_class'         => PackagingDTO::class,
+            'translation_domain' => 'messages',
+        ]);
     }
 }

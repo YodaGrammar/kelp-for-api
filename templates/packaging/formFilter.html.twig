@@ -1,0 +1,10 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<div class="card bg-light p-k-10 mb-2">
+    <div class="card-body p-0">
+        {{ form_start(form,{'attr': {'class': 'form-inline'}}) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-secondary btn-sm save float-right" name="button">{{ 'packaging.form_filter.button.save'|trans }} <i class="fas fa-search"></i></button>
+        {{ form_end(form) }}
+    </div>
+</div>

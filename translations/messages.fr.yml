@@ -52,3 +52,8 @@ packaging:
       label: "label"
     button:
       save: 'messages'
+  form_filter:
+    field:
+      label: 'Conditionnement'
+    button:
+      save: 'Rechecherche'

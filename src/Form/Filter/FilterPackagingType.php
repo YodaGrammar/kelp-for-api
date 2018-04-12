@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form\Filter;
 
 use App\DTO\Filter\PackagingDTOFilter;
@@ -18,8 +19,12 @@ class FilterPackagingType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options = null)
     {
-        $builder->add('text', TextType::class, ['required' => false]);
-//            ->add('submit', SubmitType::class, ['label' => 'search']);
+        $builder->add('text', TextType::class, [
+            'required' => false,
+            'attr' => ['class'    => 'form-control-sm mr-2'],
+            'label_attr' => ['class'=> 'mr-2'],
+            'label'    => 'packaging.form_filter.field.label',
+        ]);
     }
 
     /**
@@ -28,6 +33,6 @@ class FilterPackagingType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data', PackagingDTOFilter::class);
+        $resolver->setDefault('data', 'messages');
     }
 }
