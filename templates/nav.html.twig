@@ -18,27 +18,33 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item dropdown pull-right">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropDownAdmin" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Administration
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu kelp-dropdown-menu-no-padding" aria-labelledby="dropDownAdmin">
                         <a class="dropdown-item" href="{{ path('kelp.type_storage.list') }}">Type Storage</a>
                         <a class="dropdown-item" href="{{ path('kelp.packaging.list') }}">Packaging</a>
+                        <a class="dropdown-item" href="{{ path('kelp.logout') }}">Logout</a>
+
                     </div>
                 </li>
-                <li class="nav-item dropdown pull-right active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                {% endif %}
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownUser" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             {{ app.user.username|capitalize }}
                         {% endif %}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu kelp-dropdown-menu-sm" aria-labelledby="dropdownUser">
                         <a class="dropdown-item" href="{{ path('kelp.logout') }}">Logout</a>
                     </div>
                 </li>
+
+
             </ul>
         </div>
     </div>
