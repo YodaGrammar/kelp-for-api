@@ -5,9 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Packaging
- * @package App\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PackagingRepository")
  * @ORM\Table(name="kelp_packaging")
  */
 class Packaging

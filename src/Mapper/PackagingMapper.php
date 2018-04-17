@@ -9,40 +9,34 @@
 namespace App\Mapper;
 
 use App\DTOFilter\PackagingDTOFilter;
-use App\Entity\Packaging;
-use App\Entity\Repository\PackagingRepository;
+use App\Repository\PackagingRepository;
 use App\Factory\PackagingFactory;
-use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class PackagingMapper
+ * @package App\Mapper
+ * @deprecated
+ */
 class PackagingMapper
 {
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
     /**
      * @var PackagingFactory
      */
     protected $packagingFactory;
 
     /**
-     * PackagingMapper constructor.
-     * @param ObjectManager    $objectManager
-     * @param PackagingFactory $packagingFactory
+     * @var PackagingRepository
      */
-    public function __construct(ObjectManager $objectManager, PackagingFactory $packagingFactory)
-    {
-        $this->objectManager      = $objectManager;
-        $this->packagingFactory = $packagingFactory;
-    }
+    private $repository;
 
     /**
-     * @return PackagingRepository
+     * @param PackagingRepository $repository
+     * @param PackagingFactory $packagingFactory
      */
-    protected function getRepository():PackagingRepository
+    public function __construct(PackagingRepository $repository, PackagingFactory $packagingFactory)
     {
-        return $this->objectManager->getRepository(Packaging::class);
+        $this->packagingFactory = $packagingFactory;
+        $this->repository = $repository;
     }
 
     /**
@@ -50,9 +44,10 @@ class PackagingMapper
      * @param                    $page
      * @param                    $maxPage
      * @return mixed
+     * @throws \Doctrine\ORM\ORMException
      */
     public function findAllByFilters(PackagingDTOFilter $packagingDTO, $page, $maxPage)
     {
-        return $this->getRepository()->findAllByFilters($packagingDTO->text, $page, $maxPage);
+        return $this->repository->findAllByFilters($packagingDTO->text, $page, $maxPage);
     }
 }

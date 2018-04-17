@@ -11,8 +11,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TypeProduct
- * @package App\Entity
  * @ORM\Entity
  * @ORM\Table(name="kelp_type_product")
  */

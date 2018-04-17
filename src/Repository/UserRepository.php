@@ -1,14 +1,21 @@
 <?php
-namespace App\Entity\Repository;
+namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Class UserRepository
  * @package App\Entity\Repository
  */
-class UserRepository extends EntityRepository
+class UserRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, User::class);
+    }
+
     public function findBySearch($name = null, $role = null)
     {
         $builder = $this->getEntityManager()->createQueryBuilder();

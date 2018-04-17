@@ -1,15 +1,28 @@
 <?php
 
-namespace App\Entity\Repository;
+namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Product;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Class ProductRepository
  * @package App\Entity\Repository
  */
-class ProductRepository extends EntityRepository
+class ProductRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Product::class);
+    }
+
+    public function save(Product $product)
+    {
+        $this->getEntityManager()->persist($$product);
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @param      $idStorage
      * @param null $filter

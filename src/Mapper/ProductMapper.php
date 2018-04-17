@@ -9,31 +9,29 @@
 namespace App\Mapper;
 
 use App\DTO\ProductDTO;
-use App\Entity\Product;
 use App\Factory\ProductFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\ProductRepository;
 
 class ProductMapper
 {
     /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
-    /**
      * @var ProductFactory
      */
     protected $productFactory;
+    /**
+     * @var ProductRepository
+     */
+    private $repository;
 
     /**
      * ProductMapper constructor.
-     * @param ObjectManager  $objectManager
+     * @param ProductRepository $repository
      * @param ProductFactory $productFactory
      */
-    public function __construct(ObjectManager $objectManager, ProductFactory $productFactory)
+    public function __construct(ProductRepository $repository, ProductFactory $productFactory)
     {
-        $this->objectManager  = $objectManager;
         $this->productFactory = $productFactory;
+        $this->repository = $repository;
     }
 
     /**
@@ -42,14 +40,13 @@ class ProductMapper
      */
     public function add(ProductDTO $dto)
     {
-        $storage = $this->productFactory->newInstance($dto);
-        $this->objectManager->persist($storage);
-        $this->objectManager->flush();
+        $product = $this->productFactory->newInstance($dto);
+        $this->repository->save($product);
     }
 
     public function findAllByStorageAndByFilters($idStorage, $filter, $page, $maxPage)
     {
-        return $this->objectManager->getRepository(Product::class)
-                            ->findAllByStorageAndByFilters($idStorage, $filter, $page, $maxPage);
+        return $this->repository
+            ->findAllByStorageAndByFilters($idStorage, $filter, $page, $maxPage);
     }
 }

@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="kelp_user")
- * @ORM\Entity(repositoryClass="App\Entity\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
 {
