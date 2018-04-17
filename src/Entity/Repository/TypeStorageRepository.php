@@ -11,12 +11,10 @@ class TypeStorageRepository extends EntityRepository
 {
     /**
      * @param null $text
-     * @param null $page
-     * @param null $maxPage
      *
      * @return mixed
      */
-    public function findAllByFilters($text = null, $page = null, $maxPage = null)
+    public function findAllByFilters($text = null)
     {
         $builder = $this->createQueryBuilder('tp');
 

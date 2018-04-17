@@ -123,8 +123,7 @@ class User implements UserInterface, \Serializable
         list(
             $this->id,
             $this->username,
-            $this->password,
-            ) = unserialize($serialized);
+            $this->password) = unserialize($serialized);
     }
 
     /**

@@ -37,6 +37,6 @@ class TypeStorageController extends Controller
      */
     public function createAction()
     {
-        return $this->render('type_storage/create.html.twig', []);;
+        return $this->render('type_storage/create.html.twig', []);
     }
 }

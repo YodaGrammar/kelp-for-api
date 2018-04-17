@@ -31,12 +31,11 @@ class UserFormHandler implements FormHandlerInterface
     ) {
         $this->dtoFactory = $dtoFactory;
     }
+
     /**
      * {@inheritdoc}
      */
     public function process(Request $request)
     {
     }
-
-
 }

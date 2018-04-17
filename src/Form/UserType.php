@@ -18,9 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 /**
- * Class UserType
- *
- * @package App\Form
+ * Class UserType.
  */
 class UserType extends AbstractType
 {

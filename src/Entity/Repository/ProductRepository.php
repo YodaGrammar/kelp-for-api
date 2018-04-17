@@ -10,19 +10,15 @@ use Doctrine\ORM\EntityRepository;
 class ProductRepository extends EntityRepository
 {
     /**
-     * @param      $idStorage
-     * @param null $filter
-     * @param null $page
-     * @param null $maxPage
+     * @param $idStorage
      *
      * @return mixed
      */
-    public function findAllByStorageAndByFilters($idStorage, $filter = null, $page = null, $maxPage = null)
+    public function findAllByStorageAndByFilters($idStorage)
     {
         $builder = $this->createQueryBuilder('p')
                         ->where('p.storage = :idStorage')
                         ->setParameter('idStorage', $idStorage);
-
 
         return $builder->getQuery()->getResult();
     }
