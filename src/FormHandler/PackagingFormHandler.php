@@ -50,8 +50,7 @@ class PackagingFormHandler implements FormHandlerInterface
      *
      * @return bool
      *
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function process(Request $request, PackagingDTO $packagingDTO = null): bool
     {
