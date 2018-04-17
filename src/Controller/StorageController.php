@@ -31,7 +31,7 @@ class StorageController extends Controller
             'storage/list.html.twig',
             [
                 'pager' => $formHandler->process($request),
-                //            'form' => $formHandler->getForm()->createView(),
+                'form'  => $formHandler->getForm()->createView(),
             ]
         );
     }
@@ -119,7 +119,7 @@ class StorageController extends Controller
     }
 
     /**
-     * @param $id
+     * @param               $id
      * @param StorageMapper $mapper
      *
      * @return Response

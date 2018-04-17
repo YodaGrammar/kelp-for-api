@@ -37,24 +37,6 @@ class TypeStorageController extends Controller
      */
     public function createAction()
     {
-//        $program = new S();
-//        $program->setCreatedBy($userManager->findOneById($this->getUser()->getId()));
-//
-//        if ($programFormHandler->process($request, $program)) {
-//        $this->addFlash(
-//            'success',
-//            $translator->trans(
-//                'program.create.flash_message.validated',
-//                ['%name%' => $program->getName()]
-//            )
-//        );
-//
-//            return $this->redirectToRoute('app_program_list');
-//        }
-
-        return $this->render('type_storage/create.html.twig', []);
-//        return $this->render('type_storage/create.html.twig', [
-//            'form' => $programFormHandler->getForm()->createView(),
-//        ]);
+        return $this->render('type_storage/create.html.twig', []);;
     }
 }

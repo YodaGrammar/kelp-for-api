@@ -23,21 +23,6 @@ class ProductRepository extends EntityRepository
                         ->where('p.storage = :idStorage')
                         ->setParameter('idStorage', $idStorage);
 
-        if ($filter->text) {
-//            $builder
-//                ->andWhere('p.label like :text')
-//                ->setParameter('text', '%' . $filter->text . '%');
-        }
-        if ($page) {
-//            $builder
-//                ->andWhere('tp.label like :text')
-//                ->setParameter('text', '%' . $filter->text . '%');
-        }
-        if ($maxPage) {
-//            $builder
-//                ->andWhere('tp.label like :text')
-//                ->setParameter('text', '%' . $filter->text . '%');
-        }
 
         return $builder->getQuery()->getResult();
     }

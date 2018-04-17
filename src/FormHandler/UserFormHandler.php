@@ -8,7 +8,7 @@
 
 namespace App\FormHandler;
 
-use App\DTOFactory\UserDTOFactory;
+use App\Factory\DTO\UserDTOFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -21,22 +21,22 @@ class UserFormHandler implements FormHandlerInterface
      */
     private $dtoFactory;
 
+    /**
+     * UserFormHandler constructor.
+     *
+     * @param UserDTOFactory $dtoFactory
+     */
     public function __construct(
         UserDTOFactory $dtoFactory
     ) {
         $this->dtoFactory = $dtoFactory;
     }
-
-//    public function __construct(
-//        FilterStorageDTOFactory $filterStorageDTOFactory,
-//        TypeStorageMapper $typeStorageMapper,
-//        StorageMapper $storageMapper,
-//        FormFactoryInterface $factory,
-//        TokenStorageInterface $tokenStorage,
-//        AuthorizationCheckerInterface $authorizationChecker
-//    )
+    /**
+     * {@inheritdoc}
+     */
     public function process(Request $request)
     {
-        // TODO: Implement process() method.
     }
+
+
 }

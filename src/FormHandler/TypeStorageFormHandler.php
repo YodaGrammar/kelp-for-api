@@ -12,9 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TypeStorageFormHandler implements FormHandlerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(Request $request)
     {
         $request;
-        // TODO: Implement process() method.
     }
 }

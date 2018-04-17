@@ -6,8 +6,6 @@
  * Time: 13:11.
  */
 
-// src/Controller/RegistrationController.php
-
 namespace App\Controller;
 
 use App\DTO\UserDTO;
@@ -30,27 +28,20 @@ class RegistrationController extends Controller
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // 1) build the form
         $user = new UserDTO();
         $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $registerUser = new User();
             $registerUser->setEmail($user->email);
             $registerUser->setUsername($user->username);
-            // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($registerUser, $user->plainPassword);
             $registerUser->setPassword($password);
 
-            // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($registerUser);
             $entityManager->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
 
             return $this->redirectToRoute('kelp.home');
         }
