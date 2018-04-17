@@ -9,5 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface FilterFormHandlerInterface
 {
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
     public function process(Request $request);
 }

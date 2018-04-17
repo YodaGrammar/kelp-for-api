@@ -176,9 +176,9 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getisActive()
+    public function isActive()
     {
         return $this->isActive;
     }

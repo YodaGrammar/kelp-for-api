@@ -65,13 +65,10 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
     }
 
     /**
-     * @param Request $request
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function process(Request $request): array
     {
-        $request;
 
         return [
             'typeStorages' => $this->typeStorageMapper->findAll(),

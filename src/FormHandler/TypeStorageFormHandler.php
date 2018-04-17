@@ -17,6 +17,5 @@ class TypeStorageFormHandler implements FormHandlerInterface
      */
     public function process(Request $request)
     {
-        $request;
     }
 }
