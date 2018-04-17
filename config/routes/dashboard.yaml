@@ -1,3 +1,4 @@
 kelp.dashboard:
     path: /dashboard
     controller: App\Controller\DashboardController::dashboardAction
+
