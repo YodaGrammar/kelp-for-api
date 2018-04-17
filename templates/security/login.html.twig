@@ -1,18 +1,30 @@
 {% extends 'base.offline.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% include("@css/login.css.twig") %}
+{% endblock %}
 {% block content%}
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
+<div class="text-center">
+    <form class="form-signin" action="{{ path('kelp.login') }}" method="post">
+        <img class="mb-4" src="image/yodaGD.jpg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Username" required="" autofocus="">
 
-<form action="{{ path('kelp.login') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Password" name="_password" required="">
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" id="remember_me" name="_remember_me" checked /> Remember me
+            </label>
+        </div>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" name="login" />
+        <p class="mt-5 mb-3 text-muted">© 2018</p>
+    </form>
+</div>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
-
-    <input type="checkbox" id="remember_me" name="_remember_me" checked />
-    <label for="remember_me">Keep me logged in</label>
-    <input type="submit" name="login" />
-</form>
 {% endblock %}
+
