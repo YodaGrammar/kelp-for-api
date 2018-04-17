@@ -37,7 +37,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $active;
 
     /**
      * @ORM\OneToMany(targetEntity="Storage", mappedBy="user")
@@ -49,7 +49,7 @@ class User implements UserInterface, \Serializable
      */
     public function __construct()
     {
-        $this->isActive = true;
+        $this->active = true;
         $this->storages = new ArrayCollection();
     }
 
@@ -180,14 +180,14 @@ class User implements UserInterface, \Serializable
      */
     public function isActive()
     {
-        return $this->isActive;
+        return $this->active;
     }
 
     /**
-     * @param mixed $isActive
+     * @param mixed $active
      */
-    public function setIsActive($isActive): void
+    public function setActive($active): void
     {
-        $this->isActive = $isActive;
+        $this->active = $active;
     }
 }

@@ -69,8 +69,8 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
      */
     public function process(Request $request): array
     {
-
         return [
+            $request->get('page', 1),
             'typeStorages' => $this->typeStorageMapper->findAll(),
             'storages' => $this->storageMapper->findAllByUser($this->tokenStorage->getToken()->getUser()),
         ];
