@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form\Filter;
 
 use App\DTO\Filter\TypeStorageDTOFilter;
@@ -9,9 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SearchTypeStorageType
- *
- * @package Kelp\AppBundle\Form
+ * Class SearchTypeStorageType.
  */
 class FilterTypeStorageType extends AbstractType
 {
@@ -29,6 +28,7 @@ class FilterTypeStorageType extends AbstractType
 
     /**
      * @param OptionsResolver $resolver
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function configureOptions(OptionsResolver $resolver)

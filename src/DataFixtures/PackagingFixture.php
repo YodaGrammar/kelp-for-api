@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 26/02/2018
- * Time: 14:19
+ * Time: 14:19.
  */
 
 namespace App\DataFixtures;
@@ -13,8 +13,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class TypeStorageFixture
- * @package App\DataFixtures
+ * Class TypeStorageFixture.
  */
 class PackagingFixture extends Fixture
 {
@@ -27,7 +26,7 @@ class PackagingFixture extends Fixture
     /**
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager):void
+    public function load(ObjectManager $manager): void
     {
         foreach (self::PACKAGING as $data) {
             $packaging = new Packaging();

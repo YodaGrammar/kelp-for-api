@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 16/03/2018
- * Time: 15:52
+ * Time: 15:52.
  */
 
 namespace App\Form;
@@ -24,7 +24,7 @@ class PackagingType extends AbstractType
         $builder
             ->add('label', TextType::class, [
                 'required' => false,
-                'label'    => 'packaging.form.field.label',
+                'label' => 'packaging.form.field.label',
             ]);
     }
 
@@ -34,7 +34,7 @@ class PackagingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => PackagingDTO::class,
+            'data_class' => PackagingDTO::class,
             'translation_domain' => 'messages',
         ]);
     }

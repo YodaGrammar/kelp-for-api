@@ -5,15 +5,14 @@ namespace App\Factory\DTOFilter;
 use App\DTO\Filter\StorageDTOFilter;
 
 /**
- * Class FilterStorageDTOFactory
- * @package App\DTOFactory
+ * Class FilterStorageDTOFactory.
  */
 class StorageDTOFilterFactory implements DTOFilterFactoryInterface
 {
     /**
      * @return StorageDTOFilter
      */
-    public function newInstance():StorageDTOFilter
+    public function newInstance(): StorageDTOFilter
     {
         return new StorageDTOFilter();
     }

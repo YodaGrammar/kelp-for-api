@@ -3,8 +3,7 @@
 namespace App\Factory\DTO;
 
 /**
- * Interface DTOFactoryInterface
- * @package App\DTOFactory
+ * Interface DTOFactoryInterface.
  */
 interface DTOFactoryInterface
 {

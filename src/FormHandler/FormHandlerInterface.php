@@ -5,8 +5,7 @@ namespace App\FormHandler;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Interface FormHandlerInterface
- * @package App\FormHandler
+ * Interface FormHandlerInterface.
  */
 interface FormHandlerInterface
 {

@@ -5,8 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Storage
- * @package App\Entity
+ * Class Storage.
+ *
  * @ORM\Entity
  * @ORM\Table(name="kelp_storage")
  */
@@ -21,6 +21,7 @@ class Storage
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $label;
@@ -44,7 +45,8 @@ class Storage
 
     /**
      * @ORM\Column(type="boolean")
-     * @var boolean
+     *
+     * @var bool
      **/
     private $active;
 

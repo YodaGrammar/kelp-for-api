@@ -38,6 +38,7 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
 
     /**
      * TypeStorageFilterFormHandler constructor.
+     *
      * @param FormFactoryInterface          $factory
      * @param TypeStorageDTOFilterFactory   $dtoFactory
      * @param TypeStorageMapper             $mapper
@@ -51,20 +52,22 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->dtoFactory           = $dtoFactory->newInstance();
-        $this->form                 = $factory->createNamed(
+        $this->dtoFactory = $dtoFactory->newInstance();
+        $this->form = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class,
             $this->dtoFactory
         );
-        $this->mapper               = $mapper;
-        $this->tokenStorage         = $tokenStorage;
+        $this->mapper = $mapper;
+        $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @param Request $request
+     *
      * @return array
+     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
@@ -81,14 +84,14 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         $typeStorages = $this->mapper->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
-            'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.type_storage.list',
+            'page' => $request->get('page', 1),
+            'nbPages' => ceil(count($typeStorages) / self::MAX_PAGE),
+            'nomRoute' => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
-            'pagination'   => $pagination,
+            'pagination' => $pagination,
             'typeStorages' => $typeStorages,
         ];
     }

@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Form\Filter;
 
-use App\DTOFilter\TypeStorageDTOFilter ;
+use App\DTOFilter\TypeStorageDTOFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -9,9 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SearchTypeStorageType
- *
- * @package Kelp\AppBundle\Form
+ * Class SearchTypeStorageType.
  */
 class FilterProductType extends AbstractType
 {

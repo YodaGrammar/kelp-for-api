@@ -6,13 +6,13 @@ use App\DTO\ProductDTO;
 use App\Entity\Product;
 
 /**
- * Class ProductDTOFactory
- * @package App\DTOFactory
+ * Class ProductDTOFactory.
  */
 class ProductDTOFactory
 {
     /**
      * @param Product|null $product
+     *
      * @return ProductDTO
      */
     public function newInstance(Product $product = null): ProductDTO

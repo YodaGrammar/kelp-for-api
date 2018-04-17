@@ -6,13 +6,13 @@ use App\DTO\PackagingDTO;
 use App\Entity\Packaging;
 
 /**
- * Class PackagingDTOFactory
- * @package App\DTOFactory
+ * Class PackagingDTOFactory.
  */
 class PackagingDTOFactory
 {
     /**
      * @param Packaging|null $packaging
+     *
      * @return PackagingDTO
      */
     public function newInstance(Packaging $packaging = null): PackagingDTO

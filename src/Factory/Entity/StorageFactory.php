@@ -9,8 +9,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class StorageFactory
- * @package App\Factory
+ * Class StorageFactory.
  */
 class StorageFactory implements EntityFactoryInterface
 {
@@ -22,18 +21,21 @@ class StorageFactory implements EntityFactoryInterface
 
     /**
      * StorageFactory constructor.
-     * @param ManagerRegistry $managerRegistry
+     *
+     * @param ManagerRegistry       $managerRegistry
      * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(ManagerRegistry $managerRegistry, TokenStorageInterface $tokenStorage)
     {
         $this->managerRegistry = $managerRegistry;
-        $this->tokenStorage    = $tokenStorage;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param $dto
+     *
      * @return Storage
+     *
      * @throws NotFoundException
      * @throws \InvalidArgumentException
      */

@@ -5,8 +5,7 @@ namespace App\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class StorageRepository
- * @package App\Entity\Repository
+ * Class StorageRepository.
  */
 class StorageRepository extends EntityRepository
 {

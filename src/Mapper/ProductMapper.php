@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 14/03/2018
- * Time: 10:11
+ * Time: 10:11.
  */
 
 namespace App\Mapper;
@@ -27,17 +27,19 @@ class ProductMapper
 
     /**
      * ProductMapper constructor.
-     * @param ObjectManager        $objectManager
+     *
+     * @param ObjectManager  $objectManager
      * @param ProductFactory $productFactory
      */
     public function __construct(ObjectManager $objectManager, ProductFactory $productFactory)
     {
-        $this->objectManager  = $objectManager;
+        $this->objectManager = $objectManager;
         $this->productFactory = $productFactory;
     }
 
     /**
      * @param ProductDTO $dto
+     *
      * @throws \App\Exception\NotFoundException
      */
     public function add(ProductDTO $dto)

@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class UserRepository
- * @package App\Entity\Repository
+ * Class UserRepository.
  */
 class UserRepository extends EntityRepository
 {
@@ -17,17 +17,18 @@ class UserRepository extends EntityRepository
             ->select('user.username')
             ->from($this->getClassName(), 'user');
 
-        if ($name !== null) {
+        if (null !== $name) {
             $builder
                 ->where('user.username like :name or user.email like :name')
-                ->setParameter('name', '%' . $name . '%');
+                ->setParameter('name', '%'.$name.'%');
         }
 
-        if ($role !== null) {
+        if (null !== $role) {
             $builder
                 ->where('user.roles  :role')
-                ->setParameter('role', '%' . $role . '%');
+                ->setParameter('role', '%'.$role.'%');
         }
+
         return $builder->getQuery()->getResult();
     }
 }

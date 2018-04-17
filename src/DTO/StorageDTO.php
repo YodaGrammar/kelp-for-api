@@ -6,9 +6,7 @@ use App\Entity\Storage;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class StorageDTO
- *
- * @package Kelp\AppBundle\DTO
+ * Class StorageDTO.
  */
 class StorageDTO
 {
@@ -30,13 +28,14 @@ class StorageDTO
 
     /**
      * StorageDTO constructor.
+     *
      * @param Storage $storage
      */
     public function __construct(Storage $storage = null)
     {
         if ($storage) {
-            $this->id          = $storage->getId();
-            $this->label       = $storage->getLabel();
+            $this->id = $storage->getId();
+            $this->label = $storage->getLabel();
             $this->typeStorage = $storage->getTypeStorage();
         }
     }

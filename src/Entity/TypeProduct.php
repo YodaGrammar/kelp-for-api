@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: groot
  * Date: 22/04/2017
- * Time: 10:04
+ * Time: 10:04.
  */
 
 namespace App\Entity;
@@ -11,8 +11,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TypeProduct
- * @package App\Entity
+ * Class TypeProduct.
+ *
  * @ORM\Entity
  * @ORM\Table(name="kelp_type_product")
  */
@@ -27,12 +27,14 @@ class TypeProduct
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $label;
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $unit;
@@ -64,7 +66,7 @@ class TypeProduct
     /**
      * @return string
      */
-    public function getUnit():string
+    public function getUnit(): string
     {
         return $this->unit;
     }

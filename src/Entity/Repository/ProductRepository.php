@@ -5,8 +5,7 @@ namespace App\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class ProductRepository
- * @package App\Entity\Repository
+ * Class ProductRepository.
  */
 class ProductRepository extends EntityRepository
 {
@@ -15,6 +14,7 @@ class ProductRepository extends EntityRepository
      * @param null $filter
      * @param null $page
      * @param null $maxPage
+     *
      * @return mixed
      */
     public function findAllByStorageAndByFilters($idStorage, $filter = null, $page = null, $maxPage = null)
@@ -44,6 +44,7 @@ class ProductRepository extends EntityRepository
 
     /**
      * @param $user
+     *
      * @return mixed
      */
     public function findLastTenByUserOrderByDate($user)

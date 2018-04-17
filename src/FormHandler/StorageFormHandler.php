@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 15/02/2018
- * Time: 13:29
+ * Time: 13:29.
  */
 
 namespace App\FormHandler;
@@ -16,8 +16,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class StorageFormHandler
- * @package App\FormHandler
+ * Class StorageFormHandler.
  */
 class StorageFormHandler
 {
@@ -30,13 +29,15 @@ class StorageFormHandler
 
     /**
      * StorageFormHandler constructor.
+     *
      * @param FormFactoryInterface $factory
-     * @param StorageMapper $mapper
+     * @param StorageMapper        $mapper
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(FormFactoryInterface $factory, StorageMapper $mapper)
     {
-        $this->form   = $factory->createNamed(
+        $this->form = $factory->createNamed(
             'kelp_storage',
             StorageType::class,
             null
@@ -45,9 +46,11 @@ class StorageFormHandler
     }
 
     /**
-     * @param Request $request
+     * @param Request         $request
      * @param StorageDTO|null $storageDTO
+     *
      * @return bool
+     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
@@ -61,7 +64,7 @@ class StorageFormHandler
 
             if (!$storageDTO->id) {
                 $storageDTO->typeStorage = $request->get('id');
-                $function                = 'add';
+                $function = 'add';
             }
             $this->mapper->$function($storageDTO);
 

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 01/03/2018
- * Time: 13:08
+ * Time: 13:08.
  */
 
 namespace App\Form;
@@ -28,8 +28,8 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
             ->add('plainPassword', RepeatedType::class, [
-                'type'           => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
+                'type' => PasswordType::class,
+                'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
         ;

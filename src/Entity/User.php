@@ -52,7 +52,7 @@ class User implements UserInterface, \Serializable
         $this->isActive = true;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
-        /**
+        /*
          * User constructor.
          */
         $this->storages = new ArrayCollection();
@@ -108,9 +108,6 @@ class User implements UserInterface, \Serializable
         return ['ROLE_USER'];
     }
 
-    /**
-     *
-     */
     public function eraseCredentials()
     {
     }
@@ -132,7 +129,7 @@ class User implements UserInterface, \Serializable
     /** @see \Serializable::unserialize() */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->username,
             $this->password,

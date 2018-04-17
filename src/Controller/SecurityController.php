@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 28/02/2018
- * Time: 12:58
+ * Time: 12:58.
  */
 
 namespace App\Controller;
@@ -13,14 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * Class SecurityController
- * @package App\Controller
+ * Class SecurityController.
  */
 class SecurityController extends Controller
 {
     /**
      * @param Request             $request
      * @param AuthenticationUtils $authUtils
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function loginAction(Request $request, AuthenticationUtils $authUtils)
@@ -33,9 +33,9 @@ class SecurityController extends Controller
 
         $request;
 
-        return $this->render('security/login.html.twig', array(
+        return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+            'error' => $error,
+        ]);
     }
 }

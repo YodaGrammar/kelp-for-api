@@ -9,13 +9,10 @@ use App\EntityFactory\TypeStorageEntityFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class StorageMapper
- *
- * @package Kelp\AppBundle\Mapper
+ * Class StorageMapper.
  */
 class UserMapper
 {
-
     /**
      * @var ObjectManager
      */
@@ -28,12 +25,13 @@ class UserMapper
 
     /**
      * StorageMapper constructor.
+     *
      * @param ObjectManager        $objectManager
      * @param StorageFactoryEntity $storageFactory
      */
     public function __construct(ObjectManager $objectManager, StorageFactoryEntity $storageFactory)
     {
-        $this->objectManager  = $objectManager;
+        $this->objectManager = $objectManager;
         $this->storageFactory = $storageFactory;
     }
 
@@ -55,6 +53,7 @@ class UserMapper
 
     /**
      * @param $id
+     *
      * @return null|object
      */
     public function findOneByid($id)

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 22/03/2018
- * Time: 11:35
+ * Time: 11:35.
  */
 
 namespace App\FormHandler\Filter;
@@ -44,11 +44,13 @@ class PackagingFilterFormHandler
 
     /**
      * PackagingFilterFormHandler constructor.
-     * @param FormFactoryInterface $factory
-     * @param PackagingDTOFilterFactory $dtoFactory
-     * @param PackagingRepository $repository
-     * @param TokenStorageInterface $tokenStorage
+     *
+     * @param FormFactoryInterface          $factory
+     * @param PackagingDTOFilterFactory     $dtoFactory
+     * @param PackagingRepository           $repository
+     * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
@@ -58,20 +60,22 @@ class PackagingFilterFormHandler
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->dtoFactory           = $dtoFactory->newInstance();
-        $this->form                 = $factory->createNamed(
+        $this->dtoFactory = $dtoFactory->newInstance();
+        $this->form = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterPackagingType::class,
             $this->dtoFactory
         );
-        $this->repository           = $repository;
-        $this->tokenStorage         = $tokenStorage;
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @param Request $request
+     *
      * @return array
+     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
@@ -88,15 +92,15 @@ class PackagingFilterFormHandler
         $packaging = $this->repository->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
-            'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($packaging) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.packaging.list',
+            'page' => $request->get('page', 1),
+            'nbPages' => ceil(count($packaging) / self::MAX_PAGE),
+            'nomRoute' => 'kelp.packaging.list',
             'paramsRoute' => [],
         ];
 
         return [
             'pagination' => $pagination,
-            'packagings'  => $packaging,
+            'packagings' => $packaging,
         ];
     }
 }

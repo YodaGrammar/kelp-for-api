@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 09/03/2018
- * Time: 11:31
+ * Time: 11:31.
  */
 
 namespace App\Exception;
@@ -11,8 +11,7 @@ namespace App\Exception;
 use Throwable;
 
 /**
- * Class NotFoundException
- * @package App\Exception
+ * Class NotFoundException.
  */
 class NotFoundException extends \Exception
 {
@@ -23,7 +22,7 @@ class NotFoundException extends \Exception
      * @param int            $code
      * @param Throwable|null $previous
      */
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

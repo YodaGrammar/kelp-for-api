@@ -10,9 +10,7 @@ use App\Factory\Entity\TypeStorageFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class TypeStorageMapper
- *
- * @package Kelp\AppBundle\Mapper
+ * Class TypeStorageMapper.
  */
 class TypeStorageMapper
 {
@@ -28,12 +26,13 @@ class TypeStorageMapper
 
     /**
      * TypeStorageMapper constructor.
-     * @param ObjectManager            $objectManager
+     *
+     * @param ObjectManager      $objectManager
      * @param TypeStorageFactory $typeStorageFactory
      */
     public function __construct(ObjectManager $objectManager, TypeStorageFactory $typeStorageFactory)
     {
-        $this->objectManager      = $objectManager;
+        $this->objectManager = $objectManager;
         $this->typeStorageFactory = $typeStorageFactory;
     }
 
@@ -48,7 +47,7 @@ class TypeStorageMapper
     /**
      * @return array
      */
-    public function findAll():array
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
@@ -57,6 +56,7 @@ class TypeStorageMapper
      * @param TypeStorageDTOFilter|null $typeStorageDTO
      * @param null                      $page
      * @param null                      $maxPage
+     *
      * @return mixed
      */
     public function findAllByFilters(TypeStorageDTOFilter $typeStorageDTO = null, $page = null, $maxPage = null)
@@ -66,6 +66,7 @@ class TypeStorageMapper
 
     /**
      * @param TypeStorageDTO $dto
+     *
      * @return mixed
      */
     public function add(TypeStorageDTO $dto)
@@ -73,12 +74,15 @@ class TypeStorageMapper
         $typeStorage = $this->typeStorageFactory->newInstance($dto);
         $this->objectManager->persist($typeStorage);
         $this->objectManager->flush();
+
         return $typeStorage;
     }
 
     /**
      * @param string $idTypeStorage
+     *
      * @return TypeStorage|null|object
+     *
      * @throws \LogicException
      */
     public function find(string $idTypeStorage)
@@ -93,8 +97,9 @@ class TypeStorageMapper
     }
 
     /**
-     * @param string $idTypeStorage
+     * @param string         $idTypeStorage
      * @param TypeStorageDTO $dto
+     *
      * @throws \LogicException
      */
     public function edit(string $idTypeStorage, TypeStorageDTO $dto)
@@ -112,6 +117,7 @@ class TypeStorageMapper
 
     /**
      * @param $id
+     *
      * @throws \LogicException
      */
     public function delete($id)

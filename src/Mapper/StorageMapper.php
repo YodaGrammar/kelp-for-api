@@ -11,9 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
- * Class StorageMapper
- *
- * @package Kelp\AppBundle\Mapper
+ * Class StorageMapper.
  */
 class StorageMapper
 {
@@ -29,12 +27,13 @@ class StorageMapper
 
     /**
      * StorageMapper constructor.
-     * @param ObjectManager        $objectManager
+     *
+     * @param ObjectManager  $objectManager
      * @param StorageFactory $storageFactory
      */
     public function __construct(ObjectManager $objectManager, StorageFactory $storageFactory)
     {
-        $this->objectManager  = $objectManager;
+        $this->objectManager = $objectManager;
         $this->storageFactory = $storageFactory;
     }
 
@@ -56,13 +55,14 @@ class StorageMapper
 
     /**
      * @param User $user
+     *
      * @return mixed
      */
     public function findAllByUser(User $user)
     {
         return $this->getRepository()->findBy(
             [
-                'user'   => $user,
+                'user' => $user,
                 'active' => true,
             ]
         );
@@ -70,6 +70,7 @@ class StorageMapper
 
     /**
      * @param StorageDTO $dto
+     *
      * @throws \App\Exception\NotFoundException
      */
     public function add(StorageDTO $dto)

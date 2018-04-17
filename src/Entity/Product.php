@@ -5,8 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Product
- * @package App\Entity
+ * Class Product.
+ *
  * @ORM\Entity(repositoryClass="App\Entity\Repository\ProductRepository")
  * @ORM\Table(name="kelp_product")
  */
@@ -21,7 +21,8 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
-     * @var integer
+     *
+     * @var int
      */
     private $quantity;
 
@@ -33,6 +34,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $label;
@@ -45,19 +47,22 @@ class Product
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $datePeremption = null;
 
     /**
      * @ORM\Column(type="datetime")
+     *
      * @var \DateTime
      */
     private $dateAdd = null;
 
     /**
      * @ORM\Column(type="boolean")
-     * @var boolean
+     *
+     * @var bool
      **/
     private $active;
 

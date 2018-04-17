@@ -8,15 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class TypeStorageController
- * @package App\Controller
+ * Class TypeStorageController.
  */
 class TypeStorageController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request                      $request
      * @param TypeStorageFilterFormHandler $formHandler
+     *
      * @return Response
+     *
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
@@ -25,12 +26,13 @@ class TypeStorageController extends Controller
     {
         return $this->render('type_storage/list.html.twig', [
             'pager' => $formHandler->process($request),
-            'form'  => $formHandler->getForm()->createView(),
+            'form' => $formHandler->getForm()->createView(),
         ]);
     }
 
     /**
      * @return Response
+     *
      * @throws \LogicException
      */
     public function createAction()

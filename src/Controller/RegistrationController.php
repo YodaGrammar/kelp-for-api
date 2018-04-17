@@ -3,11 +3,11 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 01/03/2018
- * Time: 13:11
+ * Time: 13:11.
  */
 
-
 // src/Controller/RegistrationController.php
+
 namespace App\Controller;
 
 use App\DTO\UserDTO;
@@ -15,18 +15,17 @@ use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class RegistrationController
- * @package App\Controller
+ * Class RegistrationController.
  */
 class RegistrationController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request                      $request
      * @param UserPasswordEncoderInterface $passwordEncoder
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
@@ -58,7 +57,7 @@ class RegistrationController extends Controller
 
         return $this->render(
             'registration/register.html.twig',
-            array('form' => $form->createView())
+            ['form' => $form->createView()]
         );
     }
 }

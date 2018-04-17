@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 09/03/2018
- * Time: 12:01
+ * Time: 12:01.
  */
 
 namespace App\Controller;
@@ -17,16 +17,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class ProductController
- * @package App\Controller
+ * Class ProductController.
  */
 class ProductController extends Controller
 {
-
     /**
-     * @param Request $request
+     * @param Request                  $request
      * @param ProductFilterFormHandler $formHandler
+     *
      * @return Response
+     *
      * @throws \LogicException
      */
     public function listAction(Request $request, ProductFilterFormHandler $formHandler): Response
@@ -41,11 +41,13 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param ProductFormHandler $formHandler
+     * @param Request             $request
+     * @param ProductFormHandler  $formHandler
      * @param TranslatorInterface $translator
-     * @param ProductDTOFactory $dtoFactory
+     * @param ProductDTOFactory   $dtoFactory
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */

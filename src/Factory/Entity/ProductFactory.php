@@ -18,18 +18,21 @@ class ProductFactory implements EntityFactoryInterface
 
     /**
      * StorageFactory constructor.
-     * @param ManagerRegistry $managerRegistry
+     *
+     * @param ManagerRegistry       $managerRegistry
      * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(ManagerRegistry $managerRegistry, TokenStorageInterface $tokenStorage)
     {
         $this->managerRegistry = $managerRegistry;
-        $this->tokenStorage    = $tokenStorage;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param $dto
+     *
      * @return Product
+     *
      * @throws NotFoundException
      */
     public function newInstance($dto): Product

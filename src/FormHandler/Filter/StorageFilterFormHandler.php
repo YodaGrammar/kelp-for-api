@@ -11,8 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class StorageFilterFormHandler
- * @package App\FormHandler
+ * Class StorageFilterFormHandler.
  */
 class StorageFilterFormHandler implements FilterFormHandlerInterface
 {
@@ -40,11 +39,12 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
 
     /**
      * StorageFilterFormHandler constructor.
-     * @param StorageDTOFilterFactory       $dtoFactory
-     * @param TypeStorageMapper             $typeStorageMapper
-     * @param StorageMapper                 $storageMapper
-     * @param FormFactoryInterface          $factory
-     * @param TokenStorageInterface         $tokenStorage
+     *
+     * @param StorageDTOFilterFactory $dtoFactory
+     * @param TypeStorageMapper       $typeStorageMapper
+     * @param StorageMapper           $storageMapper
+     * @param FormFactoryInterface    $factory
+     * @param TokenStorageInterface   $tokenStorage
      */
     public function __construct(
         StorageDTOFilterFactory $dtoFactory,
@@ -53,24 +53,26 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
     ) {
-        $this->dtoFactory           = $dtoFactory->newInstance();
-        $this->typeStorageMapper    = $typeStorageMapper;
-        $this->storageMapper        = $storageMapper;
-        $this->form                 = $factory->createNamed(
+        $this->dtoFactory = $dtoFactory->newInstance();
+        $this->typeStorageMapper = $typeStorageMapper;
+        $this->storageMapper = $storageMapper;
+        $this->form = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class,
             $this->dtoFactory
         );
-        $this->tokenStorage         = $tokenStorage;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param Request $request
+     *
      * @return array
      */
     public function process(Request $request): array
     {
         $request;
+
         return [
             'typeStorages' => $this->typeStorageMapper->findAll(),
             'storages' => $this->storageMapper->findAllByUser($this->tokenStorage->getToken()->getUser()),

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form;
 
 use App\DTO\SearchUserDTO;
@@ -8,9 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SearchUserType
- *
- * @package Kelp\AppBundle\Form
+ * Class SearchUserType.
  */
 class SearchUserType extends AbstractType
 {

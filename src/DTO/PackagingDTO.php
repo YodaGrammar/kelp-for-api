@@ -6,9 +6,7 @@ use App\Entity\Packaging;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class PackagingDTO
- *
- * @package Kelp\AppBundle\DTO
+ * Class PackagingDTO.
  */
 class PackagingDTO
 {
@@ -22,13 +20,14 @@ class PackagingDTO
 
     /**
      * PackagingDTO constructor.
+     *
      * @param Packaging|null $packaging
      */
     public function __construct(Packaging $packaging = null)
     {
         if ($packaging) {
-            $this->id          = $packaging->getId();
-            $this->label       = $packaging->getLabel();
+            $this->id = $packaging->getId();
+            $this->label = $packaging->getLabel();
         }
     }
 }

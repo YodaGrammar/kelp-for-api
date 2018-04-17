@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  *  : groot
  * Date: 02/04/2017
- * Time: 00:24
+ * Time: 00:24.
  */
 
 namespace App\Entity;
@@ -11,12 +11,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TypeStorage
+ * Class TypeStorage.
  *
  * @ORM\Entity(repositoryClass="App\Entity\Repository\TypeStorageRepository")
  * @ORM\Table(name="kelp_type_storage")
- *
- * @package APP\Entity
  */
 class TypeStorage
 {
@@ -29,25 +27,29 @@ class TypeStorage
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $label;
 
     /**
      * @ORM\Column(type="text")
+     *
      * @var string
      */
     private $comment;
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $class;
 
     /**
      * @ORM\Column(type="boolean")
-     * @var boolean
+     *
+     * @var bool
      */
     private $active = true;
 
@@ -62,7 +64,7 @@ class TypeStorage
     /**
      * @return string
      */
-    public function getLabel():string
+    public function getLabel(): string
     {
         return $this->label;
     }
@@ -78,7 +80,7 @@ class TypeStorage
     /**
      * @return string
      */
-    public function getComment():string
+    public function getComment(): string
     {
         return $this->comment;
     }
@@ -110,7 +112,7 @@ class TypeStorage
     /**
      * @return bool
      */
-    public function isActive():bool
+    public function isActive(): bool
     {
         return $this->active;
     }

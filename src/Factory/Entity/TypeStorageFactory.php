@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 22/02/2018
- * Time: 13:06
+ * Time: 13:06.
  */
 
 namespace App\Factory\Entity;
@@ -19,6 +19,7 @@ class TypeStorageFactory implements EntityFactoryInterface
     /**
     /**
      * StorageFactory constructor.
+     *
      * @param ManagerRegistry $managerRegistry
      */
     public function __construct(ManagerRegistry $managerRegistry)
@@ -28,10 +29,12 @@ class TypeStorageFactory implements EntityFactoryInterface
 
     /**
      * @param $dto
+     *
      * @return TypeStorage
+     *
      * @throws \InvalidArgumentException
      */
-    public function newInstance($dto):TypeStorage
+    public function newInstance($dto): TypeStorage
     {
         $typeStorage = new TypeStorage();
         $typeStorage->setLabel($dto->label);

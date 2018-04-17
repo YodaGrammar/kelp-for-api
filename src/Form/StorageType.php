@@ -9,9 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class StorageType
- *
- * @package Kelp\AppBundle\Form
+ * Class StorageType.
  */
 class StorageType extends AbstractType
 {

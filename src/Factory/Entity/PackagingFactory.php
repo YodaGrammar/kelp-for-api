@@ -7,8 +7,7 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
- * Class PackagingEntityFactory
- * @package App\Factory
+ * Class PackagingEntityFactory.
  */
 class PackagingFactory implements EntityFactoryInterface
 {
@@ -20,18 +19,21 @@ class PackagingFactory implements EntityFactoryInterface
 
     /**
      * PackagingFactory constructor.
-     * @param ManagerRegistry $managerRegistry
+     *
+     * @param ManagerRegistry       $managerRegistry
      * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(ManagerRegistry $managerRegistry, TokenStorageInterface $tokenStorage)
     {
         $this->managerRegistry = $managerRegistry;
-        $this->tokenStorage    = $tokenStorage;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param $dto
+     *
      * @return Packaging
+     *
      * @throws \InvalidArgumentException
      */
     public function newInstance($dto): Packaging

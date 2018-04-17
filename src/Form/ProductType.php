@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 16/03/2018
- * Time: 15:52
+ * Time: 15:52.
  */
 
 namespace App\Form;
@@ -27,22 +27,22 @@ class ProductType extends AbstractType
         $builder
             ->add('quantity', TextType::class, [
                     'required' => false,
-                    'label'    => 'product.form.field.quantity',
+                    'label' => 'product.form.field.quantity',
             ])
             ->add('packaging', EntityType::class, [
-                    'class'        => Packaging::class,
+                    'class' => Packaging::class,
                     'choice_label' => 'label',
                     'required' => false,
-                    'label'    => 'product.form.field.packaging',
+                    'label' => 'product.form.field.packaging',
             ])
             ->add('label', TextType::class, [
                     'required' => false,
-                    'label'    => 'product.form.field.label',
+                    'label' => 'product.form.field.label',
             ])
             ->add('date', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
-                    'label'    => 'product.form.field.date',
+                    'label' => 'product.form.field.date',
             ])
         ;
     }
@@ -54,7 +54,7 @@ class ProductType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class'         => ProductDTO::class,
+                'data_class' => ProductDTO::class,
                 'translation_domain' => 'messages',
             ]);
     }

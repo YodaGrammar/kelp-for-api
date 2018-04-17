@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: groot
  * Date: 07/04/2017
- * Time: 16:01
+ * Time: 16:01.
  */
 
 namespace App\DTO;
@@ -11,9 +11,7 @@ namespace App\DTO;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class UserDTO
- *
- * @package App\DTO
+ * Class UserDTO.
  */
 class UserDTO
 {

@@ -11,8 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class StorageFilterFormHandler
- * @package App\FormHandler
+ * Class StorageFilterFormHandler.
  */
 class ProductFilterFormHandler implements FilterFormHandlerInterface
 {
@@ -37,10 +36,12 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
 
     /**
      * ProductFilterFormHandler constructor.
+     *
      * @param ProductDTOFilterFactory $dtoFactory
-     * @param ProductMapper $productMapper
-     * @param FormFactoryInterface $factory
-     * @param TokenStorageInterface $tokenStorage
+     * @param ProductMapper           $productMapper
+     * @param FormFactoryInterface    $factory
+     * @param TokenStorageInterface   $tokenStorage
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
@@ -49,19 +50,21 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
     ) {
-        $this->dtoFactory           = $dtoFactory->newInstance();
-        $this->productMapper    = $productMapper;
-        $this->form                 = $factory->createNamed(
+        $this->dtoFactory = $dtoFactory->newInstance();
+        $this->productMapper = $productMapper;
+        $this->form = $factory->createNamed(
             'kelp_product_filter',
             FilterProductType::class,
             $this->dtoFactory
         );
-        $this->tokenStorage         = $tokenStorage;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param Request $request
+     *
      * @return array
+     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
@@ -84,14 +87,14 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         );
 
         $pagination = [
-            'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($products) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.type_storage.list',
+            'page' => $request->get('page', 1),
+            'nbPages' => ceil(count($products) / self::MAX_PAGE),
+            'nomRoute' => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
-            'pagination'   => $pagination,
+            'pagination' => $pagination,
             'products' => $products,
         ];
     }

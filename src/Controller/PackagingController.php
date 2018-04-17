@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 22/03/2018
- * Time: 11:28
+ * Time: 11:28.
  */
 
 namespace App\Controller;
@@ -18,32 +18,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class PackagingController
- * @package App\Controller
+ * Class PackagingController.
  */
 class PackagingController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request                    $request
      * @param PackagingFilterFormHandler $formHandler
+     *
      * @return Response
+     *
      * @throws \LogicException
      */
     public function listAction(Request $request, PackagingFilterFormHandler $formHandler): Response
     {
         return $this->render('packaging/list.html.twig', [
             'pager' => $formHandler->process($request),
-            'form'  => $formHandler->getForm()->createView(),
+            'form' => $formHandler->getForm()->createView(),
         ]);
     }
 
     /**
-     * @param Packaging $packaging
-     * @param Request $request
+     * @param Packaging            $packaging
+     * @param Request              $request
      * @param PackagingFormHandler $formHandler
-     * @param TranslatorInterface $translator
-     * @param PackagingDTOFactory $dtoFactory
+     * @param TranslatorInterface  $translator
+     * @param PackagingDTOFactory  $dtoFactory
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException

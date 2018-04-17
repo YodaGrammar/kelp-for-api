@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 28/03/2018
- * Time: 13:19
+ * Time: 13:19.
  */
 
 namespace App\Repository;
@@ -15,16 +15,16 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Class PackagingRepository
- * @package App\Entity\Repository
+ * Class PackagingRepository.
  */
 class PackagingRepository extends ServiceEntityRepository
 {
-    /** @var PaginatorFactoryInterface  */
+    /** @var PaginatorFactoryInterface */
     private $paginatorFactory;
 
     /**
      * PackagingRepository constructor.
+     *
      * @param ManagerRegistry           $registry
      * @param PaginatorFactoryInterface $paginatorFactory
      */
@@ -38,6 +38,7 @@ class PackagingRepository extends ServiceEntityRepository
      * @param null $filter
      * @param null $page
      * @param null $maxPage
+     *
      * @return mixed
      */
     public function findAllByFilters($filter = null, $page = null, $maxPage = null)
@@ -47,20 +48,22 @@ class PackagingRepository extends ServiceEntityRepository
         if ($filter->text) {
             $builder
                 ->andWhere('p.label like :text')
-                ->setParameter('text', '%' . $filter->text . '%');
+                ->setParameter('text', '%'.$filter->text.'%');
         }
         $query = $builder->getQuery();
         $paginator = [];
-        if ($query !== null) {
+        if (null !== $query) {
             $firstResult = ($page - 1) * $maxPage;
             $query->setFirstResult($firstResult)->setMaxResults($maxPage);
             $paginator = $this->paginatorFactory->newInstance($query);
         }
+
         return $paginator;
     }
 
     /**
      * @param PackagingDTO $dto
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \LogicException

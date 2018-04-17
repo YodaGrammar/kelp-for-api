@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 26/03/2018
- * Time: 10:32
+ * Time: 10:32.
  */
 
 namespace App\Mapper;
@@ -15,8 +15,7 @@ use App\Factory\Entity\PackagingFactory;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 /**
- * Class PackagingMapper
- * @package App\Mapper
+ * Class PackagingMapper.
  */
 class PackagingMapper
 {
@@ -32,12 +31,13 @@ class PackagingMapper
 
     /**
      * PackagingMapper constructor.
-     * @param ManagerRegistry        $managerRegistry
+     *
+     * @param ManagerRegistry  $managerRegistry
      * @param PackagingFactory $packagingFactory
      */
     public function __construct(ManagerRegistry $managerRegistry, PackagingFactory $packagingFactory)
     {
-        $this->managerRegistry  = $managerRegistry;
+        $this->managerRegistry = $managerRegistry;
         $this->packagingFactory = $packagingFactory;
     }
 
@@ -53,6 +53,7 @@ class PackagingMapper
      * @param PackagingDTOFilter $packagingDTO
      * @param                    $page
      * @param                    $maxPage
+     *
      * @return mixed
      */
     public function findAllByFilters(PackagingDTOFilter $packagingDTO, $page, $maxPage)

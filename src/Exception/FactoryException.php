@@ -1,12 +1,11 @@
 <?php
+
 namespace App\Exception;
 
 use Throwable;
 
 /**
- * Class FactoryException
- *
- * @package App\Exception
+ * Class FactoryException.
  */
 class FactoryException extends \Exception
 {
@@ -17,7 +16,7 @@ class FactoryException extends \Exception
      * @param int            $code
      * @param Throwable|null $previous
      */
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
@@ -27,6 +26,6 @@ class FactoryException extends \Exception
      */
     public function __toString()
     {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+        return __CLASS__.": [{$this->code}]: {$this->message}\n";
     }
 }

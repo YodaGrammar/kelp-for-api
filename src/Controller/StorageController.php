@@ -13,15 +13,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class StorageController
- * @package App\Controller
+ * Class StorageController.
  */
 class StorageController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request                  $request
      * @param StorageFilterFormHandler $formHandler
+     *
      * @return Response
+     *
      * @throws \LogicException
      */
     public function listAction(Request $request, StorageFilterFormHandler $formHandler): Response
@@ -36,11 +37,13 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param StorageFormHandler $formHandler
+     * @param Request             $request
+     * @param StorageFormHandler  $formHandler
      * @param TranslatorInterface $translator
-     * @param StorageDTOFactory $dtoFactory
+     * @param StorageDTOFactory   $dtoFactory
+     *
      * @return Response
+     *
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
@@ -73,12 +76,14 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Storage $storage
-     * @param Request $request
-     * @param StorageFormHandler $formHandler
+     * @param Storage             $storage
+     * @param Request             $request
+     * @param StorageFormHandler  $formHandler
      * @param TranslatorInterface $translator
-     * @param StorageDTOFactory $dtoFactory
+     * @param StorageDTOFactory   $dtoFactory
+     *
      * @return Response
+     *
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
@@ -92,7 +97,7 @@ class StorageController extends Controller
         StorageDTOFactory $dtoFactory
     ): Response {
         $storageDTO = $dtoFactory->newInstance($storage);
-            $formHandler->getForm()->setData($storageDTO);
+        $formHandler->getForm()->setData($storageDTO);
         if ($formHandler->process($request, $storageDTO)) {
             $this->addFlash(
                 'success',
@@ -116,7 +121,9 @@ class StorageController extends Controller
     /**
      * @param $id
      * @param StorageMapper $mapper
+     *
      * @return Response
+     *
      * @throws \LogicException
      */
     public function deleteAction($id, StorageMapper $mapper)

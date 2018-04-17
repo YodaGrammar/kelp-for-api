@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form;
 
 use App\DTO\TypeStorageDTO;
@@ -9,9 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TypeStorageType
- *
- * @package Kelp\AppBundle\Form
+ * Class TypeStorageType.
  */
 class TypeStorageType extends AbstractType
 {

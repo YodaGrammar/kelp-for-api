@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: b.tarall
  * Date: 01/03/2018
- * Time: 13:15
+ * Time: 13:15.
  */
 
 namespace App\FormHandler;
@@ -12,8 +12,7 @@ use App\DTOFactory\UserDTOFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class UserFormHandler
- * @package App\FormHandler
+ * Class UserFormHandler.
  */
 class UserFormHandler implements FormHandlerInterface
 {

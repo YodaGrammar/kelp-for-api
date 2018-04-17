@@ -5,8 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Packaging
- * @package App\Entity
+ * Class Packaging.
+ *
  * @ORM\Entity
  * @ORM\Table(name="kelp_packaging")
  */
@@ -21,15 +21,16 @@ class Packaging
 
     /**
      * @ORM\Column(type="string", length=50)
+     *
      * @var string
      */
     private $label;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="Product", mappedBy="packaging")
      **/
     private $products;
+
     /**
      * @return mixed
      */

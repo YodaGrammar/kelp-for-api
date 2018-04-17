@@ -6,8 +6,7 @@ use App\Entity\Product;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class ProductDTO
- * @package App\DTO
+ * Class ProductDTO.
  */
 class ProductDTO
 {
@@ -37,17 +36,18 @@ class ProductDTO
 
     /**
      * ProductDTO constructor.
+     *
      * @param Product $product
      */
     public function __construct(Product $product = null)
     {
         if ($product) {
-            $this->id        = $product->getId();
-            $this->quantity  = $product->getQuantity();
+            $this->id = $product->getId();
+            $this->quantity = $product->getQuantity();
             $this->packaging = $product->getPackaging();
-            $this->label     = $product->getLabel();
-            $this->storage   = $product->getStorage();
-            $this->date      = $product->get();
+            $this->label = $product->getLabel();
+            $this->storage = $product->getStorage();
+            $this->date = $product->get();
         }
     }
 }
