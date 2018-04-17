@@ -20,7 +20,7 @@ class PackagingFilterFormHandler
 {
     use FilterFormHandlerTrait;
 
-    private const MAX_PAGE = 10;
+    private const MAX_PAGE = 1;
 
     /**
      * @var PackagingRepository

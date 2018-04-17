@@ -2,191 +2,156 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="kelp_user")
  * @ORM\Entity(repositoryClass="App\Entity\Repository\UserRepository")
+ * @ORM\Table(name="kelp_user")
+ *
  */
 class User implements UserInterface, \Serializable
 {
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $fullName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @var string
+     *
+     * @ORM\Column(type="string")
      */
-    private $active;
+    private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="Storage", mappedBy="user")
-     **/
-    private $storages;
-
-    /**
-     * User constructor.
+     * @var array
+     *
+     * @ORM\Column(type="json")
      */
-    public function __construct()
+    private $roles = [];
+
+    public function getId(): int
     {
-        $this->active = true;
-        $this->storages = new ArrayCollection();
+        return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getUsername()
+    public function setFullName(string $fullName): void
+    {
+        $this->fullName = $fullName;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->fullName;
+    }
+
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username): void
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getSalt()
+    public function getEmail(): string
     {
-        return null;
+        return $this->email;
     }
 
-    /**
-     * @return string
-     */
-    public function getPassword()
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password): void
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
     /**
-     * @return array
+     * Returns the roles or permissions granted to the user for security.
      */
-    public function getRoles()
+    public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
     }
 
-    public function eraseCredentials()
+    public function setRoles(array $roles): void
     {
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(
-            [
-                $this->id,
-                $this->username,
-                $this->password,
-            ]
-        );
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->id,
-            $this->username,
-            $this->password) = unserialize($serialized);
+        $this->roles = $roles;
     }
 
     /**
-     * @return mixed
+     * Returns the salt that was originally used to encode the password.
+     *
+     * {@inheritdoc}
      */
-    public function getId()
+    public function getSalt(): ?string
     {
-        return $this->id;
+        return null;
     }
 
     /**
-     * @param mixed $id
+     * Removes sensitive data from the user.
+     *
+     * {@inheritdoc}
      */
-    public function setId($id): void
+    public function eraseCredentials(): void
     {
-        $this->id = $id;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getEmail()
+    public function serialize(): string
     {
-        return $this->email;
+        return serialize([$this->id, $this->username, $this->password]);
     }
 
     /**
-     * @param mixed $email
+     * {@inheritdoc}
      */
-    public function setEmail($email): void
+    public function unserialize($serialized): void
     {
-        $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStorages()
-    {
-        return $this->storages;
-    }
-
-    /**
-     * @param mixed $storages
-     */
-    public function setStorages($storages): void
-    {
-        $this->storages = $storages;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param mixed $active
-     */
-    public function setActive($active): void
-    {
-        $this->active = $active;
+        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
     }
 }

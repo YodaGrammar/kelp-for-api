@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class PackagingFixture extends Fixture
 {
-    const PACKAGING = [
+    private const PACKAGING = [
         ['label' => 'Barquette'],
         ['label' => 'Unitaire'],
         ['label' => 'Conserve'],

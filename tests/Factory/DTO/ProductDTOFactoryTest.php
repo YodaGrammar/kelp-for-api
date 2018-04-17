@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ProductDTOFactoryTest extends TestCase
 {
-    public function testNewInstanceWithoutParam()
+    public function testNewInstanceWithoutParam(): Void
     {
         $dtoFactory = new ProductDTOFactory();
         $dto = $dtoFactory->newInstance();

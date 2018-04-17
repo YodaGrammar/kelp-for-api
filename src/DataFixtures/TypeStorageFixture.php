@@ -17,12 +17,13 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class TypeStorageFixture extends Fixture
 {
-    const TYPE_STORAGE = [
-        ['label' => 'Froid', 'class' => 'primary', 'comment' => ' '],
-        ['label' => 'Frais', 'class' => 'info', 'comment' => ' '],
-        ['label' => 'Sec', 'class' => 'secondary', 'comment' => ' '],
-        ['label' => 'Vin', 'class' => 'danger', 'comment' => ' '],
-    ];
+    private const TYPE_STORAGE
+        = [
+            ['label' => 'Froid', 'class' => 'primary', 'comment' => ' '],
+            ['label' => 'Frais', 'class' => 'info', 'comment' => ' '],
+            ['label' => 'Sec', 'class' => 'secondary', 'comment' => ' '],
+            ['label' => 'Vin', 'class' => 'danger', 'comment' => ' '],
+        ];
 
     /**
      * @param ObjectManager $manager
