@@ -6,7 +6,7 @@ use App\DTO\StorageDTO;
 use App\Repository\StorageRepository;
 use App\Entity\Storage;
 use App\Entity\User;
-use App\Factory\StorageFactory;
+use App\Factory\Entity\StorageFactory;
 
 /**
  * Class StorageMapper.

@@ -8,7 +8,6 @@
 
 namespace App\FormHandler\Filter;
 
-use App\Factory\DTOFilter\PackagingDTOFilterFactory;
 use App\Form\Filter\FilterPackagingType;
 use App\Repository\PackagingRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -39,12 +38,10 @@ class PackagingFilterFormHandler
 
     /**
      * PackagingFilterFormHandler constructor.
-     *
-     * @param FormFactoryInterface          $factory
-     * @param PackagingRepository           $repository
-     * @param TokenStorageInterface         $tokenStorage
+     * @param FormFactoryInterface $factory
+     * @param PackagingRepository $repository
+     * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
-     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
@@ -64,10 +61,7 @@ class PackagingFilterFormHandler
 
     /**
      * @param Request $request
-     *
      * @return array
-     *
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request): array

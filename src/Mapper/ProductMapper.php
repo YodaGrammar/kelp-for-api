@@ -9,7 +9,7 @@
 namespace App\Mapper;
 
 use App\DTO\ProductDTO;
-use App\Factory\ProductFactory;
+use App\Factory\Entity\ProductFactory;
 use App\Repository\ProductRepository;
 
 class ProductMapper
