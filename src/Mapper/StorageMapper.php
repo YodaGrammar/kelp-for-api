@@ -3,12 +3,10 @@
 namespace App\Mapper;
 
 use App\DTO\StorageDTO;
-use App\Entity\Repository\StorageRepository;
+use App\Repository\StorageRepository;
 use App\Entity\Storage;
 use App\Entity\User;
-use App\Factory\Entity\StorageFactory;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
+use App\Factory\StorageFactory;
 
 /**
  * Class StorageMapper.
@@ -16,33 +14,24 @@ use Doctrine\Common\Persistence\ObjectRepository;
 class StorageMapper
 {
     /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
-    /**
      * @var StorageFactory
      */
     protected $storageFactory;
 
     /**
-     * StorageMapper constructor.
-     *
-     * @param ObjectManager  $objectManager
-     * @param StorageFactory $storageFactory
+     * @var StorageRepository
      */
-    public function __construct(ObjectManager $objectManager, StorageFactory $storageFactory)
-    {
-        $this->objectManager = $objectManager;
-        $this->storageFactory = $storageFactory;
-    }
+    private $repository;
 
     /**
-     * @return ObjectRepository|StorageRepository
+     * StorageMapper constructor.
+     * @param StorageRepository $repository
+     * @param StorageFactory $storageFactory
      */
-    protected function getRepository(): ObjectRepository
+    public function __construct(StorageRepository $repository, StorageFactory $storageFactory)
     {
-        return $this->objectManager->getRepository(Storage::class);
+        $this->storageFactory = $storageFactory;
+        $this->repository = $repository;
     }
 
     /**
@@ -50,7 +39,7 @@ class StorageMapper
      */
     public function findAll()
     {
-        return $this->getRepository()->findAll();
+        return $this->repository->findAll();
     }
 
     /**
@@ -60,7 +49,7 @@ class StorageMapper
      */
     public function findAllByUser(User $user)
     {
-        return $this->getRepository()->findBy(
+        return $this->repository->findBy(
             [
                 'user' => $user,
                 'active' => true,
@@ -72,12 +61,12 @@ class StorageMapper
      * @param StorageDTO $dto
      *
      * @throws \App\Exception\NotFoundException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function add(StorageDTO $dto)
     {
         $storage = $this->storageFactory->newInstance($dto);
-        $this->objectManager->persist($storage);
-        $this->objectManager->flush();
+        $this->repository->save($storage);
     }
 
     /**

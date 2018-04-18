@@ -2,10 +2,11 @@
 
 namespace App\Mapper;
 
-use App\Entity\Repository\StorageRepository;
+use App\Repository\StorageRepository;
 use App\Entity\User;
 use App\Factory\Entity\StorageFactory;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -14,33 +15,24 @@ use Doctrine\Common\Persistence\ObjectManager;
 class UserMapper
 {
     /**
-     * @var ObjectManager
-     */
-    protected $managerRegistry;
-
-    /**
-     * @var StorageFactory
+     * @var TypeStorageFactory
      */
     protected $storageFactory;
 
     /**
-     * UserMapper constructor.
-     *
-     * @param ManagerRegistry $managerRegistry
-     * @param StorageFactory  $storageFactory
+     * @var UserRepository
      */
-    public function __construct(ManagerRegistry $managerRegistry, StorageFactory $storageFactory)
-    {
-        $this->managerRegistry = $managerRegistry;
-        $this->storageFactory = $storageFactory;
-    }
+    private $repository;
 
     /**
-     * @return StorageRepository
+     * StorageMapper constructor.
+     * @param UserRepository $repository
+     * @param StorageFactory $storageFactory
      */
-    protected function getRepository(): StorageRepository
+    public function __construct(UserRepository $repository, StorageFactory $storageFactory)
     {
-        return $this->managerRegistry->getRepository(User::class);
+        $this->storageFactory = $storageFactory;
+        $this->repository = $repository;
     }
 
     /**
@@ -48,7 +40,7 @@ class UserMapper
      */
     public function findAll()
     {
-        return $this->getRepository()->findAll();
+        return $this->repository->findAll();
     }
 
     /**
@@ -58,6 +50,6 @@ class UserMapper
      */
     public function findOneByid($id)
     {
-        return $this->getRepository()->find($id);
+        return $this->repository->find($id);
     }
 }

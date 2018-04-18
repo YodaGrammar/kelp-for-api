@@ -5,9 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Storage.
- *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\StorageRepository")
  * @ORM\Table(name="kelp_storage")
  */
 class Storage

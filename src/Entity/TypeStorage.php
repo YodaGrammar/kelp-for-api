@@ -11,9 +11,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TypeStorage.
- *
- * @ORM\Entity(repositoryClass="App\Entity\Repository\TypeStorageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TypeStorageRepository")
  * @ORM\Table(name="kelp_type_storage")
  */
 class TypeStorage

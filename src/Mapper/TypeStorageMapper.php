@@ -4,7 +4,7 @@ namespace App\Mapper;
 
 use App\DTO\TypeStorageDTO;
 use App\DTO\Filter\TypeStorageDTOFilter;
-use App\Entity\Repository\TypeStorageRepository;
+use App\Repository\TypeStorageRepository;
 use App\Entity\TypeStorage;
 use App\Factory\Entity\TypeStorageFactory;
 use Doctrine\Common\Persistence\ObjectManager;
