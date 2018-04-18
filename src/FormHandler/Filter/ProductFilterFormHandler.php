@@ -2,10 +2,7 @@
 
 namespace App\FormHandler\Filter;
 
-use App\Factory\DTOFilter\ProductDTOFilterFactory;
-use App\Factory\DTOFilter\StorageDTOFilterFactory;
 use App\Form\Filter\FilterProductType;
-use App\Mapper\ProductMapper;
 use App\Repository\ProductRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,9 +30,9 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
     /**
      * ProductFilterFormHandler constructor.
      *
-     * @param ProductRepository       $repository
-     * @param FormFactoryInterface    $factory
-     * @param TokenStorageInterface   $tokenStorage
+     * @param ProductRepository     $repository
+     * @param FormFactoryInterface  $factory
+     * @param TokenStorageInterface $tokenStorage
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
@@ -43,10 +40,9 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         ProductRepository $repository,
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
-    )
-    {
-        $this->repository   = $repository;
-        $this->form         = $factory->createNamed(
+    ) {
+        $this->repository = $repository;
+        $this->form = $factory->createNamed(
             'kelp_product_filter',
             FilterProductType::class
         );
@@ -80,15 +76,15 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         );
 
         $pagination = [
-            'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($products) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.type_storage.list',
+            'page' => $request->get('page', 1),
+            'nbPages' => ceil(count($products) / self::MAX_PAGE),
+            'nomRoute' => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
             'pagination' => $pagination,
-            'products'   => $products,
+            'products' => $products,
         ];
     }
 }

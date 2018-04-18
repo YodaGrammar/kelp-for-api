@@ -31,7 +31,6 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
      */
     protected $tokenStorage;
 
-
     /**
      * StorageFilterFormHandler constructor.
      *
@@ -47,15 +46,14 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
         StorageRepository $repository,
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
-    )
-    {
+    ) {
         $this->tsRepository = $tsRepository;
-        $this->repository     = $repository;
-        $this->form                  = $factory->createNamed(
+        $this->repository = $repository;
+        $this->form = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class
         );
-        $this->tokenStorage          = $tokenStorage;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -66,7 +64,7 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
         return [
             $request->get('page', 1),
             'typeStorages' => $this->tsRepository->findAll(),
-            'storages'     => $this->repository->findAllByUser($this->tokenStorage->getToken()->getUser()),
+            'storages' => $this->repository->findAllByUser($this->tokenStorage->getToken()->getUser()),
         ];
     }
 }

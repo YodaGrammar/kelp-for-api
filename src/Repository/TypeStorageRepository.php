@@ -13,7 +13,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class TypeStorageRepository extends ServiceEntityRepository
 {
-    /** @var PaginatorFactoryInterface  */
+    /** @var PaginatorFactoryInterface */
     private $paginatorFactory;
 
     public function __construct(ManagerRegistry $registry, PaginatorFactoryInterface $paginatorFactory)
@@ -47,6 +47,5 @@ class TypeStorageRepository extends ServiceEntityRepository
         }
 
         return $paginator;
-
     }
 }

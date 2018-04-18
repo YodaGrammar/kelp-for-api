@@ -10,9 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * Class TypeStorageFilterFormHandler
- *
- * @package App\FormHandler\Filter
+ * Class TypeStorageFilterFormHandler.
  */
 class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
 {
@@ -50,14 +48,13 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         TypeStorageRepository $repository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
-    )
-    {
-        $this->form                 = $factory->createNamed(
+    ) {
+        $this->form = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class
         );
-        $this->repository           = $repository;
-        $this->tokenStorage         = $tokenStorage;
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -82,14 +79,14 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         $typeStorages = $this->repository->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
-            'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.type_storage.list',
+            'page' => $request->get('page', 1),
+            'nbPages' => ceil(count($typeStorages) / self::MAX_PAGE),
+            'nomRoute' => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
-            'pagination'   => $pagination,
+            'pagination' => $pagination,
             'typeStorages' => $typeStorages,
         ];
     }

@@ -18,8 +18,9 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * ProductRepository constructor.
+     *
      * @param ManagerRegistry $registry
-     * @param ProductFactory $factory
+     * @param ProductFactory  $factory
      */
     public function __construct(ManagerRegistry $registry, ProductFactory $factory)
     {
@@ -56,6 +57,7 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * @param ProductDTO $dto
+     *
      * @throws \App\Exception\NotFoundException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException

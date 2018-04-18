@@ -10,8 +10,6 @@ namespace App\FormHandler;
 
 use App\DTO\ProductDTO;
 use App\Form\ProductType;
-use App\Mapper\ProductMapper;
-use App\Mapper\TypeStorageMapper;
 use App\Repository\ProductRepository;
 use App\Repository\TypeStorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,7 +31,7 @@ class ProductFormHandler implements FormHandlerInterface
      * ProductFormHandler constructor.
      *
      * @param FormFactoryInterface $factory
-     * @param ProductRepository        $repository
+     * @param ProductRepository    $repository
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
