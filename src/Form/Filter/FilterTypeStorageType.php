@@ -19,8 +19,14 @@ class FilterTypeStorageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = null)
     {
         $builder
-            ->add('text', TextType::class, ['required' => false])
-            ->add('submit', SubmitType::class, ['label' => 'search']);
+            ->add('text', TextType::class,
+                  [
+                      'required'   => false,
+                      'attr'       => ['class' => 'form-control-sm mr-2'],
+                      'label_attr' => ['class' => 'mr-2'],
+                      'label'      => 'type_storage.form_filter.field.label',
+                  ]
+            );
     }
 
     /**
@@ -30,6 +36,6 @@ class FilterTypeStorageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('translation_domain', 'messages');
+        $resolver->setDefaults(['translation_domain' => 'messages']);
     }
 }

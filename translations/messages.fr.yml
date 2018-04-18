@@ -61,3 +61,9 @@ packaging:
       label: 'Conditionnement'
     button:
       save: 'Rechecherche'
+type_storage:
+  list:
+    title: 'messages'
+  form_filter:
+    button:
+      save: 'messages'

@@ -13,6 +13,7 @@ use App\Form\ProductType;
 use App\Mapper\ProductMapper;
 use App\Mapper\TypeStorageMapper;
 use App\Repository\ProductRepository;
+use App\Repository\TypeStorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,7 +25,7 @@ class ProductFormHandler implements FormHandlerInterface
     use FormHandlerTrait;
 
     /**
-     * @var TypeStorageMapper
+     * @var TypeStorageRepository
      */
     private $repository;
 

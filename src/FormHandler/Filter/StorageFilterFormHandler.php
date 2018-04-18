@@ -19,12 +19,12 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
     /**
      * @var TypeStorageRepository
      */
-    protected $typeStorageRepository;
+    protected $tsRepository;
 
     /**
      * @var StorageRepository
      */
-    protected $storageRepository;
+    protected $repository;
 
     /**
      * @var TokenStorageInterface
@@ -35,22 +35,22 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
     /**
      * StorageFilterFormHandler constructor.
      *
-     * @param TypeStorageRepository $typeStorageRepository
-     * @param StorageRepository     $storageRepository
+     * @param TypeStorageRepository $tsRepository
+     * @param StorageRepository     $repository
      * @param FormFactoryInterface  $factory
      * @param TokenStorageInterface $tokenStorage
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
-        TypeStorageRepository $typeStorageRepository,
-        StorageRepository $storageRepository,
+        TypeStorageRepository $tsRepository,
+        StorageRepository $repository,
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
     )
     {
-        $this->typeStorageRepository = $typeStorageRepository;
-        $this->storageRepository     = $storageRepository;
+        $this->tsRepository = $tsRepository;
+        $this->repository     = $repository;
         $this->form                  = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterTypeStorageType::class
@@ -65,8 +65,8 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
     {
         return [
             $request->get('page', 1),
-            'typeStorages' => $this->typeStorageRepository->findAll(),
-            'storages'     => $this->storageRepository->findAllByUser($this->tokenStorage->getToken()->getUser()),
+            'typeStorages' => $this->tsRepository->findAll(),
+            'storages'     => $this->repository->findAllByUser($this->tokenStorage->getToken()->getUser()),
         ];
     }
 }
