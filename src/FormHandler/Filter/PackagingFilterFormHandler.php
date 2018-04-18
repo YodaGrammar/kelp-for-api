@@ -20,7 +20,7 @@ class PackagingFilterFormHandler
 {
     use FilterFormHandlerTrait;
 
-    private const MAX_PAGE = 1;
+    private const MAX_PAGE = 10;
 
     /**
      * @var PackagingRepository
@@ -38,15 +38,9 @@ class PackagingFilterFormHandler
     protected $authorizationChecker;
 
     /**
-     * @var PackagingDTOFilterFactory
-     */
-    protected $dtoFactory;
-
-    /**
      * PackagingFilterFormHandler constructor.
      *
      * @param FormFactoryInterface          $factory
-     * @param PackagingDTOFilterFactory     $dtoFactory
      * @param PackagingRepository           $repository
      * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
@@ -55,19 +49,16 @@ class PackagingFilterFormHandler
      */
     public function __construct(
         FormFactoryInterface $factory,
-        PackagingDTOFilterFactory $dtoFactory,
         PackagingRepository $repository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->dtoFactory = $dtoFactory->newInstance();
-        $this->form = $factory->createNamed(
+        $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',
-            FilterPackagingType::class,
-            $this->dtoFactory
+            FilterPackagingType::class
         );
-        $this->repository = $repository;
-        $this->tokenStorage = $tokenStorage;
+        $this->repository           = $repository;
+        $this->tokenStorage         = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -81,20 +72,17 @@ class PackagingFilterFormHandler
      */
     public function process(Request $request): array
     {
-        $filter = $this->dtoFactory;
-
-        $this->form->setData($filter);
+        $filter = '';
         $this->form->handleRequest($request);
-
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $filter = $this->form->getData();
         }
         $packaging = $this->repository->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
-            'page' => $request->get('page', 1),
-            'nbPages' => ceil(count($packaging) / self::MAX_PAGE),
-            'nomRoute' => 'kelp.packaging.list',
+            'page'        => $request->get('page', 1),
+            'nbPages'     => ceil(count($packaging) / self::MAX_PAGE),
+            'nomRoute'    => 'kelp.packaging.list',
             'paramsRoute' => [],
         ];
 

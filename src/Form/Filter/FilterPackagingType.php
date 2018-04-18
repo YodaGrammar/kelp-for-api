@@ -32,6 +32,6 @@ class FilterPackagingType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data', 'messages');
+        $resolver->setDefaults(['data' => 'messages']);
     }
 }

@@ -45,10 +45,10 @@ class PackagingRepository extends ServiceEntityRepository
     {
         $builder = $this->createQueryBuilder('p');
 
-        if ($filter->text) {
+        if (isset($filter['text'])) {
             $builder
                 ->andWhere('p.label like :text')
-                ->setParameter('text', '%'.$filter->text.'%');
+                ->setParameter('text', '%'.$filter['text'].'%');
         }
         $query = $builder->getQuery();
         $paginator = [];
