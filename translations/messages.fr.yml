@@ -8,6 +8,10 @@ storage:
   edit:
     flash_message:
       validated: messages
+  delete:
+    flash_message:
+      validated˜: 'messages'
+      validated: 'messages'
 
 product:
   list:

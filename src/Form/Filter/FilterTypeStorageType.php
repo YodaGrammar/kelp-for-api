@@ -30,6 +30,6 @@ class FilterTypeStorageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data', 'messages');
+        $resolver->setDefault('translation_domain', 'messages');
     }
 }

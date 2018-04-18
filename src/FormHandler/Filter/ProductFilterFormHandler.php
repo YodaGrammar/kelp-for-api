@@ -6,6 +6,7 @@ use App\Factory\DTOFilter\ProductDTOFilterFactory;
 use App\Factory\DTOFilter\StorageDTOFilterFactory;
 use App\Form\Filter\FilterProductType;
 use App\Mapper\ProductMapper;
+use App\Repository\ProductRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -20,9 +21,9 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
     private const MAX_PAGE = 10;
 
     /**
-     * @var ProductMapper
+     * @var ProductRepository
      */
-    protected $productMapper;
+    protected $repository;
 
     /**
      * @var TokenStorageInterface
@@ -30,32 +31,24 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
     protected $tokenStorage;
 
     /**
-     * @var StorageDTOFilterFactory
-     */
-    protected $dtoFactory;
-
-    /**
      * ProductFilterFormHandler constructor.
      *
-     * @param ProductDTOFilterFactory $dtoFactory
-     * @param ProductMapper           $productMapper
+     * @param ProductRepository       $repository
      * @param FormFactoryInterface    $factory
      * @param TokenStorageInterface   $tokenStorage
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
-        ProductDTOFilterFactory $dtoFactory,
-        ProductMapper $productMapper,
+        ProductRepository $repository,
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
-    ) {
-        $this->dtoFactory = $dtoFactory->newInstance();
-        $this->productMapper = $productMapper;
-        $this->form = $factory->createNamed(
+    )
+    {
+        $this->repository   = $repository;
+        $this->form         = $factory->createNamed(
             'kelp_product_filter',
-            FilterProductType::class,
-            $this->dtoFactory
+            FilterProductType::class
         );
         $this->tokenStorage = $tokenStorage;
     }
@@ -70,7 +63,7 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
      */
     public function process(Request $request): array
     {
-        $filter = $this->dtoFactory;
+        $filter = null;
 
         $this->form->setData($filter);
         $this->form->handleRequest($request);
@@ -79,7 +72,7 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
             $filter = $this->form->getData();
         }
 
-        $products = $this->productMapper->findAllByStorageAndByFilters(
+        $products = $this->repository->findAllByStorageAndByFilters(
             $request->get('id'),
             $filter,
             $request->get('page', 1),
@@ -87,15 +80,15 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         );
 
         $pagination = [
-            'page' => $request->get('page', 1),
-            'nbPages' => ceil(count($products) / self::MAX_PAGE),
-            'nomRoute' => 'kelp.type_storage.list',
+            'page'        => $request->get('page', 1),
+            'nbPages'     => ceil(count($products) / self::MAX_PAGE),
+            'nomRoute'    => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
             'pagination' => $pagination,
-            'products' => $products,
+            'products'   => $products,
         ];
     }
 }

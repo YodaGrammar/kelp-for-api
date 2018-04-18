@@ -7,6 +7,7 @@ use App\Factory\DTO\StorageDTOFactory;
 use App\FormHandler\Filter\StorageFilterFormHandler;
 use App\FormHandler\StorageFormHandler;
 use App\Mapper\StorageMapper;
+use App\Repository\StorageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 class StorageController extends Controller
 {
     /**
-     * @param Request                  $request
+     * @param Request $request
      * @param StorageFilterFormHandler $formHandler
      *
      * @return Response
@@ -31,16 +32,16 @@ class StorageController extends Controller
             'storage/list.html.twig',
             [
                 'pager' => $formHandler->process($request),
-                'form' => $formHandler->getForm()->createView(),
+                'form'  => $formHandler->getForm()->createView(),
             ]
         );
     }
 
     /**
-     * @param Request             $request
-     * @param StorageFormHandler  $formHandler
+     * @param Request $request
+     * @param StorageFormHandler $formHandler
      * @param TranslatorInterface $translator
-     * @param StorageDTOFactory   $dtoFactory
+     * @param StorageDTOFactory $dtoFactory
      *
      * @return Response
      *
@@ -52,7 +53,8 @@ class StorageController extends Controller
         StorageFormHandler $formHandler,
         TranslatorInterface $translator,
         StorageDTOFactory $dtoFactory
-    ): Response {
+    ): Response
+    {
         $storageDTO = $dtoFactory->newInstance();
 
         if ($formHandler->process($request, $storageDTO)) {
@@ -76,11 +78,11 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Storage             $storage
-     * @param Request             $request
-     * @param StorageFormHandler  $formHandler
+     * @param Storage $storage
+     * @param Request $request
+     * @param StorageFormHandler $formHandler
      * @param TranslatorInterface $translator
-     * @param StorageDTOFactory   $dtoFactory
+     * @param StorageDTOFactory $dtoFactory
      *
      * @return Response
      *
@@ -95,7 +97,8 @@ class StorageController extends Controller
         StorageFormHandler $formHandler,
         TranslatorInterface $translator,
         StorageDTOFactory $dtoFactory
-    ): Response {
+    ): Response
+    {
         $storageDTO = $dtoFactory->newInstance($storage);
         $formHandler->getForm()->setData($storageDTO);
         if ($formHandler->process($request, $storageDTO)) {
@@ -119,17 +122,27 @@ class StorageController extends Controller
     }
 
     /**
-     * @param               $id
-     * @param StorageMapper $mapper
-     *
+     * @param Storage $storage
+     * @param StorageRepository $repository
+     * @param TranslatorInterface $translator
      * @return Response
-     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
-    public function deleteAction($id, StorageMapper $mapper)
+    public function deleteAction(Storage $storage, StorageRepository $repository, TranslatorInterface $translator): Response
     {
-        $mapper->delete($id);
+        $repository->delete($storage);
 
-        return new Response($this->generateUrl('kelp.storage.list'));
+        $this->addFlash(
+            'success',
+            $translator->trans(
+                'storage.delete.flash_message.validated',
+                ['%name%' => $storage->getLabel()]
+            )
+        );
+
+        return $this->redirectToRoute('kelp.storage.list');
     }
 }

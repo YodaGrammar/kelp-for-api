@@ -18,10 +18,10 @@ class FilterPackagingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = null): void
     {
         $builder->add('text', TextType::class, [
-            'required'   => false,
-            'attr'       => ['class' => 'form-control-sm mr-2'],
+            'required' => false,
+            'attr' => ['class' => 'form-control-sm mr-2'],
             'label_attr' => ['class' => 'mr-2'],
-            'label'      => 'packaging.form_filter.field.label',
+            'label' => 'packaging.form_filter.field.label',
         ]);
     }
 

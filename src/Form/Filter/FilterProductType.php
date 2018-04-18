@@ -25,9 +25,11 @@ class FilterProductType extends AbstractType
 
     /**
      * @param OptionsResolver $resolver
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data', 'messages');
+        $resolver->setDefault('translation_domain', 'messages');
     }
 }

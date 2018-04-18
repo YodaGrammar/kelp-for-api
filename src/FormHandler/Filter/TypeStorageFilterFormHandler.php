@@ -2,14 +2,18 @@
 
 namespace App\FormHandler\Filter;
 
-use App\Factory\DTOFilter\TypeStorageDTOFilterFactory;
 use App\Form\Filter\FilterTypeStorageType;
-use App\Mapper\TypeStorageMapper;
+use App\Repository\TypeStorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
+/**
+ * Class TypeStorageFilterFormHandler
+ *
+ * @package App\FormHandler\Filter
+ */
 class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
 {
     use FilterFormHandlerTrait;
@@ -17,9 +21,9 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
     private const MAX_PAGE = 10;
 
     /**
-     * @var TypeStorageMapper
+     * @var TypeStorageRepository
      */
-    protected $mapper;
+    protected $repository;
 
     /**
      * @var TokenStorageInterface
@@ -32,34 +36,28 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
     protected $authorizationChecker;
 
     /**
-     * @var TypeStorageDTOFilterFactory
-     */
-    protected $dtoFactory;
-
-    /**
      * TypeStorageFilterFormHandler constructor.
      *
      * @param FormFactoryInterface          $factory
-     * @param TypeStorageDTOFilterFactory   $dtoFactory
-     * @param TypeStorageMapper             $mapper
+     * @param TypeStorageRepository         $repository
      * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
         FormFactoryInterface $factory,
-        TypeStorageDTOFilterFactory $dtoFactory,
-        TypeStorageMapper $mapper,
+        TypeStorageRepository $repository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->dtoFactory = $dtoFactory->newInstance();
-        $this->form = $factory->createNamed(
+    )
+    {
+        $this->form                 = $factory->createNamed(
             'kelp_type_storage_filter',
-            FilterTypeStorageType::class,
-            $this->dtoFactory
+            FilterTypeStorageType::class
         );
-        $this->mapper = $mapper;
-        $this->tokenStorage = $tokenStorage;
+        $this->repository           = $repository;
+        $this->tokenStorage         = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -73,7 +71,7 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
      */
     public function process(Request $request): array
     {
-        $filter = $this->dtoFactory;
+        $filter = null;
 
         $this->form->setData($filter);
         $this->form->handleRequest($request);
@@ -81,17 +79,17 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $filter = $this->form->getData();
         }
-        $typeStorages = $this->mapper->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
+        $typeStorages = $this->repository->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
-            'page' => $request->get('page', 1),
-            'nbPages' => ceil(count($typeStorages) / self::MAX_PAGE),
-            'nomRoute' => 'kelp.type_storage.list',
+            'page'        => $request->get('page', 1),
+            'nbPages'     => ceil(count($typeStorages) / self::MAX_PAGE),
+            'nomRoute'    => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
-            'pagination' => $pagination,
+            'pagination'   => $pagination,
             'typeStorages' => $typeStorages,
         ];
     }

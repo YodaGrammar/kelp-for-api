@@ -38,10 +38,12 @@ class PackagingFilterFormHandler
 
     /**
      * PackagingFilterFormHandler constructor.
-     * @param FormFactoryInterface $factory
-     * @param PackagingRepository $repository
-     * @param TokenStorageInterface $tokenStorage
+     *
+     * @param FormFactoryInterface          $factory
+     * @param PackagingRepository           $repository
+     * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
@@ -50,18 +52,20 @@ class PackagingFilterFormHandler
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->form                 = $factory->createNamed(
+        $this->form = $factory->createNamed(
             'kelp_type_storage_filter',
             FilterPackagingType::class
         );
-        $this->repository           = $repository;
-        $this->tokenStorage         = $tokenStorage;
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @param Request $request
+     *
      * @return array
+     *
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request): array
@@ -74,9 +78,9 @@ class PackagingFilterFormHandler
         $packaging = $this->repository->findAllByFilters($filter, $request->get('page', 1), self::MAX_PAGE);
 
         $pagination = [
-            'page'        => $request->get('page', 1),
-            'nbPages'     => ceil(count($packaging) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.packaging.list',
+            'page' => $request->get('page', 1),
+            'nbPages' => ceil(count($packaging) / self::MAX_PAGE),
+            'nomRoute' => 'kelp.packaging.list',
             'paramsRoute' => [],
         ];
 

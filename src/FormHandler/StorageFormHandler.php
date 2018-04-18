@@ -12,6 +12,7 @@ use App\DTO\StorageDTO;
 use App\Form\StorageType;
 use App\Mapper\StorageMapper;
 use App\Mapper\TypeStorageMapper;
+use App\Repository\StorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,34 +24,32 @@ class StorageFormHandler
     use FormHandlerTrait;
 
     /**
-     * @var TypeStorageMapper
+     * @var StorageRepository
      */
-    protected $mapper;
+    protected $repository;
 
     /**
      * StorageFormHandler constructor.
      *
      * @param FormFactoryInterface $factory
-     * @param StorageMapper        $mapper
+     * @param StorageRepository $repository
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
-    public function __construct(FormFactoryInterface $factory, StorageMapper $mapper)
+    public function __construct(FormFactoryInterface $factory, StorageRepository $repository)
     {
-        $this->form = $factory->createNamed(
+        $this->form   = $factory->createNamed(
             'kelp_storage',
             StorageType::class,
             null
         );
-        $this->mapper = $mapper;
+        $this->repository = $repository;
     }
 
     /**
-     * @param Request         $request
+     * @param Request $request
      * @param StorageDTO|null $storageDTO
-     *
      * @return bool
-     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
@@ -64,9 +63,9 @@ class StorageFormHandler
 
             if (!$storageDTO->id) {
                 $storageDTO->typeStorage = $request->get('id');
-                $function = 'add';
+                $function                = 'add';
             }
-            $this->mapper->$function($storageDTO);
+            $this->repository->$function($storageDTO);
 
             return true;
         }

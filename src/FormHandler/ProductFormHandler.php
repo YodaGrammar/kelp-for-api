@@ -12,6 +12,7 @@ use App\DTO\ProductDTO;
 use App\Form\ProductType;
 use App\Mapper\ProductMapper;
 use App\Mapper\TypeStorageMapper;
+use App\Repository\ProductRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,24 +26,24 @@ class ProductFormHandler implements FormHandlerInterface
     /**
      * @var TypeStorageMapper
      */
-    protected $mapper;
+    private $repository;
 
     /**
      * ProductFormHandler constructor.
      *
      * @param FormFactoryInterface $factory
-     * @param ProductMapper        $mapper
+     * @param ProductRepository        $repository
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
-    public function __construct(FormFactoryInterface $factory, ProductMapper $mapper)
+    public function __construct(FormFactoryInterface $factory, ProductRepository $repository)
     {
         $this->form = $factory->createNamed(
             'kelp_product',
             ProductType::class,
             null
         );
-        $this->mapper = $mapper;
+        $this->repository = $repository;
     }
 
     /**
@@ -66,7 +67,7 @@ class ProductFormHandler implements FormHandlerInterface
                 $productDTO->storage = $request->get('id');
                 $function = 'add';
             }
-            $this->mapper->$function($productDTO);
+            $this->repository->$function($productDTO);
 
             return true;
         }

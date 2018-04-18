@@ -2,10 +2,9 @@
 
 namespace App\FormHandler\Filter;
 
-use App\Factory\DTOFilter\StorageDTOFilterFactory;
 use App\Form\Filter\FilterTypeStorageType;
-use App\Mapper\StorageMapper;
-use App\Mapper\TypeStorageMapper;
+use App\Repository\StorageRepository;
+use App\Repository\TypeStorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -18,50 +17,45 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
     use FilterFormHandlerTrait;
 
     /**
-     * @var TypeStorageMapper
+     * @var TypeStorageRepository
      */
-    protected $typeStorageMapper;
+    protected $typeStorageRepository;
 
     /**
-     * @var StorageMapper
+     * @var StorageRepository
      */
-    protected $storageMapper;
+    protected $storageRepository;
 
     /**
      * @var TokenStorageInterface
      */
     protected $tokenStorage;
 
-    /**
-     * @var StorageDTOFilterFactory
-     */
-    protected $dtoFactory;
 
     /**
      * StorageFilterFormHandler constructor.
      *
-     * @param StorageDTOFilterFactory $dtoFactory
-     * @param TypeStorageMapper       $typeStorageMapper
-     * @param StorageMapper           $storageMapper
-     * @param FormFactoryInterface    $factory
-     * @param TokenStorageInterface   $tokenStorage
+     * @param TypeStorageRepository $typeStorageRepository
+     * @param StorageRepository     $storageRepository
+     * @param FormFactoryInterface  $factory
+     * @param TokenStorageInterface $tokenStorage
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(
-        StorageDTOFilterFactory $dtoFactory,
-        TypeStorageMapper $typeStorageMapper,
-        StorageMapper $storageMapper,
+        TypeStorageRepository $typeStorageRepository,
+        StorageRepository $storageRepository,
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
-    ) {
-        $this->dtoFactory = $dtoFactory->newInstance();
-        $this->typeStorageMapper = $typeStorageMapper;
-        $this->storageMapper = $storageMapper;
-        $this->form = $factory->createNamed(
+    )
+    {
+        $this->typeStorageRepository = $typeStorageRepository;
+        $this->storageRepository     = $storageRepository;
+        $this->form                  = $factory->createNamed(
             'kelp_type_storage_filter',
-            FilterTypeStorageType::class,
-            $this->dtoFactory
+            FilterTypeStorageType::class
         );
-        $this->tokenStorage = $tokenStorage;
+        $this->tokenStorage          = $tokenStorage;
     }
 
     /**
@@ -71,8 +65,8 @@ class StorageFilterFormHandler implements FilterFormHandlerInterface
     {
         return [
             $request->get('page', 1),
-            'typeStorages' => $this->typeStorageMapper->findAll(),
-            'storages' => $this->storageMapper->findAllByUser($this->tokenStorage->getToken()->getUser()),
+            'typeStorages' => $this->typeStorageRepository->findAll(),
+            'storages'     => $this->storageRepository->findAllByUser($this->tokenStorage->getToken()->getUser()),
         ];
     }
 }

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: btaralle
  * Date: 17/04/2018
- * Time: 21:56
+ * Time: 21:56.
  */
 
 namespace App\DataFixtures;
@@ -14,8 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class UserFixture
- * @package App\DataFixtures
+ * Class UserFixture.
  */
 class UserFixture extends Fixture
 {
@@ -24,16 +23,16 @@ class UserFixture extends Fixture
             [
                 'username' => 'admin',
                 'fullName' => 'admini stration',
-                'email'    => 'admin@kelp.com',
-                'roles'    => ['ROLE_ADMIN'],
+                'email' => 'admin@kelp.com',
+                'roles' => ['ROLE_ADMIN'],
                 'password' => 'admin',
             ],
             [
                 'username' => 'user',
                 'fullName' => 'user user',
-                'email'    => 'user@kelp.com',
-                'roles'    => ['ROLE_USER'],
-                'password' => 'user'],
+                'email' => 'user@kelp.com',
+                'roles' => ['ROLE_USER'],
+                'password' => 'user', ],
         ];
 
     /** @var UserPasswordEncoderInterface */
@@ -41,6 +40,7 @@ class UserFixture extends Fixture
 
     /**
      * UserFixture constructor.
+     *
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -65,5 +65,4 @@ class UserFixture extends Fixture
         }
         $manager->flush();
     }
-
 }
