@@ -10,16 +10,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('kelp.dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
+                <li class="nav-item {% if currentPath == path('kelp.dashboard') %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('kelp.dashboard') }}">
+                        Dashboard<span class="sr-only">(current)</span>
+
+                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if currentPath == path('kelp.storage.list') %}active{% endif %}">
                     <a class="nav-link" href="{{ path('kelp.storage.list') }}">Storage</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {% if currentPath == path('kelp.packaging.list') or
+                    currentPath == path('kelp.type_storage.list') %}active{% endif %}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropDownAdmin" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Administration
@@ -27,7 +31,6 @@
                     <div class="dropdown-menu kelp-dropdown-menu-no-padding" aria-labelledby="dropDownAdmin">
                         <a class="dropdown-item" href="{{ path('kelp.type_storage.list') }}">Type Storage</a>
                         <a class="dropdown-item" href="{{ path('kelp.packaging.list') }}">Packaging</a>
-                        <a class="dropdown-item" href="{{ path('kelp.logout') }}">Logout</a>
 
                     </div>
                 </li>
