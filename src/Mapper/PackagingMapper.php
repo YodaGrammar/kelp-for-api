@@ -8,45 +8,35 @@
 
 namespace App\Mapper;
 
-use App\DTO\Filter\PackagingDTOFilter;
-use App\Entity\Packaging;
+use App\DTOFilter\PackagingDTOFilter;
 use App\Repository\PackagingRepository;
-use App\Factory\Entity\PackagingFactory;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use App\Factory\PackagingFactory;
 
 /**
- * Class PackagingMapper.
+ * Class PackagingMapper
+ * @package App\Mapper
+ * @deprecated
  */
 class PackagingMapper
 {
     /**
-     * @var ManagerRegistry
-     */
-    protected $managerRegistry;
-
-    /**
-     * @var PackagingEntityFactory
+     * @var PackagingFactory
      */
     protected $packagingFactory;
 
     /**
-     * PackagingMapper constructor.
-     *
-     * @param ManagerRegistry  $managerRegistry
-     * @param PackagingFactory $packagingFactory
+     * @var PackagingRepository
      */
-    public function __construct(ManagerRegistry $managerRegistry, PackagingFactory $packagingFactory)
-    {
-        $this->managerRegistry = $managerRegistry;
-        $this->packagingFactory = $packagingFactory;
-    }
+    private $repository;
 
     /**
-     * @return PackagingRepository
+     * @param PackagingRepository $repository
+     * @param PackagingFactory $packagingFactory
      */
-    protected function getRepository(): PackagingRepository
+    public function __construct(PackagingRepository $repository, PackagingFactory $packagingFactory)
     {
-        return $this->managerRegistry->getRepository(Packaging::class);
+        $this->packagingFactory = $packagingFactory;
+        $this->repository = $repository;
     }
 
     /**
@@ -55,9 +45,10 @@ class PackagingMapper
      * @param                    $maxPage
      *
      * @return mixed
+     * @throws \Doctrine\ORM\ORMException
      */
     public function findAllByFilters(PackagingDTOFilter $packagingDTO, $page, $maxPage)
     {
-        return $this->getRepository()->findAllByFilters($packagingDTO->text, $page, $maxPage);
+        return $this->repository->findAllByFilters($packagingDTO->text, $page, $maxPage);
     }
 }
