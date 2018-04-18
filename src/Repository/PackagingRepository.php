@@ -13,6 +13,7 @@ use App\Entity\Packaging;
 use App\Factory\PaginatorFactoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Class PackagingRepository
@@ -35,22 +36,22 @@ class PackagingRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param null $filter
+     * @param array|null $filter
      * @param null $page
      * @param null $maxPage
-     * @return mixed
+     * @return Paginator
      */
-    public function findAllByFilters($filter = null, $page = null, $maxPage = null)
+    public function findAllByFilters(array $filter = null, $page = null, $maxPage = null): ?Paginator
     {
         $builder = $this->createQueryBuilder('p');
 
-        if ($filter->text) {
+        if ($filter['text']) {
             $builder
                 ->andWhere('p.label like :text')
-                ->setParameter('text', '%' . $filter->text . '%');
+                ->setParameter('text', '%' . $filter['text'] . '%');
         }
         $query = $builder->getQuery();
-        $paginator = [];
+        $paginator = null;
         if ($query !== null) {
             $firstResult = ($page - 1) * $maxPage;
             $query->setFirstResult($firstResult)->setMaxResults($maxPage);
@@ -63,8 +64,9 @@ class PackagingRepository extends ServiceEntityRepository
      * @param PackagingDTO $dto
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
      */
-    public function edit(PackagingDTO $dto)
+    public function edit(PackagingDTO $dto): void
     {
         /** @var Packaging $packaging */
         $packaging = $this->find($dto->id);

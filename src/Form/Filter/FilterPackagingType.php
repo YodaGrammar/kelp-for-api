@@ -15,13 +15,13 @@ class FilterPackagingType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = null)
+    public function buildForm(FormBuilderInterface $builder, array $options = null): void
     {
         $builder->add('text', TextType::class, [
-            'required' => false,
-            'attr' => ['class' => 'form-control-sm mr-2'],
+            'required'   => false,
+            'attr'       => ['class' => 'form-control-sm mr-2'],
             'label_attr' => ['class' => 'mr-2'],
-            'label' => 'packaging.form_filter.field.label',
+            'label'      => 'packaging.form_filter.field.label',
         ]);
     }
 
@@ -30,8 +30,8 @@ class FilterPackagingType extends AbstractType
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data' => 'messages']);
+        $resolver->setDefaults(['translation_domain' => 'messages']);
     }
 }

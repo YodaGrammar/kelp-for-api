@@ -66,7 +66,7 @@ class PackagingFilterFormHandler
      */
     public function process(Request $request): array
     {
-        $filter = '';
+        $filter = null;
         $this->form->handleRequest($request);
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $filter = $this->form->getData();
