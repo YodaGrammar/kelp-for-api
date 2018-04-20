@@ -1,4 +1,3 @@
-git
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
