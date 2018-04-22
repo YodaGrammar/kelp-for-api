@@ -34,6 +34,9 @@ clean: ## Stop the project and remove generated files
 clean: kill
 	rm -rf .env vendor node_modules
 
+bash: ## Open bash
+	$(DOCKER_EXEC) bash
+
 .PHONY: kill install reset start stop clean
 
 ##
@@ -46,8 +49,8 @@ db: .env vendor
 	@$(DOCKER_EXEC) php -r 'echo "Wait database...\n"; set_time_limit(15); require __DIR__."/vendor/autoload.php"; (new \Symfony\Component\Dotenv\Dotenv())->load(__DIR__."/.env"); $$u = parse_url(getenv("DATABASE_URL")); for(;;) { if(@fsockopen($$u["host"].":".($$u["port"] ?? 3306))) { break; }}'
 	-$(SYMFONY) doctrine:database:drop --if-exists --force
 	-$(SYMFONY) doctrine:database:create --if-not-exists
-	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
-	$(SYMFONY) doctrine:fixtures:load --no-interaction --purge-with-truncate
+	$(SYMFONY) doctrine:schema:update --force
+	$(SYMFONY) doctrine:fixtures:load --no-interaction
 
 migration: ## Generate a new doctrine migration
 migration: vendor
@@ -83,8 +86,7 @@ tf: vendor
 ##
 
 phpmd: ## PHP Mess Detector (https://phpmd.org)
-	$(EXEC_PHP) vendor/bin/phpmd src text .phpmd.xml
-
+	$(EXEC_PHP) vendor/bin/phpmd src text phpmd.xml
 
 phpcpd: ## PHP Copy/Paste Detector (https://github.com/sebastianbergmann/phpcpd)
 	$(EXEC_PHP) vendor/bin/phpcpd src
@@ -96,10 +98,10 @@ pdepend: ## PHP_Depend (https://pdepend.org)
 		--overview-pyramid=$(ARTEFACTS)/pdepend_pyramid.svg \
 		src/
 
-phpcs: ## PHP CS (https://github.com/squizlabs/PHP_CodeSniffer)
-	$(EXEC_PHP) vendor/bin/phpcs --standard=PSR2 src
+phpcs: ## PHP_CS (https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+	@$(EXEC) vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes
 
-.PHONY: pdepend phpmd phpcs phpcpd
+.PHONY: pdepend phpmd phpcpd phpcs
 
 # rules based on files
 composer.lock: composer.json
