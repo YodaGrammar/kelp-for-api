@@ -53,7 +53,17 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ['ROLE_USER'];
+
+    /**
+     * @ORM\OneToMany(targetEntity="Storage", mappedBy="user")
+     **/
+    private $storages;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive = 1;
 
     public function getId(): int
     {
@@ -117,6 +127,38 @@ class User implements UserInterface, \Serializable
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStorages()
+    {
+        return $this->storages;
+    }
+
+    /**
+     * @param mixed $storages
+     */
+    public function setStorages($storages): void
+    {
+        $this->storages = $storages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled():bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 
     /**

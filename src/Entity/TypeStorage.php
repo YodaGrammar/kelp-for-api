@@ -45,11 +45,9 @@ class TypeStorage
     private $class;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
-     * @var bool
+     * @ORM\Column(name="is_active", type="boolean")
      */
-    private $active = true;
+    private $isActive = 1;
 
     /**
      * @return mixed
@@ -110,16 +108,16 @@ class TypeStorage
     /**
      * @return bool
      */
-    public function isActive(): bool
+    public function isEnabled():bool
     {
-        return $this->active;
+        return $this->isActive;
     }
 
     /**
-     * @param bool $active
+     * @param mixed $isActive
      */
-    public function setActive(bool $active)
+    public function setActive(bool $isActive): void
     {
-        $this->active = $active;
+        $this->isActive = $isActive;
     }
 }

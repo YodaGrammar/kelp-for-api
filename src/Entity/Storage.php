@@ -42,11 +42,9 @@ class Storage
     private $products;
 
     /**
-     * @ORM\Column(type="boolean")
-     *
-     * @var bool
-     **/
-    private $active;
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive = 1;
 
     /**
      * @return mixed
@@ -105,22 +103,6 @@ class Storage
     }
 
     /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param bool $active
-     */
-    public function setActive(bool $active): void
-    {
-        $this->active = $active;
-    }
-
-    /**
      * @return mixed
      */
     public function getProducts()
@@ -134,5 +116,21 @@ class Storage
     public function setProducts($products): void
     {
         $this->products = $products;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled():bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }

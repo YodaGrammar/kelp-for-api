@@ -30,6 +30,11 @@ class Packaging
     private $products;
 
     /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive = 1;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -67,5 +72,21 @@ class Packaging
     public function setProduct($products): void
     {
         $this->products = $products;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled():bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }

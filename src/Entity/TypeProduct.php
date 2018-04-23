@@ -40,6 +40,11 @@ class TypeProduct
     private $unit;
 
     /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive = 1;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -77,5 +82,21 @@ class TypeProduct
     public function setUnit(string $unit)
     {
         $this->unit = $unit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled():bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }

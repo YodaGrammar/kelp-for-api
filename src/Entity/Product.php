@@ -44,7 +44,7 @@ class Product
     private $storage;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
@@ -55,14 +55,14 @@ class Product
      *
      * @var \DateTime
      */
-    private $dateAdd = null;
+    private $dateAdd;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @var bool
      **/
-    private $active;
+    private $isActive = 1;
 
     /**
      * @return mixed
@@ -171,16 +171,16 @@ class Product
     /**
      * @return bool
      */
-    public function isActive(): bool
+    public function isEnabled():bool
     {
-        return $this->active;
+        return $this->isActive;
     }
 
     /**
-     * @param bool $active
+     * @param mixed $isActive
      */
-    public function setActive(bool $active): void
+    public function setActive(bool $isActive): void
     {
-        $this->active = $active;
+        $this->isActive = $isActive;
     }
 }
