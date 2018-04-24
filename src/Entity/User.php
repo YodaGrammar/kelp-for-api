@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+    use EntityTrait;
     /**
      * @var int
      *
@@ -59,11 +60,6 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Storage", mappedBy="user")
      **/
     private $storages;
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive = 1;
 
     public function getId(): int
     {
@@ -143,22 +139,6 @@ class User implements UserInterface, \Serializable
     public function setStorages($storages): void
     {
         $this->storages = $storages;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnabled():bool
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param mixed $isActive
-     */
-    public function setActive(bool $isActive): void
-    {
-        $this->isActive = $isActive;
     }
 
     /**

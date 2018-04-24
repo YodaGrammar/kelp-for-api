@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TypeProduct
 {
+    use EntityTrait;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -38,11 +39,6 @@ class TypeProduct
      * @var string
      */
     private $unit;
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive = 1;
 
     /**
      * @return mixed
@@ -82,21 +78,5 @@ class TypeProduct
     public function setUnit(string $unit)
     {
         $this->unit = $unit;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnabled():bool
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param mixed $isActive
-     */
-    public function setActive(bool $isActive): void
-    {
-        $this->isActive = $isActive;
     }
 }
