@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Packaging
 {
+    use EntityTrait;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")

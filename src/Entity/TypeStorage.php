@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TypeStorage
 {
+    use EntityTrait;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -43,13 +44,6 @@ class TypeStorage
      * @var string
      */
     private $class;
-
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @var bool
-     */
-    private $active = true;
 
     /**
      * @return mixed
@@ -105,21 +99,5 @@ class TypeStorage
     public function setClass($class)
     {
         $this->class = $class;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param bool $active
-     */
-    public function setActive(bool $active)
-    {
-        $this->active = $active;
     }
 }

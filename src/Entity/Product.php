@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+    use EntityTrait;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -44,7 +45,7 @@ class Product
     private $storage;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
@@ -55,14 +56,7 @@ class Product
      *
      * @var \DateTime
      */
-    private $dateAdd = null;
-
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @var bool
-     **/
-    private $active;
+    private $dateAdd;
 
     /**
      * @return mixed
@@ -166,21 +160,5 @@ class Product
     public function setDateAdd(\DateTime $dateAdd): void
     {
         $this->dateAdd = $dateAdd;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param bool $active
-     */
-    public function setActive(bool $active): void
-    {
-        $this->active = $active;
     }
 }

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Storage
 {
+    use EntityTrait;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -41,12 +42,6 @@ class Storage
      */
     private $products;
 
-    /**
-     * @ORM\Column(type="boolean")
-     *
-     * @var bool
-     **/
-    private $active;
 
     /**
      * @return mixed
@@ -102,22 +97,6 @@ class Storage
     public function setTypeStorage($typeStorage)
     {
         $this->typeStorage = $typeStorage;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param bool $active
-     */
-    public function setActive(bool $active): void
-    {
-        $this->active = $active;
     }
 
     /**

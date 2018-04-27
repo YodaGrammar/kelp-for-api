@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+    use EntityTrait;
     /**
      * @var int
      *
@@ -53,7 +54,12 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ['ROLE_USER'];
+
+    /**
+     * @ORM\OneToMany(targetEntity="Storage", mappedBy="user")
+     **/
+    private $storages;
 
     public function getId(): int
     {
@@ -117,6 +123,22 @@ class User implements UserInterface, \Serializable
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStorages()
+    {
+        return $this->storages;
+    }
+
+    /**
+     * @param mixed $storages
+     */
+    public function setStorages($storages): void
+    {
+        $this->storages = $storages;
     }
 
     /**

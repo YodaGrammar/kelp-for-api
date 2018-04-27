@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TypeProduct
 {
+    use EntityTrait;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
