@@ -3240,16 +3240,16 @@
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v4.0.9",
+            "version": "v4.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "f4f2ce9f9386bddff52bfb4110a28d2a4be7ea94"
+                "reference": "d0b5a96ee1fcb6ccf43145f652058c2eeb0255f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/f4f2ce9f9386bddff52bfb4110a28d2a4be7ea94",
-                "reference": "f4f2ce9f9386bddff52bfb4110a28d2a4be7ea94",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/d0b5a96ee1fcb6ccf43145f652058c2eeb0255f2",
+                "reference": "d0b5a96ee1fcb6ccf43145f652058c2eeb0255f2",
                 "shasum": ""
             },
             "require": {
@@ -3257,6 +3257,7 @@
                 "symfony/config": "~3.4|~4.0",
                 "symfony/http-foundation": "~3.4|~4.0",
                 "symfony/http-kernel": "~3.4|~4.0",
+                "symfony/polyfill-ctype": "~1.8",
                 "symfony/twig-bridge": "^3.4.3|^4.0.3",
                 "twig/twig": "~1.34|~2.4"
             },
@@ -3309,7 +3310,7 @@
             ],
             "description": "Symfony TwigBundle",
             "homepage": "https://symfony.com",
-            "time": "2018-04-20T06:20:23+00:00"
+            "time": "2018-05-01T23:00:51+00:00"
         },
         {
             "name": "symfony/validator",
