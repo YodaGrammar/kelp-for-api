@@ -2,7 +2,7 @@
     "name" : "diwoka/kelp",
     "description":"kitchen helper",
     "type": "project",
-    "license": "proprietary",
+    license": "MIT",
     "require": {
         "php": "7.2.*",
         "ext-iconv": "*",
