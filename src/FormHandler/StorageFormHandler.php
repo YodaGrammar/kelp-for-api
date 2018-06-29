@@ -36,11 +36,7 @@ class StorageFormHandler
      */
     public function __construct(FormFactoryInterface $factory, StorageRepository $repository)
     {
-        $this->form = $factory->createNamed(
-            'kelp_storage',
-            StorageType::class,
-            null
-        );
+        $this->form = $factory->createNamed('kelp_storage',StorageType::class);
         $this->repository = $repository;
     }
 
@@ -53,7 +49,7 @@ class StorageFormHandler
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
-    public function process(Request $request, StorageDTO $storageDTO = null): bool
+    public function process(Request $request,  $storageDTO = null): bool
     {
         $this->form->setData($storageDTO);
         $this->form->handleRequest($request);

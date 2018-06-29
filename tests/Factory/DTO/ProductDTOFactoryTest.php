@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b.tarall
- * Date: 26/03/2018
- * Time: 10:54
- */
 
 namespace App\Tests\DTOFactoryTest;
 
@@ -22,6 +16,6 @@ class ProductDTOFactoryTest extends TestCase
     {
         $dtoFactory = new ProductDTOFactory();
         $dto = $dtoFactory->newInstance();
-        $this->isInstanceOf(ProductDTO::class, $dto);
+        $this->assertInstanceOf(ProductDTO::class, $dto);
     }
 }

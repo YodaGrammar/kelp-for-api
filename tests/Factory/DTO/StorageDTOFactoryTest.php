@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b.tarall
- * Date: 26/03/2018
- * Time: 10:59
- */
 
 namespace App\Tests\DTOFactoryTest;
-
 
 use App\DTO\StorageDTO;
 use App\Factory\DTO\StorageDTOFactory;
@@ -23,6 +16,6 @@ class StorageDTOFactoryTest extends TestCase
     {
         $dtoFactory = new StorageDTOFactory();
         $dto = $dtoFactory->newInstance();
-        $this->isInstanceOf(StorageDTO::class, $dto);
+        $this->assertInstanceOf(StorageDTO::class, $dto);
     }
 }
