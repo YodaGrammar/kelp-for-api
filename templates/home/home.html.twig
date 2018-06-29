@@ -3,5 +3,34 @@
 {% block content %}
 
 
-    {#<img src="image/kitchen.jpg">#}
+    <main role="main">
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Bienvenue sur Kelp!</h1>
+                <p>La plateforme qui va vous aidé a mieux gérer votre cuisine.</p>
+                <p>Venez nous découvrir.</p>
+                <p><a class="btn btn-primary btn-lg float-left" href="{{ path('kelp.user_registration') }}">{{  'home.button.register'|trans }} <i class="fas fa-play"></i></a></p>
+                <p><a class="btn btn-primary btn-lg float-right" href="{{ path('kelp.login') }}"><i class="fas fa-play"></i> {{  'home.button.login'|trans }}</a></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Gérer vos espace de stockage</h2>
+                    <p>Vous pourrez gérer aussi bien vos frigos, vos placard, vos congélateur. </p>
+                </div>
+                <div class="col-md-6">
+                    <h2>Aide au déjeuner ou au diner</h2>
+                    <p>Kelp vous aide a trouvé des idées avec ce que contient vos espace de stockage </p>
+                </div>
+            </div>
+
+
+        </div> <!-- /container -->
+
+    </main>
 {% endblock %}

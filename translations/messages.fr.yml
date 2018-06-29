@@ -12,7 +12,6 @@ storage:
     flash_message:
       validated˜: 'messages'
       validated: 'messages'
-
 product:
   list:
     title: 'Produit'
@@ -67,3 +66,16 @@ type_storage:
   form_filter:
     button:
       save: 'messages'
+home:
+  button:
+    register: 'Inscription'
+    login: 'Connexion'
+register:
+  form:
+    button:
+      save: 'Créer mon compte'
+    field:
+      username: 'Nom d utilisateur'
+      email: 'Adresse E-mail '
+      password: 'Mot de passe'
+      repeat_password: 'Confirmation'
