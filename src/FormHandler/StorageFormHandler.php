@@ -36,11 +36,7 @@ class StorageFormHandler
      */
     public function __construct(FormFactoryInterface $factory, StorageRepository $repository)
     {
-        $this->form = $factory->createNamed(
-            'kelp_storage',
-            StorageType::class,
-            null
-        );
+        $this->form = $factory->createNamed('kelp_storage',StorageType::class);
         $this->repository = $repository;
     }
 
