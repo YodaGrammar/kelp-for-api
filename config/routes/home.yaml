@@ -1,3 +1,5 @@
 kelp.home:
     path: /
-    controller: App\Controller\HomeController::homeAction
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: 'home/home.html.twig'

@@ -1,4 +1,8 @@
 security:
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\User: bcrypt
@@ -8,12 +12,10 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
-                # if you're using multiple entity managers
-                # manager_name: customer
+
     firewalls:
         main:
             anonymous: ~
-            http_basic: ~
             pattern:    ^/
             provider: kelp_user
             form_login:
