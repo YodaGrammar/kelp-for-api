@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b.tarall
- * Date: 24/04/2018
- * Time: 14:20
- */
 
 namespace App\Entity;
-
 
 trait EntityTrait
 {

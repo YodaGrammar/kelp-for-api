@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- *  : groot
- * Date: 02/04/2017
- * Time: 00:24.
- */
 
 namespace App\Entity;
 

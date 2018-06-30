@@ -1,4 +1,5 @@
 kelp.dashboard:
     path: /dashboard
-    controller: App\Controller\DashboardController::dashboardAction
-
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: 'dashboard/dashboard.html.twig'
