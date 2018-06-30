@@ -37,6 +37,17 @@ clean: kill
 .PHONY: kill install reset start stop clean
 
 ##
+## Lint
+## -----
+##
+
+lint-twig: ## Check the syntax of your Twig templates
+	$(SYMFONY) lint:twig ./templates
+
+lint-php: ## Check the syntax of your PHP files
+	$(EXEC_PHP) vendor/bin/php-cs-fixer fix --diff --dry-run -v
+
+##
 ## Utils
 ## -----
 ##
