@@ -6,4 +6,6 @@ php:
 before_script:
     - composer install --prefer-source
 
-script: phpunit --coverage-text
+script:
+    - bin/console lint:twig ./templates
+    - vendor/bin/phpunit --coverage-text
