@@ -24,9 +24,9 @@ class TypeStorageFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @return TypeStorage
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return TypeStorage
      */
     public function newInstance($dto): TypeStorage
     {

@@ -30,11 +30,7 @@ class PackagingFormHandler implements FormHandlerInterface
      */
     public function __construct(FormFactoryInterface $factory, PackagingRepository $repository)
     {
-        $this->form = $factory->createNamed(
-            'kelp_packaging',
-            PackagingType::class,
-            null
-        );
+        $this->form = $factory->createNamed('kelp_packaging', PackagingType::class);
         $this->repository = $repository;
     }
 
@@ -42,9 +38,9 @@ class PackagingFormHandler implements FormHandlerInterface
      * @param Request           $request
      * @param PackagingDTO|null $packagingDTO
      *
-     * @return bool
-     *
      * @throws \Doctrine\ORM\ORMException
+     *
+     * @return bool
      */
     public function process(Request $request, PackagingDTO $packagingDTO = null): bool
     {

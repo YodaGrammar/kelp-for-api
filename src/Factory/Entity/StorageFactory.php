@@ -34,10 +34,10 @@ class StorageFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @return Storage
-     *
      * @throws NotFoundException
      * @throws \InvalidArgumentException
+     *
+     * @return Storage
      */
     public function newInstance($dto): Storage
     {

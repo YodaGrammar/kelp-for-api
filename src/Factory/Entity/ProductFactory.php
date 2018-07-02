@@ -31,9 +31,9 @@ class ProductFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @return Product
-     *
      * @throws NotFoundException
+     *
+     * @return Product
      */
     public function newInstance($dto): Product
     {

@@ -42,7 +42,6 @@ class Storage
      */
     private $products;
 
-
     /**
      * @return mixed
      */
