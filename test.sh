@@ -51,10 +51,10 @@ echo "$TEST_RES" > doc/phpunit.txt
 test "$PHP vendor/bin/php-cs-fixer fix src/" PHPCSFIXER
 echo "$TEST_RES" > doc/phpcsfixer.txt
 
-test "$PHP vendor/bin/phpcs --standard=PSR2 src/" PHPCS 100
+test "$PHP vendor/bin/phpcs --ignore=Migrations --standard=PSR2 src/ " PHPCS 100
 echo "$TEST_RES" > doc/phpcs.txt
 
-test "$PHP vendor/bin/phpmd src/ text ./phpmd.xml" PHPMD 100
+test "$PHP vendor/bin/phpmd src/ text ./phpmd.xml --exclude Migrations" PHPMD 100
 echo "$TEST_RES" > doc/phpmd.txt
 
 test "$PHP vendor/bin/phpcpd src/" PHPCPD 1
