@@ -10,8 +10,14 @@ kelp.packaging.list:
     requirements:
         page: '\d+'
 
+kelp.packaging.create:
+    path: /packaging/create
+    controller: App\Controller\PackagingController::createAction
+
 kelp.packaging.edit:
     path: /packaging/edit/{id}
     controller: App\Controller\PackagingController::editAction
     requirements:
         id: '\d+'
+
+

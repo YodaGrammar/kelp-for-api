@@ -3,7 +3,7 @@
 namespace App\Factory\Entity;
 
 use App\Entity\Packaging;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**

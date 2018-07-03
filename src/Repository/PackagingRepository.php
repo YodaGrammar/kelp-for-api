@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\DTO\PackagingDTO;
 use App\Entity\Packaging;
+use App\Factory\Entity\PackagingFactory;
 use App\Factory\PaginatorFactoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -15,17 +16,25 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PackagingRepository extends ServiceEntityRepository
 {
     /** @var PaginatorFactoryInterface */
+    private $factory;
+
+    /** @var PaginatorFactoryInterface */
     private $paginatorFactory;
 
     /**
      * PackagingRepository constructor.
      *
      * @param ManagerRegistry           $registry
+     * @param PackagingFactory          $factory
      * @param PaginatorFactoryInterface $paginatorFactory
      */
-    public function __construct(ManagerRegistry $registry, PaginatorFactoryInterface $paginatorFactory)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        PackagingFactory $factory,
+        PaginatorFactoryInterface $paginatorFactory
+    ) {
         parent::__construct($registry, Packaging::class);
+        $this->factory          = $factory;
         $this->paginatorFactory = $paginatorFactory;
     }
 
@@ -45,7 +54,7 @@ class PackagingRepository extends ServiceEntityRepository
                 ->andWhere('p.label like :text')
                 ->setParameter('text', '%'.$filter['text'].'%');
         }
-        $query = $builder->getQuery();
+        $query     = $builder->getQuery();
         $paginator = null;
         if (null !== $query) {
             $firstResult = ($page - 1) * $maxPage;
@@ -54,6 +63,19 @@ class PackagingRepository extends ServiceEntityRepository
         }
 
         return $paginator;
+    }
+
+    /**
+     * @param PackagingDTO $dto
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function add(PackagingDTO $dto): void
+    {
+        $packaging = $this->factory->newInstance($dto);
+        $this->getEntityManager()->persist($packaging);
+        $this->getEntityManager()->flush();
     }
 
     /**
