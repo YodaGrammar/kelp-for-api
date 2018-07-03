@@ -33,6 +33,44 @@ class PackagingController extends Controller
     }
 
     /**
+     * @param Request              $request
+     * @param PackagingFormHandler $formHandler
+     * @param TranslatorInterface  $translator
+     * @param PackagingDTOFactory  $dtoFactory
+     *
+     * @throws \Doctrine\ORM\ORMException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function createAction(
+        Request $request,
+        PackagingFormHandler $formHandler,
+        TranslatorInterface $translator,
+        PackagingDTOFactory $dtoFactory
+    ) {
+        $packagingDTO = $dtoFactory->newInstance();
+
+        if ($formHandler->process($request, $packagingDTO)) {
+            $this->addFlash(
+                'success',
+                $translator->trans(
+                    'packaging.create.flash_message.validated',
+                    ['%name%' => $packagingDTO->label]
+                )
+            );
+
+            return $this->redirectToRoute('kelp.packaging.list');
+        }
+
+        return $this->render(
+            'packaging/create.html.twig',
+            [
+                'form' => $formHandler->getForm()->createView(),
+            ]
+        );
+    }
+
+    /**
      * @param Packaging            $packaging
      * @param Request              $request
      * @param PackagingFormHandler $formHandler

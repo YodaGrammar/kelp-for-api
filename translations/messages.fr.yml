@@ -60,6 +60,9 @@ packaging:
       label: 'Conditionnement'
     button:
       save: 'Rechecherche'
+  create:
+    flash_message:
+      validated: 'messages'
 type_storage:
   list:
     title: 'messages'
