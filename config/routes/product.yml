@@ -1,7 +1,11 @@
 kelp.product.add:
     path: /product/add/{id}
     controller: App\Controller\ProductController::createAction
+    requirements:
+        page: '\d+'
 
 kelp.product.list:
     path: /product/list/{id}
     controller: App\Controller\ProductController::listAction
+    requirements:
+        page: '\d+'
