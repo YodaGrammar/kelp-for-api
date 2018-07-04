@@ -61,10 +61,10 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
     /**
      * @param Request $request
      *
-     * @return array
-     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
+     *
+     * @return array
      */
     public function process(Request $request): array
     {

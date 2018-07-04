@@ -19,9 +19,9 @@ class ProductController extends Controller
      * @param Request                  $request
      * @param ProductFilterFormHandler $formHandler
      *
-     * @return Response
-     *
      * @throws \LogicException
+     *
+     * @return Response
      */
     public function listAction(Request $request, ProductFilterFormHandler $formHandler): Response
     {
@@ -40,10 +40,10 @@ class ProductController extends Controller
      * @param TranslatorInterface $translator
      * @param ProductDTOFactory   $dtoFactory
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     *
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function createAction(
         Request $request,

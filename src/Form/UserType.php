@@ -4,12 +4,12 @@ namespace App\Form;
 
 use App\DTO\UserDTO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 /**
  * Class UserType.
@@ -25,15 +25,15 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'register.form.field.email',
             ])
-            ->add('username', TextType::class,[
+            ->add('username', TextType::class, [
                 'label' => 'register.form.field.username',
             ])
             ->add(
                 'plainPassword',
                 RepeatedType::class,
                 [
-                    'type'           => PasswordType::class,
-                    'first_options'  => ['label' => 'register.form.field.password'],
+                    'type' => PasswordType::class,
+                    'first_options' => ['label' => 'register.form.field.password'],
                     'second_options' => ['label' => 'register.form.field.repeat_password'],
                 ]
             );

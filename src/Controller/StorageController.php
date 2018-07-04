@@ -21,9 +21,9 @@ class StorageController extends Controller
      * @param Request                  $request
      * @param StorageFilterFormHandler $formHandler
      *
-     * @return Response
-     *
      * @throws \LogicException
+     *
+     * @return Response
      */
     public function listAction(Request $request, StorageFilterFormHandler $formHandler): Response
     {
@@ -42,10 +42,10 @@ class StorageController extends Controller
      * @param TranslatorInterface $translator
      * @param StorageDTOFactory   $dtoFactory
      *
-     * @return Response
-     *
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     *
+     * @return Response
      */
     public function createAction(
         Request $request,
@@ -82,12 +82,12 @@ class StorageController extends Controller
      * @param TranslatorInterface $translator
      * @param StorageDTOFactory   $dtoFactory
      *
-     * @return Response
-     *
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     *
+     * @return Response
      */
     public function editAction(
         Storage $storage,
@@ -123,12 +123,12 @@ class StorageController extends Controller
      * @param StorageRepository   $repository
      * @param TranslatorInterface $translator
      *
-     * @return Response
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     *
+     * @return Response
      */
     public function deleteAction(
         Storage $storage,
