@@ -16,25 +16,19 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PackagingRepository extends ServiceEntityRepository
 {
     /** @var PaginatorFactoryInterface */
-    private $factory;
-
-    /** @var PaginatorFactoryInterface */
     private $paginatorFactory;
 
     /**
      * PackagingRepository constructor.
      *
      * @param ManagerRegistry           $registry
-     * @param PackagingFactory          $factory
      * @param PaginatorFactoryInterface $paginatorFactory
      */
     public function __construct(
         ManagerRegistry $registry,
-        PackagingFactory $factory,
         PaginatorFactoryInterface $paginatorFactory
     ) {
         parent::__construct($registry, Packaging::class);
-        $this->factory          = $factory;
         $this->paginatorFactory = $paginatorFactory;
     }
 
@@ -83,9 +77,10 @@ class PackagingRepository extends ServiceEntityRepository
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
+     *
+     * @return Packaging|null
      */
-    public function edit(PackagingDTO $dto): void
+    public function edit(PackagingDTO $dto): ?Packaging
     {
         /** @var Packaging $packaging */
         $packaging = $this->find($dto->id);
@@ -94,5 +89,7 @@ class PackagingRepository extends ServiceEntityRepository
         }
         $packaging->setLabel($dto->label);
         $this->getEntityManager()->flush();
+
+        return $packaging;
     }
 }
