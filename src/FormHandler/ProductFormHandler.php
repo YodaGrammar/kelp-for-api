@@ -31,11 +31,7 @@ class ProductFormHandler implements FormHandlerInterface
      */
     public function __construct(FormFactoryInterface $factory, ProductRepository $repository)
     {
-        $this->form = $factory->createNamed(
-            'kelp_product',
-            ProductType::class,
-            null
-        );
+        $this->form = $factory->createNamed('kelp_product', ProductType::class);
         $this->repository = $repository;
     }
 
@@ -43,10 +39,10 @@ class ProductFormHandler implements FormHandlerInterface
      * @param Request         $request
      * @param ProductDTO|null $productDTO
      *
-     * @return bool
-     *
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
+     *
+     * @return bool
      */
     public function process(Request $request, ProductDTO $productDTO = null): bool
     {

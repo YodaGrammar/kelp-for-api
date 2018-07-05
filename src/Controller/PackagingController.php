@@ -20,9 +20,9 @@ class PackagingController extends Controller
      * @param Request                    $request
      * @param PackagingFilterFormHandler $formHandler
      *
-     * @return Response
-     *
      * @throws \LogicException
+     *
+     * @return Response
      */
     public function listAction(Request $request, PackagingFilterFormHandler $formHandler): Response
     {
@@ -77,13 +77,13 @@ class PackagingController extends Controller
      * @param TranslatorInterface  $translator
      * @param PackagingDTOFactory  $dtoFactory
      *
-     * @return Response
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     *
+     * @return Response
      */
     public function editAction(
         Packaging $packaging,

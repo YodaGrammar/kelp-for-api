@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -10,10 +12,13 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20180423201649 extends AbstractMigration
 {
+    /**
+     * {@inheritdoc}
+     */
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE kelp_product (id INT AUTO_INCREMENT NOT NULL, packaging_id INT NOT NULL, storage_id INT NOT NULL, quantity INT NOT NULL, label VARCHAR(50) NOT NULL, date_peremption DATETIME NOT NULL, date_add DATETIME NOT NULL, is_active TINYINT(1) NOT NULL, INDEX IDX_FACE29814E7B3801 (packaging_id), INDEX IDX_FACE29815CC5DB90 (storage_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE kelp_user (id INT AUTO_INCREMENT NOT NULL, full_name VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, roles JSON NOT NULL, is_active TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_F194DF17F85E0677 (username), UNIQUE INDEX UNIQ_F194DF17E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -30,7 +35,7 @@ class Version20180423201649 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE kelp_storage DROP FOREIGN KEY FK_7DFE3618A76ED395');
         $this->addSql('ALTER TABLE kelp_storage DROP FOREIGN KEY FK_7DFE361841C60DB5');

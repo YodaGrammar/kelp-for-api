@@ -18,10 +18,10 @@ class RegistrationController extends Controller
      * @param Request                      $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     *
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\LogicException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {

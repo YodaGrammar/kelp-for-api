@@ -32,9 +32,9 @@ class PackagingFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @return Packaging
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return Packaging
      */
     public function newInstance($dto): Packaging
     {
