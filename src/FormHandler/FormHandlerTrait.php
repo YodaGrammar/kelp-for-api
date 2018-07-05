@@ -2,6 +2,8 @@
 
 namespace App\FormHandler;
 
+use App\Factory\Entity\EntityFactoryInterface;
+use App\Repository\EntityRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 trait FormHandlerTrait
@@ -12,6 +14,16 @@ trait FormHandlerTrait
     protected $form;
 
     /**
+     * @var EntityRepositoryInterface
+     */
+    protected $repository;
+
+    /**
+     * @var EntityFactoryInterface
+     */
+    protected $factory;
+
+    /**
      * Get generated form.
      *
      * @return FormInterface
@@ -19,5 +31,37 @@ trait FormHandlerTrait
     public function getForm()
     {
         return $this->form;
+    }
+
+    /**
+     * @param  $dto
+     *
+     * @return bool
+     */
+    public function add($dto): bool
+    {
+        $instance = $this->factory->create($dto);
+
+        if ($instance) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $dto
+     *
+     * @return bool
+     */
+    public function edit($dto): bool
+    {
+        $instance = $this->repository->edit($dto);
+
+        if ($instance) {
+            return true;
+        }
+
+        return false;
     }
 }

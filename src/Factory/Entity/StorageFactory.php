@@ -39,7 +39,7 @@ class StorageFactory implements EntityFactoryInterface
      *
      * @return Storage
      */
-    public function newInstance($dto): Storage
+    public function create($dto): ?Storage
     {
         $storage = new Storage();
         $storage->setLabel($dto->label);

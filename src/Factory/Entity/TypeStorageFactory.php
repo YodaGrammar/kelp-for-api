@@ -28,7 +28,7 @@ class TypeStorageFactory implements EntityFactoryInterface
      *
      * @return TypeStorage
      */
-    public function newInstance($dto): TypeStorage
+    public function create($dto): TypeStorage
     {
         $typeStorage = new TypeStorage();
         $typeStorage->setLabel($dto->label);

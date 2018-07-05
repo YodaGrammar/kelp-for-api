@@ -36,7 +36,7 @@ class PackagingFactory implements EntityFactoryInterface
      *
      * @return Packaging
      */
-    public function newInstance($dto): Packaging
+    public function create($dto): Packaging
     {
         $packaging = new Packaging();
         $packaging->setLabel($dto->label);
