@@ -3,6 +3,7 @@
 namespace App\Tests\FormHandler;
 
 use App\DTO\StorageDTO;
+use App\Factory\Entity\StorageFactory;
 use App\FormHandler\StorageFormHandler;
 use App\Repository\StorageRepository;
 use Prophecy\Argument;
@@ -18,13 +19,15 @@ class StorageFormHandlerTest extends TestCase
     private $formFactoryProphecy;
     private $repositoryProphecy;
     private $storageFormHandler;
+    private $factoryProphecy;
 
     public function setUp()
     {
-        $this->requestProphecy = $this->prophesize(Request::class);
-        $this->formProphecy = $this->prophesize(FormInterface::class);
+        $this->requestProphecy     = $this->prophesize(Request::class);
+        $this->formProphecy        = $this->prophesize(FormInterface::class);
         $this->formFactoryProphecy = $this->prophesize(FormFactoryInterface::class);
-        $this->repositoryProphecy = $this->prophesize(StorageRepository::class);
+        $this->repositoryProphecy  = $this->prophesize(StorageRepository::class);
+        $this->factoryProphecy     = $this->prophesize(StorageFactory::class);
 
         $this->formFactoryProphecy
             ->createNamed(Argument::any(), Argument::any())
@@ -32,7 +35,8 @@ class StorageFormHandlerTest extends TestCase
 
         $this->storageFormHandler = new StorageFormHandler(
             $this->formFactoryProphecy->reveal(),
-            $this->repositoryProphecy->reveal()
+            $this->repositoryProphecy->reveal(),
+            $this->factoryProphecy->reveal()
         );
     }
 
@@ -49,7 +53,7 @@ class StorageFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->add(Argument::type(StorageDTO::class))->shouldBeCalled();
+        $this->factoryProphecy->create(Argument::type(StorageDTO::class))->shouldBeCalled();
 
         $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new StorageDTO());
 
@@ -66,7 +70,7 @@ class StorageFormHandlerTest extends TestCase
 
         $this->repositoryProphecy->edit(Argument::type(StorageDTO::class))->shouldBeCalled();
 
-        $storage = new StorageDTO();
+        $storage     = new StorageDTO();
         $storage->id = 123;
 
         $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), $storage);

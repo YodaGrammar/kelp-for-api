@@ -3,9 +3,9 @@
 namespace App\FormHandler;
 
 use App\DTO\ProductDTO;
+use App\Factory\Entity\ProductFactory;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use App\Repository\TypeStorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,22 +17,20 @@ class ProductFormHandler implements FormHandlerInterface
     use FormHandlerTrait;
 
     /**
-     * @var TypeStorageRepository
-     */
-    private $repository;
-
-    /**
      * ProductFormHandler constructor.
      *
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface $formFactory
      * @param ProductRepository    $repository
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @param ProductFactory       $factory
      */
-    public function __construct(FormFactoryInterface $factory, ProductRepository $repository)
-    {
-        $this->form = $factory->createNamed('kelp_product', ProductType::class);
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        ProductRepository $repository,
+        ProductFactory $factory
+    ) {
+        $this->form = $formFactory->createNamed('kelp_product', ProductType::class);
         $this->repository = $repository;
+        $this->factory = $factory;
     }
 
     /**
@@ -51,14 +49,12 @@ class ProductFormHandler implements FormHandlerInterface
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $function = 'edit';
-
             if (!$productDTO->id) {
                 $productDTO->storage = $request->get('id');
                 $function = 'add';
             }
-            $this->repository->$function($productDTO);
 
-            return true;
+            return $this->$function($productDTO);
         }
 
         return false;

@@ -35,7 +35,7 @@ class ProductFactory implements EntityFactoryInterface
      *
      * @return Product
      */
-    public function newInstance($dto): Product
+    public function create($dto): Product
     {
         $product = new Product();
         $product->setLabel($dto->label);

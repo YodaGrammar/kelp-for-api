@@ -2,9 +2,7 @@
 
 namespace App\Repository;
 
-use App\DTO\PackagingDTO;
 use App\Entity\Packaging;
-use App\Factory\Entity\PackagingFactory;
 use App\Factory\PaginatorFactoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -13,7 +11,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * Class PackagingRepository.
  */
-class PackagingRepository extends ServiceEntityRepository
+class PackagingRepository extends ServiceEntityRepository implements EntityRepositoryInterface
 {
     /** @var PaginatorFactoryInterface */
     private $paginatorFactory;
@@ -48,7 +46,7 @@ class PackagingRepository extends ServiceEntityRepository
                 ->andWhere('p.label like :text')
                 ->setParameter('text', '%'.$filter['text'].'%');
         }
-        $query     = $builder->getQuery();
+        $query = $builder->getQuery();
         $paginator = null;
         if (null !== $query) {
             $firstResult = ($page - 1) * $maxPage;
@@ -60,14 +58,14 @@ class PackagingRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param PackagingDTO $dto
+     * @param $dto
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @return Packaging|null
      */
-    public function edit(PackagingDTO $dto): ?Packaging
+    public function edit($dto): ?Packaging
     {
         /** @var Packaging $packaging */
         $packaging = $this->find($dto->id);

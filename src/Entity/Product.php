@@ -45,7 +45,7 @@ class Product
     private $storage;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",  nullable=true)
      *
      * @var \DateTime
      */

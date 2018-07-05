@@ -3,6 +3,7 @@
 namespace App\FormHandler;
 
 use App\DTO\StorageDTO;
+use App\Factory\Entity\StorageFactory;
 use App\Form\StorageType;
 use App\Repository\StorageRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,15 +24,18 @@ class StorageFormHandler
     /**
      * StorageFormHandler constructor.
      *
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface $formFactory
      * @param StorageRepository    $repository
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @param StorageFactory       $factory
      */
-    public function __construct(FormFactoryInterface $factory, StorageRepository $repository)
-    {
-        $this->form = $factory->createNamed('kelp_storage', StorageType::class);
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        StorageRepository $repository,
+        StorageFactory $factory
+    ) {
+        $this->form = $formFactory->createNamed('kelp_storage', StorageType::class);
         $this->repository = $repository;
+        $this->factory = $factory;
     }
 
     /**
@@ -55,9 +59,8 @@ class StorageFormHandler
                 $storageDTO->typeStorage = $request->get('id');
                 $function = 'add';
             }
-            $this->repository->$function($storageDTO);
 
-            return true;
+            return $this->$function($storageDTO);
         }
 
         return false;

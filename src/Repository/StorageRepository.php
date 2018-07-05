@@ -47,27 +47,12 @@ class StorageRepository extends ServiceEntityRepository
     /**
      * @param StorageDTO $dto
      *
-     * @throws \App\Exception\NotFoundException
      * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \InvalidArgumentException
-     */
-    public function add(StorageDTO $dto): void
-    {
-        $storage = $this->factory->newInstance($dto);
-        $this->getEntityManager()->persist($storage);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @param StorageDTO $dto
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
+     * @return Storage
      */
-    public function edit(StorageDTO $dto): void
+    public function edit(StorageDTO $dto): Storage
     {
         /** @var Storage $storage */
         $storage = $this->find($dto->id);
@@ -77,6 +62,7 @@ class StorageRepository extends ServiceEntityRepository
         }
         $storage->setLabel($dto->label);
         $this->getEntityManager()->flush();
+        return $storage;
     }
 
     /**
