@@ -64,19 +64,6 @@ class PackagingRepository extends ServiceEntityRepository
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function add(PackagingDTO $dto): void
-    {
-        $packaging = $this->factory->newInstance($dto);
-        $this->getEntityManager()->persist($packaging);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @param PackagingDTO $dto
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @return Packaging|null
      */
