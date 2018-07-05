@@ -44,8 +44,6 @@ class PackagingFormHandler implements FormHandlerInterface
      * @param Request           $request
      * @param PackagingDTO|null $packagingDTO
      *
-     * @throws \Doctrine\ORM\ORMException
-     *
      * @return bool
      */
     public function process(Request $request, PackagingDTO $packagingDTO = null): bool
@@ -65,7 +63,12 @@ class PackagingFormHandler implements FormHandlerInterface
         return false;
     }
 
-    public function add($dto)
+    /**
+     * @param PackagingDTO $dto
+     *
+     * @return bool
+     */
+    public function add(PackagingDTO $dto) :bool
     {
         $packaging = $this->factory->newInstance($dto);
 
@@ -75,7 +78,15 @@ class PackagingFormHandler implements FormHandlerInterface
         return false;
     }
 
-    public function edit($dto)
+    /**
+     * @param PackagingDTO $dto
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @return bool
+     */
+    public function edit(PackagingDTO $dto) :bool
     {
         $packaging = $this->repository->edit($dto);
 
