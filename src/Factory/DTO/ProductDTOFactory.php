@@ -15,7 +15,7 @@ class ProductDTOFactory
      *
      * @return ProductDTO
      */
-    public function newInstance(Product $product = null): ProductDTO
+    public function create(Product $product = null): ProductDTO
     {
         return new ProductDTO($product);
     }

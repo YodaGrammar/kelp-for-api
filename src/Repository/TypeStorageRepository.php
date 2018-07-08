@@ -43,7 +43,7 @@ class TypeStorageRepository extends ServiceEntityRepository
         if (null !== $query) {
             $firstResult = ($page - 1) * $maxPage;
             $query->setFirstResult($firstResult)->setMaxResults($maxPage);
-            $paginator = $this->paginatorFactory->newInstance($query);
+            $paginator = $this->paginatorFactory->create($query);
         }
 
         return $paginator;

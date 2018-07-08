@@ -38,7 +38,7 @@ trait FormHandlerTrait
      *
      * @return bool
      */
-    public function add($dto): bool
+    protected function add($dto): bool
     {
         $instance = $this->factory->create($dto);
 
@@ -54,7 +54,7 @@ trait FormHandlerTrait
      *
      * @return bool
      */
-    public function edit($dto): bool
+    protected function edit($dto): bool
     {
         $instance = $this->repository->edit($dto);
 

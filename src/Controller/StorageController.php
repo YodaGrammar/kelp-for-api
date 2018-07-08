@@ -53,7 +53,7 @@ class StorageController extends Controller
         TranslatorInterface $translator,
         StorageDTOFactory $dtoFactory
     ): Response {
-        $storageDTO = $dtoFactory->newInstance();
+        $storageDTO = $dtoFactory->create();
 
         if ($formHandler->process($request, $storageDTO)) {
             $this->addFlash(
@@ -96,7 +96,7 @@ class StorageController extends Controller
         TranslatorInterface $translator,
         StorageDTOFactory $dtoFactory
     ): Response {
-        $storageDTO = $dtoFactory->newInstance($storage);
+        $storageDTO = $dtoFactory->create($storage);
         $formHandler->getForm()->setData($storageDTO);
         if ($formHandler->process($request, $storageDTO)) {
             $this->addFlash(

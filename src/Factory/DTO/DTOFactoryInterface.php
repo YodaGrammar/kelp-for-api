@@ -7,5 +7,5 @@ namespace App\Factory\DTO;
  */
 interface DTOFactoryInterface
 {
-    public function newInstance();
+    public function create();
 }
