@@ -14,16 +14,6 @@ trait FormHandlerTrait
     protected $form;
 
     /**
-     * @var EntityRepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * @var EntityFactoryInterface
-     */
-    protected $factory;
-
-    /**
      * Get generated form.
      *
      * @return FormInterface
@@ -31,37 +21,5 @@ trait FormHandlerTrait
     public function getForm()
     {
         return $this->form;
-    }
-
-    /**
-     * @param  $dto
-     *
-     * @return bool
-     */
-    protected function add($dto): bool
-    {
-        $instance = $this->factory->create($dto);
-
-        if ($instance) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $dto
-     *
-     * @return bool
-     */
-    protected function edit($dto): bool
-    {
-        $instance = $this->repository->edit($dto);
-
-        if ($instance) {
-            return true;
-        }
-
-        return false;
     }
 }
