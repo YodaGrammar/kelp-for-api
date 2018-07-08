@@ -48,7 +48,7 @@ class PackagingController extends Controller
         TranslatorInterface $translator,
         PackagingDTOFactory $dtoFactory
     ) {
-        $packagingDTO = $dtoFactory->newInstance();
+        $packagingDTO = $dtoFactory->create();
 
         if ($formHandler->process($request, $packagingDTO)) {
             $this->addFlash(
@@ -92,7 +92,7 @@ class PackagingController extends Controller
         TranslatorInterface $translator,
         PackagingDTOFactory $dtoFactory
     ): Response {
-        $packagingDTO = $dtoFactory->newInstance($packaging);
+        $packagingDTO = $dtoFactory->create($packaging);
         $formHandler->getForm()->setData($packagingDTO);
         if ($formHandler->process($request, $packagingDTO)) {
             $this->addFlash(

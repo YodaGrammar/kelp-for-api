@@ -38,7 +38,7 @@ class StorageRepository extends ServiceEntityRepository
     {
         return $this->findBy(
             [
-                'user' => $user,
+                'user'   => $user,
                 'active' => true,
             ]
         );
@@ -47,19 +47,17 @@ class StorageRepository extends ServiceEntityRepository
     /**
      * @param StorageDTO $dto
      *
+     * @return Storage
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
-     * @return Storage
+     * @throws \LogicException
      */
     public function edit(StorageDTO $dto): Storage
     {
-        /** @var Storage $storage */
-        $storage = $this->find($dto->id);
-
-        if (!$storage) {
+        if (null === ($storage = $this->find($dto->id))) {
             throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
         }
+
         $storage->setLabel($dto->label);
         $this->getEntityManager()->flush();
         return $storage;

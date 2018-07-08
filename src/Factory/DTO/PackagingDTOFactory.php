@@ -15,7 +15,7 @@ class PackagingDTOFactory
      *
      * @return PackagingDTO
      */
-    public function newInstance(Packaging $packaging = null): PackagingDTO
+    public function create(Packaging $packaging = null): PackagingDTO
     {
         return new PackagingDTO($packaging);
     }
