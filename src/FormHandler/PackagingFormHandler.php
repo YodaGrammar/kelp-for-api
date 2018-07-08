@@ -3,11 +3,11 @@
 namespace App\FormHandler;
 
 use App\DTO\PackagingDTO;
-use App\Factory\Entity\PackagingFactory;
 use App\Form\PackagingType;
 use App\Repository\PackagingRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 /**
  * Class StorageFormHandler.
@@ -17,17 +17,22 @@ class PackagingFormHandler implements FormHandlerInterface
     use FormHandlerTrait;
 
     /**
+     * @var PackagingRepository
+     */
+    protected $repository;
+
+    /**
      * PackagingFormHandler constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param PackagingRepository  $repository
-     * @param PackagingFactory     $factory
+     *
+     * @throws InvalidOptionsException
      */
-    public function __construct(FormFactoryInterface $formFactory, PackagingRepository $repository, PackagingFactory $factory)
+    public function __construct(FormFactoryInterface $formFactory, PackagingRepository $repository)
     {
-        $this->form = $formFactory->createNamed('kelp_packaging', PackagingType::class);
+        $this->form       = $formFactory->createNamed('kelp_packaging', PackagingType::class);
         $this->repository = $repository;
-        $this->factory = $factory;
     }
 
     /**
@@ -35,6 +40,8 @@ class PackagingFormHandler implements FormHandlerInterface
      * @param PackagingDTO|null $packagingDTO
      *
      * @return bool
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request, PackagingDTO $packagingDTO = null): bool
     {
@@ -44,11 +51,11 @@ class PackagingFormHandler implements FormHandlerInterface
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $function = 'edit';
 
-            if (!$packagingDTO->id) {
+            if ($packagingDTO &&!$packagingDTO->id) {
                 $function = 'add';
             }
 
-            return $this->$function($packagingDTO);
+            return $this->repository->$function($packagingDTO);
         }
 
         return false;

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\ProductDTO;
 use App\Entity\Product;
 use App\Factory\Entity\ProductFactory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -25,6 +26,25 @@ class ProductRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Product::class);
         $this->factory = $factory;
+    }
+
+    /**
+     * @param ProductDTO $dto
+     *
+     * @return Product
+     * @throws \App\Exception\NotFoundException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function add(ProductDTO $dto): Product
+    {
+        $product = $this->factory->create($dto);
+
+        $this->getEntityManager()->persist($product);
+        $this->getEntityManager()->flush();
+
+        return $product;
     }
 
     /**

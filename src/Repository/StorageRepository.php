@@ -47,10 +47,36 @@ class StorageRepository extends ServiceEntityRepository
     /**
      * @param StorageDTO $dto
      *
-     * @return Storage
+     * @throws \App\Exception\NotFoundException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \InvalidArgumentException
+     * @throws \LogicException
+     *
+     * @return Storage|null
+     */
+    public function add(StorageDTO $dto): Storage
+    {
+        $storage = $this->factory->create($dto);
+
+        if (!$storage) {
+            throw new \LogicException(sprintf('impossible to create entity'));
+        }
+
+        $this->getEntityManager()->persist($storage);
+        $this->getEntityManager()->flush();
+        return $storage;
+    }
+
+    /**
+     * @param StorageDTO $dto
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \LogicException
+     *
+     * @return Storage
      */
     public function edit(StorageDTO $dto): Storage
     {
