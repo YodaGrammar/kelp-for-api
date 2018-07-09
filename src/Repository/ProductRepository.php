@@ -37,7 +37,7 @@ class ProductRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function add(ProductDTO $dto): Product
+    public function create(ProductDTO $dto): Product
     {
         $product = $this->factory->create($dto);
 

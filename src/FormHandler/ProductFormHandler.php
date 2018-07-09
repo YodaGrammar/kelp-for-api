@@ -55,7 +55,7 @@ class ProductFormHandler implements FormHandlerInterface
             $function = 'edit';
             if ($productDTO &&!$productDTO->id) {
                 $productDTO->storage = $request->get('id');
-                $function = 'add';
+                $function = 'create';
             }
 
             return $this->repository->$function($productDTO);
