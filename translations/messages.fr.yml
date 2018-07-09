@@ -10,7 +10,6 @@ storage:
       validated: messages
   delete:
     flash_message:
-      validated˜: 'messages'
       validated: 'messages'
 product:
   list:
@@ -61,6 +60,9 @@ packaging:
     button:
       save: 'Rechecherche'
   create:
+    flash_message:
+      validated: 'messages'
+  delete:
     flash_message:
       validated: 'messages'
 type_storage:

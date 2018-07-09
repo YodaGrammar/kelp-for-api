@@ -76,7 +76,7 @@ class PackagingRepository extends ServiceEntityRepository implements EntityRepos
     {
         $packaging = $this->factory->create($dto);
 
-        $this->getEntityManager()->persist($dto);
+        $this->getEntityManager()->persist($packaging);
         $this->getEntityManager()->flush();
 
         return $packaging;
@@ -101,5 +101,24 @@ class PackagingRepository extends ServiceEntityRepository implements EntityRepos
         $this->getEntityManager()->flush();
 
         return $packaging;
+    }
+
+    /**
+     * @param $id
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
+     */
+    public function delete($id): void
+    {
+        $packaging = $this->find($id);
+
+        if (!$packaging) {
+            throw new \LogicException(sprintf('impossible to find information for id %s', $id));
+        }
+        $packaging->setActive(false);
+
+        $this->getEntityManager()->flush();
     }
 }

@@ -52,12 +52,13 @@ class PackagingFormHandler implements FormHandlerInterface
             $function = 'edit';
 
             if ($packagingDTO &&!$packagingDTO->id) {
-                $function = 'add';
+                $function = 'create';
             }
 
-            return $this->repository->$function($packagingDTO);
+            if($this->repository->$function($packagingDTO)) {
+                return true;
+            }
         }
-
         return false;
     }
 }

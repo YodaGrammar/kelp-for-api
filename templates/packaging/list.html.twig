@@ -8,7 +8,8 @@
             <h1>{{ 'packaging.list.title'|trans }}</h1>
         </div>
         <div class="col-2 text-right">
-            <a href="{{ path('kelp.packaging.create') }}" class="btn btn-sm btn-secondary"><i class="fas fa-plus"></i></a>
+            <a href="{{ path('kelp.packaging.create') }}" class="btn btn-sm btn-secondary"><i
+                        class="fas fa-plus"></i></a>
         </div>
     </div>
     {% include 'packaging/formFilter.html.twig' %}
@@ -28,10 +29,14 @@
                     </td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-secondary btn-sm" href="{{ path('kelp.packaging.edit', {'id':packaging.id}) }}">
+                            <a class="btn btn-secondary btn-sm"
+                               href="{{ path('kelp.packaging.edit', {'id':packaging.id}) }}">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <button type="button" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                            <button type="button" class="btn-delete btn btn-danger btn-sm"
+                                    data-url="{{ path('kelp.packaging.delete',{'id':packaging.id }) }}">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -47,4 +52,9 @@
     {% set pagination = pager.pagination %}
     {% include 'pagination.html.twig' %}
 
+    {% set modal_parameters = {
+        delete_title: 'Suppression d\'un packaging',
+        delete_question: 'Etes-vous sûr de vouloir supprimer ce packaging?'
+    } %}
+    {% include'modal/delete.html.twig' with modal_parameters only %}
 {% endblock %}

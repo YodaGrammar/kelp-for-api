@@ -57,7 +57,7 @@ class StorageRepository extends ServiceEntityRepository
     {
         $storage = $this->factory->create($dto);
 
-        $this->getEntityManager()->persist($dto);
+        $this->getEntityManager()->persist($storage);
         $this->getEntityManager()->flush();
 
         return $storage;
