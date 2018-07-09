@@ -12,10 +12,15 @@ use PHPUnit\Framework\TestCase;
  */
 class ProductDTOFactoryTest extends TestCase
 {
-    public function testNewInstanceWithoutParam(): Void
+    /**
+     * @return Void
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testCreateWithoutParam(): Void
     {
         $dtoFactory = new ProductDTOFactory();
-        $dto = $dtoFactory->newInstance();
+        $dto = $dtoFactory->create();
         $this->assertInstanceOf(ProductDTO::class, $dto);
     }
 }

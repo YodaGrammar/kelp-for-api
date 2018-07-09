@@ -7,6 +7,7 @@ use App\Form\PackagingType;
 use App\Repository\PackagingRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 /**
  * Class StorageFormHandler.
@@ -23,14 +24,14 @@ class PackagingFormHandler implements FormHandlerInterface
     /**
      * PackagingFormHandler constructor.
      *
-     * @param FormFactoryInterface $factory
+     * @param FormFactoryInterface $formFactory
      * @param PackagingRepository  $repository
      *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
-    public function __construct(FormFactoryInterface $factory, PackagingRepository $repository)
+    public function __construct(FormFactoryInterface $formFactory, PackagingRepository $repository)
     {
-        $this->form = $factory->createNamed('kelp_packaging', PackagingType::class);
+        $this->form       = $formFactory->createNamed('kelp_packaging', PackagingType::class);
         $this->repository = $repository;
     }
 
@@ -38,9 +39,9 @@ class PackagingFormHandler implements FormHandlerInterface
      * @param Request           $request
      * @param PackagingDTO|null $packagingDTO
      *
-     * @throws \Doctrine\ORM\ORMException
-     *
      * @return bool
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request, PackagingDTO $packagingDTO = null): bool
     {
@@ -50,12 +51,11 @@ class PackagingFormHandler implements FormHandlerInterface
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $function = 'edit';
 
-            if (!$packagingDTO->id) {
+            if ($packagingDTO &&!$packagingDTO->id) {
                 $function = 'add';
             }
-            $this->repository->$function($packagingDTO);
 
-            return true;
+            return $this->repository->$function($packagingDTO);
         }
 
         return false;

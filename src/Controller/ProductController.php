@@ -51,7 +51,7 @@ class ProductController extends Controller
         TranslatorInterface $translator,
         ProductDTOFactory $dtoFactory
     ) {
-        $productDTO = $dtoFactory->newInstance();
+        $productDTO = $dtoFactory->create();
 
         if ($formHandler->process($request, $productDTO)) {
             $this->addFlash(

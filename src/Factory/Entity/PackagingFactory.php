@@ -3,7 +3,7 @@
 namespace App\Factory\Entity;
 
 use App\Entity\Packaging;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
@@ -32,17 +32,12 @@ class PackagingFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @throws \InvalidArgumentException
-     *
      * @return Packaging
      */
-    public function newInstance($dto): Packaging
+    public function create($dto): Packaging
     {
         $packaging = new Packaging();
         $packaging->setLabel($dto->label);
-
-        $this->managerRegistry->getManager()->persist($packaging);
-        $this->managerRegistry->getManager()->flush();
 
         return $packaging;
     }

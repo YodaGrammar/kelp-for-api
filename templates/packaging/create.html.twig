@@ -6,5 +6,6 @@
 {% block content %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
+    <button type="submit" class="btn btn-responsive right-block save btn-primary" name="button">{{ 'packaging.form.button.save'|trans }}</button>
     {{ form_end(form) }}
 {% endblock %}

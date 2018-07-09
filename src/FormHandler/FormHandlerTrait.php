@@ -2,6 +2,8 @@
 
 namespace App\FormHandler;
 
+use App\Factory\Entity\EntityFactoryInterface;
+use App\Repository\EntityRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 trait FormHandlerTrait

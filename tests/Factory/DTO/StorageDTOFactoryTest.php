@@ -12,10 +12,10 @@ use PHPUnit\Framework\TestCase;
  */
 class StorageDTOFactoryTest extends TestCase
 {
-    public function testNewInstanceWithoutParam()
+    public function testCreateWithoutParam(): void
     {
         $dtoFactory = new StorageDTOFactory();
-        $dto = $dtoFactory->newInstance();
+        $dto = $dtoFactory->create();
         $this->assertInstanceOf(StorageDTO::class, $dto);
     }
 }

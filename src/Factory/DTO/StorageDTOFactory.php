@@ -15,7 +15,7 @@ class StorageDTOFactory
      *
      * @return StorageDTO
      */
-    public function newInstance(Storage $storage = null): StorageDTO
+    public function create(Storage $storage = null): StorageDTO
     {
         return new StorageDTO($storage);
     }

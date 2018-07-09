@@ -29,6 +29,25 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param ProductDTO $dto
+     *
+     * @return Product
+     * @throws \App\Exception\NotFoundException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function create(ProductDTO $dto): Product
+    {
+        $product = $this->factory->create($dto);
+
+        $this->getEntityManager()->persist($product);
+        $this->getEntityManager()->flush();
+
+        return $product;
+    }
+
+    /**
      * @param $idStorage
      *
      * @return mixed
@@ -53,20 +72,5 @@ class ProductRepository extends ServiceEntityRepository
                     ->where('p.user = :user')
                     ->setParameter('user', $user)
                     ->orderBy('p.date', 'DESC')->getQuery()->getResult();
-    }
-
-    /**
-     * @param ProductDTO $dto
-     *
-     * @throws \App\Exception\NotFoundException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\ORMInvalidArgumentException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function add(ProductDTO $dto): void
-    {
-        $product = $this->factory->newInstance($dto);
-        $this->getEntityManager()->persist($product);
-        $this->getEntityManager()->flush();
     }
 }

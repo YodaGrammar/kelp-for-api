@@ -25,7 +25,7 @@ class ProductFactory implements EntityFactoryInterface
     public function __construct(ManagerRegistry $managerRegistry, TokenStorageInterface $tokenStorage)
     {
         $this->managerRegistry = $managerRegistry;
-        $this->tokenStorage = $tokenStorage;
+        $this->tokenStorage    = $tokenStorage;
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductFactory implements EntityFactoryInterface
      *
      * @return Product
      */
-    public function newInstance($dto): Product
+    public function create($dto): Product
     {
         $product = new Product();
         $product->setLabel($dto->label);
@@ -52,8 +52,6 @@ class ProductFactory implements EntityFactoryInterface
         }
         $product->setDateAdd(new \DateTime());
         $product->setActive(true);
-        $this->managerRegistry->getManager()->persist($product);
-        $this->managerRegistry->getManager()->flush();
 
         return $product;
     }

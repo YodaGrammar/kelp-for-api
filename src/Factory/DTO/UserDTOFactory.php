@@ -12,7 +12,7 @@ class UserDTOFactory implements DTOFactoryInterface
     /**
      * @return UserDTO
      */
-    public function newInstance(): UserDTO
+    public function create(): UserDTO
     {
         return new UserDTO();
     }

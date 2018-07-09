@@ -38,26 +38,29 @@ class StorageRepository extends ServiceEntityRepository
     {
         return $this->findBy(
             [
-                'user' => $user,
+                'user'   => $user,
                 'active' => true,
             ]
         );
     }
 
     /**
-     * @param StorageDTO $dto
+     * @param $dto
      *
+     * @return Storage|null
      * @throws \App\Exception\NotFoundException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \InvalidArgumentException
      */
-    public function add(StorageDTO $dto): void
+    public function create($dto): ?Storage
     {
-        $storage = $this->factory->newInstance($dto);
-        $this->getEntityManager()->persist($storage);
+        $storage = $this->factory->create($dto);
+
+        $this->getEntityManager()->persist($dto);
         $this->getEntityManager()->flush();
+
+        return $storage;
     }
 
     /**
@@ -66,17 +69,18 @@ class StorageRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \LogicException
+     *
+     * @return Storage
      */
-    public function edit(StorageDTO $dto): void
+    public function edit(StorageDTO $dto): Storage
     {
-        /** @var Storage $storage */
-        $storage = $this->find($dto->id);
-
-        if (!$storage) {
+        if (null === ($storage = $this->find($dto->id))) {
             throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
         }
+
         $storage->setLabel($dto->label);
         $this->getEntityManager()->flush();
+        return $storage;
     }
 
     /**
