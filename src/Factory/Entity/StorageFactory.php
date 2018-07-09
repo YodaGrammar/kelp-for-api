@@ -34,10 +34,8 @@ class StorageFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
+     * @return Storage|null
      * @throws NotFoundException
-     * @throws \InvalidArgumentException
-     *
-     * @return Storage
      */
     public function create($dto): ?Storage
     {
@@ -50,8 +48,6 @@ class StorageFactory implements EntityFactoryInterface
         }
         $storage->setTypeStorage($typeStorage);
         $storage->setActive(true);
-        $this->managerRegistry->getManager()->persist($storage);
-        $this->managerRegistry->getManager()->flush();
 
         return $storage;
     }

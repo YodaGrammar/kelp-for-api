@@ -32,17 +32,12 @@ class PackagingFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @throws \InvalidArgumentException
-     *
      * @return Packaging
      */
     public function create($dto): Packaging
     {
         $packaging = new Packaging();
         $packaging->setLabel($dto->label);
-
-        $this->managerRegistry->getManager()->persist($packaging);
-        $this->managerRegistry->getManager()->flush();
 
         return $packaging;
     }

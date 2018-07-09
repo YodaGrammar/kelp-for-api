@@ -24,8 +24,6 @@ class TypeStorageFactory implements EntityFactoryInterface
     /**
      * @param $dto
      *
-     * @throws \InvalidArgumentException
-     *
      * @return TypeStorage
      */
     public function create($dto): TypeStorage
@@ -34,9 +32,6 @@ class TypeStorageFactory implements EntityFactoryInterface
         $typeStorage->setLabel($dto->label);
         $typeStorage->setClass($dto->class);
         $typeStorage->setComment($dto->comment);
-
-        $this->managerRegistry->getManager()->persist($typeStorage);
-        $this->managerRegistry->getManager()->flush();
 
         return $typeStorage;
     }

@@ -56,12 +56,13 @@ class StorageFormHandler
 
             if ($storageDTO && !$storageDTO->id) {
                 $storageDTO->typeStorage = $request->get('id');
-                $function = 'add';
+                $function = 'create';
             }
 
-            return $this->repository->$function($storageDTO);
+            if($this->repository->$function($storageDTO)) {
+                return true;
+            }
         }
-
         return false;
     }
 }

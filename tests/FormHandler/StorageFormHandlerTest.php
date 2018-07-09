@@ -53,7 +53,7 @@ class StorageFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->factoryProphecy->create(Argument::type(StorageDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->create(Argument::type(StorageDTO::class))->shouldBeCalled();
 
         $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new StorageDTO());
 
