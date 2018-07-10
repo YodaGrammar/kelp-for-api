@@ -21,7 +21,14 @@ class StorageFormHandlerTest extends TestCase
     private $storageFormHandler;
     private $factoryProphecy;
 
-    public function setUp()
+    /**
+     * @throws \Prophecy\Exception\Doubler\ClassNotFoundException
+     * @throws \Prophecy\Exception\Doubler\DoubleException
+     * @throws \Prophecy\Exception\Doubler\InterfaceNotFoundException
+     * @throws \Prophecy\Exception\Prophecy\ObjectProphecyException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function setUp(): void
     {
         $this->requestProphecy     = $this->prophesize(Request::class);
         $this->formProphecy        = $this->prophesize(FormInterface::class);
@@ -40,12 +47,20 @@ class StorageFormHandlerTest extends TestCase
         );
     }
 
-    public function testShouldReturnFormWhenGetFormCalled()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldReturnFormWhenGetFormCalled(): void
     {
         $this->assertInstanceOf(FormInterface::class, $this->storageFormHandler->getForm());
     }
 
-    public function testShouldCallsAddIfFormIsValid()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldCallsAddIfFormIsValid(): void
     {
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
@@ -60,7 +75,11 @@ class StorageFormHandlerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testShouldCallsEditIfFormIsValid()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldCallsEditIfFormIsValid(): void
     {
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
@@ -78,7 +97,11 @@ class StorageFormHandlerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testShouldReturnFalseIfFormIsInvalid()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldReturnFalseIfFormIsInvalid(): void
     {
         $this->formProphecy->isValid()->willReturn(false);
         $this->formProphecy->isSubmitted()->willReturn(true);
@@ -91,7 +114,11 @@ class StorageFormHandlerTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testShouldReturnFalseIfFormIsNotSubmitted()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldReturnFalseIfFormIsNotSubmitted(): void
     {
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(false);

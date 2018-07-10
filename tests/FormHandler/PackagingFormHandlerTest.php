@@ -19,6 +19,13 @@ class PackagingFormHandlerTest extends TestCase
     private $repositoryProphecy;
     private $packagingFormHandler;
 
+    /**
+     * @throws \Prophecy\Exception\Doubler\ClassNotFoundException
+     * @throws \Prophecy\Exception\Doubler\DoubleException
+     * @throws \Prophecy\Exception\Doubler\InterfaceNotFoundException
+     * @throws \Prophecy\Exception\Prophecy\ObjectProphecyException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
     public function setUp()
     {
         $this->requestProphecy     = $this->prophesize(Request::class);
@@ -36,12 +43,20 @@ class PackagingFormHandlerTest extends TestCase
         );
     }
 
-    public function testShouldReturnFormWhenGetFormCalled()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldReturnFormWhenGetFormCalled(): void
     {
         $this->assertInstanceOf(FormInterface::class, $this->packagingFormHandler->getForm());
     }
 
-    public function testShouldCallsAddIfFormIsValid()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldCallsAddIfFormIsValid(): void
     {
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
@@ -56,7 +71,11 @@ class PackagingFormHandlerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testShouldCallsEditIfFormIsValid()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldCallsEditIfFormIsValid(): void
     {
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
@@ -74,7 +93,11 @@ class PackagingFormHandlerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testShouldReturnFalseIfFormIsInvalid()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldReturnFalseIfFormIsInvalid(): void
     {
         $this->formProphecy->isValid()->willReturn(false);
         $this->formProphecy->isSubmitted()->willReturn(true);
@@ -87,7 +110,11 @@ class PackagingFormHandlerTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testShouldReturnFalseIfFormIsNotSubmitted()
+    /**
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testShouldReturnFalseIfFormIsNotSubmitted(): void
     {
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(false);
