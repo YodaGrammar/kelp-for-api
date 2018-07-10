@@ -1,11 +1,23 @@
-kelp.product.add:
-    path: /product/add/{id}
-    controller: App\Controller\ProductController::createAction
-    requirements:
-        page: '\d+'
-
 kelp.product.list:
     path: /product/list/{id}
     controller: App\Controller\ProductController::listAction
     requirements:
         page: '\d+'
+
+kelp.product.create:
+    path: /product/create/{id}
+    controller: App\Controller\ProductController::createAction
+    requirements:
+        page: '\d+'
+
+kelp.product.edit:
+    path: /product/edit/{id}
+    controller: App\Controller\ProductController::editAction
+    requirements:
+        id: '\d+'
+
+kelp.product.delete:
+    path: /product/delete/{id}
+    controller: App\Controller\ProductController::deleteAction
+    requirements:
+            id: '\d+'

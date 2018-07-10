@@ -31,11 +31,12 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * @param ProductDTO $dto
      *
-     * @return Product
      * @throws \App\Exception\NotFoundException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @return Product
      */
     public function create(ProductDTO $dto): Product
     {
@@ -48,6 +49,51 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param ProductDTO $dto
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
+     *
+     * @return Product
+     */
+    public function edit(ProductDTO $dto): Product
+    {
+        if (null === ($product = $this->find($dto->id))) {
+            throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
+        }
+
+        $product->setLabel($dto->label);
+        $product->setQuantity($dto->quantity);
+        $product->setPackaging($dto->packaging);
+        if ($dto->date) {
+            $product->setDatePeremption($dto->date);
+        }
+        $this->getEntityManager()->flush();
+
+        return $product;
+    }
+
+    /**
+     * @param $id
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
+     */
+    public function delete($id): void
+    {
+        $product = $this->find($id);
+
+        if (!$product) {
+            throw new \LogicException(sprintf('impossible to find information for id %s', $id));
+        }
+        $product->setActive(false);
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @param $idStorage
      *
      * @return mixed
@@ -56,7 +102,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         $builder = $this->createQueryBuilder('p')
                         ->where('p.storage = :idStorage')
-                        ->setParameter('idStorage', $idStorage);
+                        ->setParameter('idStorage', $idStorage)
+                        ->andWhere('p.active = true');
 
         return $builder->getQuery()->getResult();
     }

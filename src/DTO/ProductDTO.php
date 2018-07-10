@@ -47,7 +47,7 @@ class ProductDTO
             $this->packaging = $product->getPackaging();
             $this->label = $product->getLabel();
             $this->storage = $product->getStorage();
-            $this->date = $product->get();
+            $this->date = $product->getDatePeremption();
         }
     }
 }

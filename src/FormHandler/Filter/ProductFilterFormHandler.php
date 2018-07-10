@@ -85,6 +85,7 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         return [
             'pagination' => $pagination,
             'products' => $products,
+
         ];
     }
 }

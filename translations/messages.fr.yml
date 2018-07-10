@@ -13,7 +13,7 @@ storage:
       validated: 'messages'
 product:
   list:
-    title: 'Produit'
+    title: 'Produit du'
     table:
       header:
         label: 'Produit'
