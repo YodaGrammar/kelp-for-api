@@ -65,6 +65,9 @@ packaging:
   delete:
     flash_message:
       validated: 'messages'
+    modal:
+      question: 'Etes-vous sûr de vouloir supprimer ce conditionnement ?'
+      title: "Suppression d'un conditionnement"
 type_storage:
   list:
     title: 'messages'

@@ -104,19 +104,13 @@ class PackagingRepository extends ServiceEntityRepository implements EntityRepos
     }
 
     /**
-     * @param $id
+     * @param Packaging $packaging
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
      */
-    public function delete($id): void
+    public function delete(Packaging $packaging): void
     {
-        $packaging = $this->find($id);
-
-        if (!$packaging) {
-            throw new \LogicException(sprintf('impossible to find information for id %s', $id));
-        }
         $packaging->setActive(false);
 
         $this->getEntityManager()->flush();
