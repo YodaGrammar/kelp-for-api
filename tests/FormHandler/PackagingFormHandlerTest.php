@@ -49,7 +49,7 @@ class PackagingFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->add(Argument::type(PackagingDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->create(Argument::type(PackagingDTO::class))->shouldBeCalled();
 
         $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new PackagingDTO());
 
