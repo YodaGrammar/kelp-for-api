@@ -124,6 +124,8 @@ class PackagingController extends Controller
      * @param TranslatorInterface $translator
      *
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
