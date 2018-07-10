@@ -1,7 +1,3 @@
-#kelp.packaging.add:
-#    path: /packaging/add/{id}
-#    controller: App\Controller\PackagingController::createAction
-
 kelp.packaging.list:
     path: /packaging/list/{page}
     controller: App\Controller\PackagingController::listAction
@@ -20,4 +16,8 @@ kelp.packaging.edit:
     requirements:
         id: '\d+'
 
-
+kelp.packaging.delete:
+    path: /packaging/delete/{id}
+    controller: App\Controller\PackagingController::deleteAction
+    requirements:
+            id: '\d+'

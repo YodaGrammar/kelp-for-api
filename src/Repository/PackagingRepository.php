@@ -76,7 +76,7 @@ class PackagingRepository extends ServiceEntityRepository implements EntityRepos
     {
         $packaging = $this->factory->create($dto);
 
-        $this->getEntityManager()->persist($dto);
+        $this->getEntityManager()->persist($packaging);
         $this->getEntityManager()->flush();
 
         return $packaging;
@@ -101,5 +101,18 @@ class PackagingRepository extends ServiceEntityRepository implements EntityRepos
         $this->getEntityManager()->flush();
 
         return $packaging;
+    }
+
+    /**
+     * @param Packaging $packaging
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Packaging $packaging): void
+    {
+        $packaging->setActive(false);
+
+        $this->getEntityManager()->flush();
     }
 }

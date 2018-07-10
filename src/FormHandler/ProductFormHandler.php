@@ -58,7 +58,9 @@ class ProductFormHandler implements FormHandlerInterface
                 $function = 'create';
             }
 
-            return $this->repository->$function($productDTO);
+            if($this->repository->$function($productDTO)) {
+                return true;
+            }
         }
 
         return false;
