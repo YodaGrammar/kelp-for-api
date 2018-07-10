@@ -21,10 +21,10 @@ class PackagingFormHandlerTest extends TestCase
 
     public function setUp()
     {
-        $this->requestProphecy = $this->prophesize(Request::class);
-        $this->formProphecy = $this->prophesize(FormInterface::class);
+        $this->requestProphecy     = $this->prophesize(Request::class);
+        $this->formProphecy        = $this->prophesize(FormInterface::class);
         $this->formFactoryProphecy = $this->prophesize(FormFactoryInterface::class);
-        $this->repositoryProphecy = $this->prophesize(PackagingRepository::class);
+        $this->repositoryProphecy  = $this->prophesize(PackagingRepository::class);
 
         $this->formFactoryProphecy
             ->createNamed(Argument::any(), Argument::any())
@@ -66,7 +66,7 @@ class PackagingFormHandlerTest extends TestCase
 
         $this->repositoryProphecy->edit(Argument::type(PackagingDTO::class))->shouldBeCalled();
 
-        $storage = new PackagingDTO();
+        $storage     = new PackagingDTO();
         $storage->id = 123;
 
         $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), $storage);
