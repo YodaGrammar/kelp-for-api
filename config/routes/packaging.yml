@@ -21,5 +21,3 @@ kelp.packaging.delete:
     controller: App\Controller\PackagingController::deleteAction
     requirements:
             id: '\d+'
-
-
