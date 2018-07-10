@@ -24,6 +24,7 @@ services:
     php:
         build: ./docker/php
         user: php
+        working_dir: /app
         links:
             - db
         volumes:
