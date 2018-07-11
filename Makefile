@@ -1,5 +1,5 @@
 DOCKER_COMPOSE  = docker-compose
-DOCKER_EXEC     = $(DOCKER_COMPOSE) exec app
+DOCKER_EXEC     = $(DOCKER_COMPOSE) exec php
 EXEC_PHP        = $(DOCKER_EXEC) php
 COMPOSER        = $(DOCKER_EXEC) composer
 SYMFONY         = $(EXEC_PHP) bin/console
