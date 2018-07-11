@@ -9,7 +9,7 @@
         </div>
         <div class="col-6 text-right align-bottom">
             <a href="{{ path('kelp.storage.list') }}" class="btn btn-primary"><i class="fas fa-caret-left"></i> Retour</a>
-            <a class="btn-primary btn" href="{{ path('kelp.product.create',{'id': app.request.attributes.get('_route_params')['id'] } ) }}">
+            <a class="btn-primary btn" href="{{ path('kelp.product.create',{'id': storage.id } ) }}">
                 <i class="fas fa-plus"></i>
             </a>
         </div>
