@@ -9,3 +9,4 @@ before_script:
 script:
     - bin/console lint:twig ./templates
     - vendor/bin/phpunit --coverage-text
+    - vendor/bin/behat

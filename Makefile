@@ -84,7 +84,7 @@ tu: vendor
 
 tf: ## Run functional tests
 tf: vendor
-	$(EXEC_PHP) vendor/bin/phpunit --group functional
+	$(EXEC_PHP) vendor/bin/behat
 
 .PHONY: tests tu tf
 
