@@ -74,8 +74,9 @@
     {% include 'pagination.html.twig' %}
 
     {% set modal_parameters = {
-        delete_title: 'Suppression d\'un produit',
-        delete_question: 'Etes-vous sûr de vouloir supprimer ce produit?'
+        delete_title: 'product.delete.modal.title'|trans ,
+        delete_question: 'product.delete.modal.question'|trans
+
     } %}
     {% include'modal/delete.html.twig' with modal_parameters only %}
 {% endblock %}

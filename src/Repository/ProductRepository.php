@@ -75,19 +75,13 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $id
+     * @param Product $product
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
      */
-    public function delete($id): void
+    public function delete(Product $product): void
     {
-        $product = $this->find($id);
-
-        if (!$product) {
-            throw new \LogicException(sprintf('impossible to find information for id %s', $id));
-        }
         $product->setActive(false);
 
         $this->getEntityManager()->flush();
