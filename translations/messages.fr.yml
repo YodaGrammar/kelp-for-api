@@ -83,6 +83,7 @@ register:
     button:
       save: 'Créer mon compte'
     field:
+      fullname: 'Nom Complet'
       username: 'Nom d utilisateur'
       email: 'Adresse E-mail '
       password: 'Mot de passe'
