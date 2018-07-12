@@ -11,9 +11,16 @@ storage:
   delete:
     flash_message:
       validated: 'messages'
+    modal:
+      title: "Suppression d'un storage"
+      question: 'Etes-vous sûr de vouloir supprimer ce storage?'
+  list:
+    button:
+      add:
+        product: 'Ajouter un produit'
 product:
   list:
-    title: 'Produit'
+    title: 'Produit du'
     table:
       header:
         label: 'Produit'
@@ -38,6 +45,10 @@ product:
   edit:
     flash_message:
       validated: messages
+  delete:
+    modal:
+      title: "Suppression d'un produit"
+      question: 'Etes-vous sûr de vouloir supprimer ce produit?'
 packaging:
   list:
     title: 'Gestion des conditionnements'

@@ -5,21 +5,22 @@
 {% block content %}
     <div class="row">
         <div class="col-6">
-            <h1 >{{ 'product.list.title'|trans }}</h1>
+            <h1 >{{ 'product.list.title'|trans }} {{ storage.label|lower }}</h1>
         </div>
         <div class="col-6 text-right align-bottom">
             <a href="{{ path('kelp.storage.list') }}" class="btn btn-primary"><i class="fas fa-caret-left"></i> Retour</a>
+            <a class="btn-primary btn" href="{{ path('kelp.product.create',{'id': storage.id } ) }}">
+                <i class="fas fa-plus"></i>
+            </a>
         </div>
     </div>
-
-
     <div>
         <table class="table table-striped table-bordered table-sm">
             <thead>
             <tr class="active">
-                <th width="10%"> {{ 'product.list.table.header.label'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.quantity'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.packaging'|trans }} </th>
+                <th width="10%"> {{ 'product.list.table.header.label'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.datePeremption'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.dateAdd'|trans }} </th>
                 <th width="10%" class="text-center"> Action </th>
@@ -29,13 +30,13 @@
             {% for product in pager.products %}
                 <tr>
                     <td>
-                        {{ product.label }}
-                    </td>
-                    <td>
                         {{ product.quantity }}
                     </td>
                     <td>
                         {{ product.packaging.label }}
+                    </td>
+                    <td>
+                        {{ product.label }}
                     </td>
                     <td>
                         {% if product.datePeremption %}
@@ -47,13 +48,22 @@
                             {{ product.dateAdd|date('d/m/Y') }}
                         {% endif %}
                     </td>
-                    <td>
-                        action
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a class="btn btn-secondary btn-sm" href="{{ path('kelp.product.edit', {'id':product.id}) }}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+
+                            <button type="button" class="btn-delete btn btn-sm btn-danger"
+                                    data-url="{{ path('kelp.product.delete',{'id':product.id }) }}">
+                                <i class="far  fa-trash-alt"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="5" class="text-center"> {{ 'product.list.table.empty.message'|trans }} </td>
+                    <td colspan="6" class="text-center"> {{ 'product.list.table.empty.message'|trans }} </td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -63,4 +73,10 @@
     {% set pagination = pager.pagination %}
     {% include 'pagination.html.twig' %}
 
+    {% set modal_parameters = {
+        delete_title: 'product.delete.modal.title'|trans ,
+        delete_question: 'product.delete.modal.question'|trans
+
+    } %}
+    {% include'modal/delete.html.twig' with modal_parameters only %}
 {% endblock %}

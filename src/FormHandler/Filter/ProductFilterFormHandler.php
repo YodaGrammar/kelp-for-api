@@ -41,8 +41,8 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         FormFactoryInterface $factory,
         TokenStorageInterface $tokenStorage
     ) {
-        $this->repository = $repository;
-        $this->form = $factory->createNamed(
+        $this->repository   = $repository;
+        $this->form         = $factory->createNamed(
             'kelp_product_filter',
             FilterProductType::class
         );
@@ -76,15 +76,15 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         );
 
         $pagination = [
-            'page' => $request->get('page', 1),
-            'nbPages' => ceil(count($products) / self::MAX_PAGE),
-            'nomRoute' => 'kelp.type_storage.list',
+            'page'        => $request->get('page', 1),
+            'nbPages'     => ceil(count($products) / self::MAX_PAGE),
+            'nomRoute'    => 'kelp.type_storage.list',
             'paramsRoute' => [],
         ];
 
         return [
             'pagination' => $pagination,
-            'products' => $products,
+            'products'   => $products,
         ];
     }
 }

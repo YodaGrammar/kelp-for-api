@@ -45,9 +45,10 @@
                                     <div class="mt-3 col-sm-{{ classStorage }}">
                                         <div class="card text-center">
                                             <div class="card-body">
-                                                <a href="{{ path('kelp.product.add',{'id':storage.id }) }}"
-                                                   class="btn {{ 'btn-' ~ typeStorage.class }} btn-block btn-sm">Add a
-                                                    Product</a>
+                                                <a href="{{ path('kelp.product.create',{'id':storage.id }) }}"
+                                                   class="btn {{ 'btn-' ~ typeStorage.class }} btn-block btn-sm">
+                                                    {{ 'storage.list.button.add.product'|trans }}
+                                                </a>
                                             </div>
                                             <div class="card-footer text-muted mt-0 mb-0 pt-1 pb-1">
                                                 <div class="row">
@@ -62,10 +63,12 @@
                                                             <a class="btn {{ 'btn-outline-' ~ typeStorage.class }} btn-sm" href="{{ path('kelp.storage.edit',{'id':storage.id }) }}">
                                                                 <i class="fas  fa-pencil-alt"></i>
                                                             </a>
+                                                            {% if storage.products is empty %}
                                                             <button type="button" class="btn-delete btn btn-sm {{ 'btn-outline-' ~ typeStorage.class }}"
                                                                     data-url="{{ path('kelp.storage.delete',{'id':storage.id }) }}">
                                                                 <i class="far  fa-trash-alt"></i>
                                                             </button>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -92,8 +95,8 @@
     </div>
 
     {% set modal_parameters = {
-        delete_title: 'Suppression d\'un storage',
-        delete_question: 'Etes-vous sûr de vouloir supprimer ce storage?'
+        delete_title: 'storage.delete.modal.title'|trans ,
+        delete_question: 'storage.delete.modal.question'|trans
     } %}
     {% include'modal/delete.html.twig' with modal_parameters only %}
 {% endblock %}
