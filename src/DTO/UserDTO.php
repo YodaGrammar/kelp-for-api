@@ -11,6 +11,11 @@ class UserDTO
 {
     /**
      * @Assert\NotBlank()
+     */
+    public $fullName;
+
+    /**
+     * @Assert\NotBlank()
      * @Assert\Email()
      */
     public $email;

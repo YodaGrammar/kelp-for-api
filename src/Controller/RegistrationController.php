@@ -32,6 +32,7 @@ class RegistrationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $registerUser = new User();
             $registerUser->setEmail($user->email);
+            $registerUser->setFullName($user->fullName);
             $registerUser->setUsername($user->username);
             $password = $passwordEncoder->encodePassword($registerUser, $user->plainPassword);
             $registerUser->setPassword($password);

@@ -19,9 +19,12 @@ class UserType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options):void
     {
         $builder
+            ->add('fullName', TextType::class, [
+                'label' => 'register.form.field.fullname',
+            ])
             ->add('email', EmailType::class, [
                 'label' => 'register.form.field.email',
             ])
@@ -40,9 +43,9 @@ class UserType extends AbstractType
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
             'data_class' => UserDTO::class,
