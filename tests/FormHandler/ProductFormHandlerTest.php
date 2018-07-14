@@ -2,7 +2,7 @@
 
 namespace App\Tests\FormHandler;
 
-use App\DTO\ProductDTO;
+use App\Entity\Product;
 use App\FormHandler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use Prophecy\Argument;
@@ -64,9 +64,9 @@ class ProductFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->create(Argument::type(ProductDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->createOrUpdate(Argument::type(Product::class), Argument::any())->shouldBeCalled();
 
-        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new ProductDTO());
+        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new Product());
 
         $this->assertTrue($result);
     }
@@ -83,12 +83,11 @@ class ProductFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->edit(Argument::type(ProductDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->createOrUpdate(Argument::type(Product::class), Argument::any())->shouldBeCalled();
 
-        $storage = new ProductDTO();
-        $storage->id = 123;
+        $product = new Product();
 
-        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), $storage);
+        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), $product);
 
         $this->assertTrue($result);
     }
@@ -105,7 +104,7 @@ class ProductFormHandlerTest extends TestCase
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
 
-        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new ProductDTO());
+        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new Product());
 
         $this->assertFalse($result);
     }
@@ -122,7 +121,7 @@ class ProductFormHandlerTest extends TestCase
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
 
-        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new ProductDTO());
+        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new Product());
 
         $this->assertFalse($result);
     }

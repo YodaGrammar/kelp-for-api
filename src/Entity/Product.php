@@ -61,7 +61,7 @@ class Product
     /**
      * @return mixed
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -69,7 +69,7 @@ class Product
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -139,9 +139,9 @@ class Product
     }
 
     /**
-     * @param \DateTime $datePeremption
+     * @param  $datePeremption
      */
-    public function setDatePeremption(\DateTime $datePeremption): void
+    public function setDatePeremption($datePeremption): void
     {
         $this->datePeremption = $datePeremption;
     }
