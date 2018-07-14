@@ -3,7 +3,7 @@ kelp.storage.list:
     controller: App\Controller\StorageController::listAction
 
 kelp.storage.create:
-    path: /storage/create/{id}
+    path: /storage/add/{id}
     controller: App\Controller\StorageController::createAction
     requirements:
         id: '\d+'

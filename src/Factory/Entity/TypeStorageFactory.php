@@ -5,7 +5,8 @@ namespace App\Factory\Entity;
 use App\Entity\TypeStorage;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class TypeStorageFactory implements EntityFactoryInterface
+class TypeStorageFactory
+//    implements EntityFactoryInterface
 {
     /** @var ManagerRegistry */
     protected $managerRegistry;
