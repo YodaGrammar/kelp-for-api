@@ -4,5 +4,5 @@ namespace App\Factory\Entity;
 
 interface EntityFactoryInterface
 {
-    public function create($dto);
+    public function create();
 }
