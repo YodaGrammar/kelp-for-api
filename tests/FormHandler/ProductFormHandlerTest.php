@@ -64,7 +64,7 @@ class ProductFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->add(Argument::type(ProductDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->create(Argument::type(ProductDTO::class))->shouldBeCalled();
 
         $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new ProductDTO());
 
