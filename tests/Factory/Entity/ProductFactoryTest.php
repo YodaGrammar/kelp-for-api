@@ -3,14 +3,16 @@
 namespace App\Tests\DTOFactoryTest;
 
 use App\DTO\ProductDTO;
+use App\Entity\Product;
 use App\Factory\DTO\ProductDTOFactory;
+use App\Factory\Entity\ProductFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ProductDTOFactoryTest
  * @package App\Tests\DTOFactoryTest
  */
-class ProductDTOFactoryTest extends TestCase
+class ProductFactoryTest extends TestCase
 {
     /**
      * @return Void
@@ -19,8 +21,8 @@ class ProductDTOFactoryTest extends TestCase
      */
     public function testCreateWithoutParam(): Void
     {
-        $dtoFactory = new ProductDTOFactory();
-        $dto = $dtoFactory->create();
-        $this->assertInstanceOf(ProductDTO::class, $dto);
+        $factory = new ProductFactory();
+        $dto = $factory->create();
+        $this->assertInstanceOf(Product::class, $dto);
     }
 }
