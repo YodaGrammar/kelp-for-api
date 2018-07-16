@@ -5,7 +5,7 @@ kelp.product.list:
         page: '\d+'
 
 kelp.product.create:
-    path: /storage/{id}/add/product
+    path: /storage/{id}/create/product
     controller: App\Controller\ProductController::createAction
     requirements:
         page: '\d+'
