@@ -58,12 +58,12 @@ class ProductFormHandler
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
 
-            $id = null;
+            $idStorage = null;
             if($product->getId() === null) {
-                $id = $request->get('id');
+                $idStorage = $request->get('id');
             }
 
-            if($this->repository->createOrUpdate($product, $id)) {
+            if($this->repository->createOrUpdate($product, $idStorage)) {
                 return true;
             }
         }

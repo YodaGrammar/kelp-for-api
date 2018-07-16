@@ -25,7 +25,6 @@ class ProductType extends AbstractType
                 'quantity',
                 TextType::class,
                 [
-                    'required'    => false,
                     'label'       => 'product.form.field.quantity',
                     'constraints' => [new NotBlank()],
                 ]
@@ -36,7 +35,6 @@ class ProductType extends AbstractType
                 [
                     'class'        => Packaging::class,
                     'choice_label' => 'label',
-                    'required'     => false,
                     'label'        => 'product.form.field.packaging',
                     'constraints' => [new NotBlank()],
                 ]
@@ -45,7 +43,6 @@ class ProductType extends AbstractType
                 'label',
                 TextType::class,
                 [
-                    'required' => false,
                     'label'    => 'product.form.field.label',
                     'constraints' => [new NotBlank()],
                 ]
@@ -55,7 +52,6 @@ class ProductType extends AbstractType
                 DateType::class,
                 [
                     'widget'   => 'single_text',
-                    'required' => false,
                     'label'    => 'product.form.field.date',
                     'constraints' => [new Date()],
                 ]
@@ -67,11 +63,6 @@ class ProductType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'data_class'         => Product::class,
-                'translation_domain' => 'messages',
-            ]
-        );
+        $resolver->setDefaults(['data_class' => Product::class, ]);
     }
 }

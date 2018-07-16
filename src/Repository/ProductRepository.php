@@ -32,7 +32,7 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * @param Product $product
-     * @param         $id
+     * @param null    $idStorage
      *
      * @return Product
      * @throws NotFoundException
@@ -40,10 +40,10 @@ class ProductRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createOrUpdate(Product $product, $id = null): Product
+    public function createOrUpdate(Product $product, $idStorage = null): Product
     {
-        if ($id) {
-            $storage = $this->getEntityManager()->getRepository(Storage::class)->find($id);
+        if ($idStorage) {
+            $storage = $this->getEntityManager()->getRepository(Storage::class)->find($idStorage);
             if (!$storage) {
                 throw new NotFoundException('this storage does not exist');
             }
