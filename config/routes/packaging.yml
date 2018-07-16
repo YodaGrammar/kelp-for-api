@@ -7,7 +7,7 @@ kelp.packaging.list:
         page: '\d+'
 
 kelp.packaging.create:
-    path: /packaging/add
+    path: /packaging/create
     controller: App\Controller\PackagingController::createAction
 
 kelp.packaging.edit:
