@@ -40,30 +40,29 @@ class ProductFormHandler
     }
 
     /**
-     * @param Request      $request
+     * @param Request $request
      * @param Product $product
+     * @param null    $storage
      *
      * @return bool
-     * @throws \App\Exception\NotFoundException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      */
-    public function process(Request $request, Product $product): bool
+    public function process(Request $request, Product $product, $storage = null): bool
     {
         $this->form->setData($product);
         $this->form->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
 
-            $idStorage = null;
-            if($product->getId() === null) {
-                $idStorage = $request->get('id');
+            if($storage) {
+                $product->setStorage($storage);
             }
 
-            if($this->repository->createOrUpdate($product, $idStorage)) {
+            if($this->repository->createOrUpdate($product)) {
                 return true;
             }
         }
