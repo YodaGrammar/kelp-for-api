@@ -42,13 +42,13 @@ class ProductController extends Controller
     }
 
     /**
+     * @param Storage             $storage
      * @param Request             $request
      * @param ProductFormHandler  $formHandler
      * @param TranslatorInterface $translator
      * @param ProductFactory      $factory
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @throws \App\Exception\NotFoundException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -58,6 +58,7 @@ class ProductController extends Controller
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function createAction(
+        Storage $storage,
         Request $request,
         ProductFormHandler $formHandler,
         TranslatorInterface $translator,
@@ -65,7 +66,7 @@ class ProductController extends Controller
     ) {
         $product = $factory->create();
 
-        if ($formHandler->process($request, $product)) {
+        if ($formHandler->process($request, $product, $storage)) {
             $this->addFlash(
                 'success',
                 $translator->trans(

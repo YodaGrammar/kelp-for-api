@@ -16,6 +16,8 @@ class ProductFactory implements EntityFactoryInterface
     public function create(): Product
     {
         $product = new Product();
+        $product->setDateAdd(new \DateTime());
+        $product->setActive(true);
 
         return $product;
     }
