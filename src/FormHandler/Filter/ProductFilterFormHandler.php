@@ -78,8 +78,8 @@ class ProductFilterFormHandler implements FilterFormHandlerInterface
         $pagination = [
             'page'        => $request->get('page', 1),
             'nbPages'     => ceil(count($products) / self::MAX_PAGE),
-            'nomRoute'    => 'kelp.type_storage.list',
-            'paramsRoute' => [],
+            'nomRoute'    => 'kelp.product.list',
+            'paramsRoute' => ['id' => $request->get('id'),],
         ];
 
         return [

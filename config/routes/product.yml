@@ -1,6 +1,8 @@
 kelp.product.list:
-    path: /product/list/{id}
+    path: /product/list/{id}/{page}
     controller: App\Controller\ProductController::listAction
+    defaults:
+        page: 1
     requirements:
         page: '\d+'
 
