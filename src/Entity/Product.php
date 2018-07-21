@@ -58,6 +58,11 @@ class Product
      */
     private $dateAdd;
 
+    public function __construct()
+    {
+        $this->dateAdd = new \DateTime();
+    }
+
     /**
      * @return mixed
      */

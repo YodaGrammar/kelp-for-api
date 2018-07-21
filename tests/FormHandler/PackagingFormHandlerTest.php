@@ -2,8 +2,8 @@
 
 namespace App\Tests\FormHandler;
 
-use App\DTO\PackagingDTO;
-use App\FormHandler\PackagingFormHandler;
+use App\Entity\Packaging;
+use App\Form\Handler\PackagingFormHandler;
 use App\Repository\PackagingRepository;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -64,34 +64,13 @@ class PackagingFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->create(Argument::type(PackagingDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->createOrUpdate(Argument::type(Packaging::class))->shouldBeCalled();
 
-        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new PackagingDTO());
-
-        $this->assertTrue($result);
-    }
-
-    /**
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testShouldCallsEditIfFormIsValid(): void
-    {
-        $this->formProphecy->setData(Argument::any())->shouldBeCalled();
-        $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
-
-        $this->formProphecy->isValid()->willReturn(true);
-        $this->formProphecy->isSubmitted()->willReturn(true);
-
-        $this->repositoryProphecy->edit(Argument::type(PackagingDTO::class))->shouldBeCalled();
-
-        $storage     = new PackagingDTO();
-        $storage->id = 123;
-
-        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), $storage);
+        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new Packaging());
 
         $this->assertTrue($result);
     }
+
 
     /**
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -105,7 +84,7 @@ class PackagingFormHandlerTest extends TestCase
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
 
-        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new PackagingDTO());
+        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new Packaging());
 
         $this->assertFalse($result);
     }
@@ -122,7 +101,7 @@ class PackagingFormHandlerTest extends TestCase
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
 
-        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new PackagingDTO());
+        $result = $this->packagingFormHandler->process($this->requestProphecy->reveal(), new Packaging());
 
         $this->assertFalse($result);
     }

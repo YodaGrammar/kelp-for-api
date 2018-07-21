@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Storage;
-use App\Factory\Entity\ProductFactory;
 use App\FormHandler\Filter\ProductFilterFormHandler;
-use App\FormHandler\ProductFormHandler;
+use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +17,16 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class ProductController extends Controller
 {
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * @param Storage                  $storage
      * @param Request                  $request
@@ -31,22 +40,17 @@ class ProductController extends Controller
      */
     public function listAction(Storage $storage, Request $request, ProductFilterFormHandler $formHandler): Response
     {
-        return $this->render(
-            'product/list.html.twig',
-            [
+        return $this->render('product/list.html.twig', [
                 'pager'   => $formHandler->process($request),
                 'storage' => $storage,
                 'form'    => $formHandler->getForm()->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
      * @param Storage             $storage
      * @param Request             $request
      * @param ProductFormHandler  $formHandler
-     * @param TranslatorInterface $translator
-     * @param ProductFactory      $factory
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Doctrine\ORM\ORMException
@@ -57,39 +61,31 @@ class ProductController extends Controller
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
-    public function createAction(
-        Storage $storage,
-        Request $request,
-        ProductFormHandler $formHandler,
-        TranslatorInterface $translator,
-        ProductFactory $factory
-    ) {
-        $product = $factory->create();
+    public function createAction(Storage $storage, Request $request, ProductFormHandler $formHandler)
+    {
+        $product = new Product();
 
         if ($formHandler->process($request, $product, $storage)) {
             $this->addFlash(
                 'success',
-                $translator->trans(
+                $this->translator->trans(
                     'product.create.flash_message.validated',
                     ['%name%' => $product->getLabel()]
                 )
             );
+
             return $this->redirectToRoute('kelp.product.list', ['id' => $product->getStorage()->getId()]);
         }
 
-        return $this->render(
-            'product/create.html.twig',
-            [
+        return $this->render('product/create.html.twig', [
                 'form' => $formHandler->getForm()->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
      * @param Product             $product
      * @param Request             $request
      * @param ProductFormHandler  $formHandler
-     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws \App\Exception\NotFoundException
@@ -101,18 +97,11 @@ class ProductController extends Controller
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
-    public function editAction(
-        Product $product,
-        Request $request,
-        ProductFormHandler $formHandler,
-        TranslatorInterface $translator
-    ): Response {
-
-        $formHandler->getForm()->setData($product);
+    public function editAction(Product $product, Request $request, ProductFormHandler $formHandler): Response {
         if ($formHandler->process($request, $product)) {
             $this->addFlash(
                 'success',
-                $translator->trans(
+                $this->translator->trans(
                     'storage.edit.flash_message.validated',
                     ['%name%' => $product->getLabel()]
                 )
@@ -121,18 +110,14 @@ class ProductController extends Controller
             return $this->redirectToRoute('kelp.product.list', ['id' => $product->getStorage()->getId()]);
         }
 
-        return $this->render(
-            'product/edit.html.twig',
-            [
+        return $this->render('product/edit.html.twig', [
                 'form' => $formHandler->getForm()->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
      * @param Product             $product
      * @param ProductRepository   $repository
-     * @param TranslatorInterface $translator
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -141,16 +126,12 @@ class ProductController extends Controller
      *
      * @return Response
      */
-    public function deleteAction(
-        Product $product,
-        ProductRepository $repository,
-        TranslatorInterface $translator
-    ): Response {
+    public function deleteAction(Product $product, ProductRepository $repository): Response {
         $repository->delete($product);
 
         $this->addFlash(
             'success',
-            $translator->trans(
+            $this->translator->trans(
                 'storage.delete.flash_message.validated',
                 ['%name%' => $product->getLabel()]
             )

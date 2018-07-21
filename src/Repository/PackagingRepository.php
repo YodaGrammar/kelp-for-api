@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Packaging;
-use App\Factory\Entity\PackagingFactory;
 use App\Factory\PaginatorFactoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -12,29 +11,21 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * Class PackagingRepository.
  */
-class PackagingRepository extends ServiceEntityRepository implements EntityRepositoryInterface
+class PackagingRepository extends ServiceEntityRepository
 {
     /** @var PaginatorFactoryInterface */
     private $paginatorFactory;
-
-    /** @var PackagingFactory */
-    private $factory;
 
     /**
      * PackagingRepository constructor.
      *
      * @param ManagerRegistry           $registry
      * @param PaginatorFactoryInterface $paginatorFactory
-     * @param PackagingFactory          $factory
      */
-    public function __construct(
-        ManagerRegistry $registry,
-        PaginatorFactoryInterface $paginatorFactory,
-        PackagingFactory $factory
-    ) {
+    public function __construct(ManagerRegistry $registry, PaginatorFactoryInterface $paginatorFactory)
+    {
         parent::__construct($registry, Packaging::class);
         $this->paginatorFactory = $paginatorFactory;
-        $this->factory          = $factory;
     }
 
     /**
@@ -65,39 +56,17 @@ class PackagingRepository extends ServiceEntityRepository implements EntityRepos
     }
 
     /**
-     * @param $dto
-     *
-     * @return Packaging|null
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\ORMInvalidArgumentException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function create($dto): ?Packaging
-    {
-        $packaging = $this->factory->create($dto);
-
-        $this->getEntityManager()->persist($packaging);
-        $this->getEntityManager()->flush();
-
-        return $packaging;
-    }
-
-    /**
-     * @param $dto
-     *
-     * @return Packaging|null
+     * @param Packaging $packaging
+     * @return Packaging
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
      */
-    public function edit($dto): ?Packaging
+    public function createOrUpdate(Packaging $packaging): Packaging
     {
-        /** @var Packaging $packaging */
-        $packaging = $this->find($dto->id);
-        if (!$packaging) {
-            throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
+        if (null === $packaging->getId()) {
+            $this->getEntityManager()->persist($packaging);
         }
-        $packaging->setLabel($dto->label);
+
         $this->getEntityManager()->flush();
 
         return $packaging;

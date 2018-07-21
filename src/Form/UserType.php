@@ -49,7 +49,6 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => UserDTO::class,
-            'translation_domain' => 'messages',
         ]);
     }
 }

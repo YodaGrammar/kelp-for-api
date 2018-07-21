@@ -2,11 +2,7 @@
 
 namespace App\Repository;
 
-use App\DTO\ProductDTO;
 use App\Entity\Product;
-use App\Entity\Storage;
-use App\Exception\NotFoundException;
-use App\Factory\Entity\ProductFactory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -15,19 +11,14 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    /** @var ProductFactory */
-    private $factory;
-
     /**
      * ProductRepository constructor.
      *
      * @param ManagerRegistry $registry
-     * @param ProductFactory  $factory
      */
-    public function __construct(ManagerRegistry $registry, ProductFactory $factory)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
-        $this->factory = $factory;
     }
 
     /**

@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Storage;
-use App\Factory\DTO\StorageDTOFactory;
 use App\FormHandler\Filter\StorageFilterFormHandler;
-use App\FormHandler\StorageFormHandler;
+use App\Form\Handler\StorageFormHandler;
 use App\Repository\StorageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +17,16 @@ use Symfony\Component\Translation\TranslatorInterface;
 class StorageController extends Controller
 {
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
+    /**
      * @param Request                  $request
      * @param StorageFilterFormHandler $formHandler
      *
@@ -27,101 +36,67 @@ class StorageController extends Controller
      */
     public function listAction(Request $request, StorageFilterFormHandler $formHandler): Response
     {
-        return $this->render(
-            'storage/list.html.twig',
-            [
+        return $this->render('storage/list.html.twig', [
                 'pager' => $formHandler->process($request),
                 'form' => $formHandler->getForm()->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
-     * @param Request             $request
-     * @param StorageFormHandler  $formHandler
-     * @param TranslatorInterface $translator
-     * @param StorageDTOFactory   $dtoFactory
-     *
-     * @throws \LogicException
-     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     *
+     * @param Request $request
+     * @param StorageFormHandler $formHandler
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createAction(
-        Request $request,
-        StorageFormHandler $formHandler,
-        TranslatorInterface $translator,
-        StorageDTOFactory $dtoFactory
-    ): Response {
-        $storageDTO = $dtoFactory->create();
+    public function createAction(Request $request, StorageFormHandler $formHandler): Response {
+        $storage = new Storage();
 
-        if ($formHandler->process($request, $storageDTO)) {
+        if ($formHandler->process($request, $storage)) {
             $this->addFlash(
                 'success',
-                $translator->trans(
+                $this->translator->trans(
                     'storage.create.flash_message.validated',
-                    ['%name%' => $storageDTO->label]
+                    ['%name%' => $storage->getLabel()]
                 )
             );
 
             return $this->redirectToRoute('kelp.storage.list');
         }
 
-        return $this->render(
-            'storage/create.html.twig',
-            [
+        return $this->render('storage/create.html.twig', [
                 'form' => $formHandler->getForm()->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
-     * @param Storage             $storage
-     * @param Request             $request
-     * @param StorageFormHandler  $formHandler
-     * @param TranslatorInterface $translator
-     * @param StorageDTOFactory   $dtoFactory
-     *
-     * @throws \LogicException
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
-     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @param Storage $storage
+     * @param Request $request
+     * @param StorageFormHandler $formHandler
      *
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function editAction(
-        Storage $storage,
-        Request $request,
-        StorageFormHandler $formHandler,
-        TranslatorInterface $translator,
-        StorageDTOFactory $dtoFactory
-    ): Response {
-        $storageDTO = $dtoFactory->create($storage);
-        $formHandler->getForm()->setData($storageDTO);
-        if ($formHandler->process($request, $storageDTO)) {
-            $this->addFlash(
-                'success',
-                $translator->trans(
+    public function editAction(Storage $storage, Request $request, StorageFormHandler $formHandler): Response {
+        if ($formHandler->process($request, $storage)) {
+            $this->addFlash('success', $this->translator->trans(
                     'storage.edit.flash_message.validated',
-                    ['%name%' => $storageDTO->label]
+                    ['%name%' => $storage->getLabel()]
                 )
             );
 
             return $this->redirectToRoute('kelp.storage.list');
         }
 
-        return $this->render(
-            'storage/edit.html.twig',
-            [
+        return $this->render('storage/edit.html.twig', [
                 'form' => $formHandler->getForm()->createView(),
-            ]
-        );
+        ]);
     }
 
     /**
      * @param Storage             $storage
      * @param StorageRepository   $repository
-     * @param TranslatorInterface $translator
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -130,16 +105,12 @@ class StorageController extends Controller
      *
      * @return Response
      */
-    public function deleteAction(
-        Storage $storage,
-        StorageRepository $repository,
-        TranslatorInterface $translator
-    ): Response {
+    public function deleteAction(Storage $storage, StorageRepository $repository): Response {
         $repository->delete($storage);
 
         $this->addFlash(
             'success',
-            $translator->trans(
+            $this->translator->trans(
                 'storage.delete.flash_message.validated',
                 ['%name%' => $storage->getLabel()]
             )

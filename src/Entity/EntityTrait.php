@@ -7,7 +7,7 @@ trait EntityTrait
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $active = 1;
+    private $active = true;
 
     /**
      * @return bool

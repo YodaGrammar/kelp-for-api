@@ -3,7 +3,7 @@
 namespace App\Tests\FormHandler;
 
 use App\Entity\Product;
-use App\FormHandler\ProductFormHandler;
+use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -67,27 +67,6 @@ class ProductFormHandlerTest extends TestCase
         $this->repositoryProphecy->createOrUpdate(Argument::type(Product::class), Argument::any())->shouldBeCalled();
 
         $result = $this->productFormHandler->process($this->requestProphecy->reveal(), new Product());
-
-        $this->assertTrue($result);
-    }
-
-    /**
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testShouldCallsEditIfFormIsValid(): void
-    {
-        $this->formProphecy->setData(Argument::any())->shouldBeCalled();
-        $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
-
-        $this->formProphecy->isValid()->willReturn(true);
-        $this->formProphecy->isSubmitted()->willReturn(true);
-
-        $this->repositoryProphecy->createOrUpdate(Argument::type(Product::class), Argument::any())->shouldBeCalled();
-
-        $product = new Product();
-
-        $result = $this->productFormHandler->process($this->requestProphecy->reveal(), $product);
 
         $this->assertTrue($result);
     }

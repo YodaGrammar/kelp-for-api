@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\DTO\TypeStorageDTO;
+use App\Entity\TypeStorage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,6 +31,6 @@ class TypeStorageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data_class', TypeStorageDTO::class);
+        $resolver->setDefault('data_class', TypeStorage::class);
     }
 }
