@@ -10,46 +10,12 @@ use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class ProductFactory implements EntityFactoryInterface
 {
-    /** @var ManagerRegistry */
-    protected $managerRegistry;
-
-    /** @var TokenStorageInterface */
-    protected $tokenStorage;
-
     /**
-     * StorageFactory constructor.
-     *
-     * @param ManagerRegistry       $managerRegistry
-     * @param TokenStorageInterface $tokenStorage
-     */
-    public function __construct(ManagerRegistry $managerRegistry, TokenStorageInterface $tokenStorage)
-    {
-        $this->managerRegistry = $managerRegistry;
-        $this->tokenStorage    = $tokenStorage;
-    }
-
-    /**
-     * @param $dto
-     *
-     * @throws NotFoundException
-     *
      * @return Product
      */
-    public function create($dto): Product
+    public function create(): Product
     {
         $product = new Product();
-        $product->setLabel($dto->label);
-
-        $storage = $this->managerRegistry->getRepository(Storage::class)->find($dto->storage);
-        if (!$storage) {
-            throw new NotFoundException('this storage does not exist');
-        }
-        $product->setStorage($storage);
-        $product->setQuantity($dto->quantity);
-        $product->setPackaging($dto->packaging);
-        if ($dto->date) {
-            $product->setDatePeremption($dto->date);
-        }
         $product->setDateAdd(new \DateTime());
         $product->setActive(true);
 

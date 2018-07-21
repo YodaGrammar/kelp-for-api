@@ -11,7 +11,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /**
  * Class StorageFactory.
  */
-class StorageFactory implements EntityFactoryInterface
+class StorageFactory
+//    implements EntityFactoryInterface
 {
     /** @var ManagerRegistry */
     protected $managerRegistry;

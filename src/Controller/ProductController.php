@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Storage;
-use App\Factory\DTO\ProductDTOFactory;
+use App\Factory\Entity\ProductFactory;
 use App\FormHandler\Filter\ProductFilterFormHandler;
 use App\FormHandler\ProductFormHandler;
 use App\Repository\ProductRepository;
@@ -42,34 +42,39 @@ class ProductController extends Controller
     }
 
     /**
+     * @param Storage             $storage
      * @param Request             $request
      * @param ProductFormHandler  $formHandler
      * @param TranslatorInterface $translator
-     * @param ProductDTOFactory   $dtoFactory
-     *
-     * @throws \LogicException
-     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @param ProductFactory      $factory
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function createAction(
+        Storage $storage,
         Request $request,
         ProductFormHandler $formHandler,
         TranslatorInterface $translator,
-        ProductDTOFactory $dtoFactory
+        ProductFactory $factory
     ) {
-        $productDTO = $dtoFactory->create();
+        $product = $factory->create();
 
-        if ($formHandler->process($request, $productDTO)) {
+        if ($formHandler->process($request, $product, $storage)) {
             $this->addFlash(
                 'success',
                 $translator->trans(
                     'product.create.flash_message.validated',
-                    ['%name%' => $productDTO->label]
+                    ['%name%' => $product->getLabel()]
                 )
             );
-
-            return $this->redirectToRoute('kelp.product.list', ['id' => $productDTO->storage]);
+            return $this->redirectToRoute('kelp.product.list', ['id' => $product->getStorage()->getId()]);
         }
 
         return $this->render(
@@ -85,30 +90,31 @@ class ProductController extends Controller
      * @param Request             $request
      * @param ProductFormHandler  $formHandler
      * @param TranslatorInterface $translator
-     * @param ProductDTOFactory   $dtoFactory
      *
+     * @return Response
+     * @throws \App\Exception\NotFoundException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \LogicException
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
-     *
-     * @return Response
      */
     public function editAction(
         Product $product,
         Request $request,
         ProductFormHandler $formHandler,
-        TranslatorInterface $translator,
-        ProductDTOFactory $dtoFactory
+        TranslatorInterface $translator
     ): Response {
-        $productDTO = $dtoFactory->create($product);
-        $formHandler->getForm()->setData($productDTO);
-        if ($formHandler->process($request, $productDTO)) {
+
+        $formHandler->getForm()->setData($product);
+        if ($formHandler->process($request, $product)) {
             $this->addFlash(
                 'success',
                 $translator->trans(
                     'storage.edit.flash_message.validated',
-                    ['%name%' => $productDTO->label]
+                    ['%name%' => $product->getLabel()]
                 )
             );
 

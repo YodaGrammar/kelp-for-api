@@ -9,7 +9,8 @@ use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 /**
  * Class PackagingEntityFactory.
  */
-class PackagingFactory implements EntityFactoryInterface
+class PackagingFactory
+//    implements EntityFactoryInterface
 {
     /** @var ManagerRegistry */
     protected $managerRegistry;

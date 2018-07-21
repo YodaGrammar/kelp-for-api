@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\DTO\ProductDTO;
 use App\Entity\Product;
+use App\Entity\Storage;
+use App\Exception\NotFoundException;
 use App\Factory\Entity\ProductFactory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -29,45 +31,18 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param ProductDTO $dto
+     * @param Product $product
      *
-     * @throws \App\Exception\NotFoundException
+     * @return Product
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
-     * @return Product
      */
-    public function create(ProductDTO $dto): Product
+    public function createOrUpdate(Product $product): Product
     {
-        $product = $this->factory->create($dto);
+        if ($product->getId() === null) {
 
-        $this->getEntityManager()->persist($product);
-        $this->getEntityManager()->flush();
-
-        return $product;
-    }
-
-    /**
-     * @param ProductDTO $dto
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
-     *
-     * @return Product
-     */
-    public function edit(ProductDTO $dto): Product
-    {
-        if (null === ($product = $this->find($dto->id))) {
-            throw new \LogicException(sprintf('impossible to find information for id %s', $dto->id));
-        }
-
-        $product->setLabel($dto->label);
-        $product->setQuantity($dto->quantity);
-        $product->setPackaging($dto->packaging);
-        if ($dto->date) {
-            $product->setDatePeremption($dto->date);
+            $this->getEntityManager()->persist($product);
         }
         $this->getEntityManager()->flush();
 

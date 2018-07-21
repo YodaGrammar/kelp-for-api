@@ -2,14 +2,16 @@
 
 namespace App\Form;
 
-use App\DTO\ProductDTO;
 use App\Entity\Packaging;
+use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Date;
 
 class ProductType extends AbstractType
 {
@@ -19,37 +21,48 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', TextType::class, [
-                    'required' => false,
-                    'label' => 'product.form.field.quantity',
-            ])
-            ->add('packaging', EntityType::class, [
-                    'class' => Packaging::class,
+            ->add(
+                'quantity',
+                TextType::class,
+                [
+                    'label'       => 'product.form.field.quantity',
+                    'constraints' => [new NotBlank()],
+                ]
+            )
+            ->add(
+                'packaging',
+                EntityType::class,
+                [
+                    'class'        => Packaging::class,
                     'choice_label' => 'label',
-                    'required' => false,
-                    'label' => 'product.form.field.packaging',
-            ])
-            ->add('label', TextType::class, [
-                    'required' => false,
-                    'label' => 'product.form.field.label',
-            ])
-            ->add('date', DateType::class, [
-                    'widget' => 'single_text',
-                    'required' => false,
-                    'label' => 'product.form.field.date',
-            ])
-        ;
+                    'label'        => 'product.form.field.packaging',
+                    'constraints' => [new NotBlank()],
+                ]
+            )
+            ->add(
+                'label',
+                TextType::class,
+                [
+                    'label'    => 'product.form.field.label',
+                    'constraints' => [new NotBlank()],
+                ]
+            )
+            ->add(
+                'datePeremption',
+                DateType::class,
+                [
+                    'widget'   => 'single_text',
+                    'label'    => 'product.form.field.date',
+                    'constraints' => [new Date()],
+                ]
+            );
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'data_class' => ProductDTO::class,
-                'translation_domain' => 'messages',
-            ]);
+        $resolver->setDefaults(['data_class' => Product::class, ]);
     }
 }

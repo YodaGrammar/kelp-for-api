@@ -3,6 +3,8 @@
 namespace App\FormHandler;
 
 use App\DTO\ProductDTO;;
+
+use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -12,7 +14,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * Class StorageFormHandler.
  */
-class ProductFormHandler implements FormHandlerInterface
+class ProductFormHandler
 {
     use FormHandlerTrait;
 
@@ -38,27 +40,29 @@ class ProductFormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Request         $request
-     * @param ProductDTO|null $productDTO
-     *
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @param Request $request
+     * @param Product $product
+     * @param null    $storage
      *
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
-    public function process(Request $request, ProductDTO $productDTO = null): bool
+    public function process(Request $request, Product $product, $storage = null): bool
     {
-        $this->form->setData($productDTO);
+        $this->form->setData($product);
         $this->form->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
-            $function = 'edit';
-            if ($productDTO &&!$productDTO->id) {
-                $productDTO->storage = $request->get('id');
-                $function = 'create';
+
+            if($storage) {
+                $product->setStorage($storage);
             }
 
-            if($this->repository->$function($productDTO)) {
+            if($this->repository->createOrUpdate($product)) {
                 return true;
             }
         }
