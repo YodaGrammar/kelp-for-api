@@ -91,6 +91,8 @@ home:
     login: 'Connexion'
 register:
   form:
+    flash_message:
+      success: 'Inscription réalisée avec succès.'
     button:
       save: 'Créer mon compte'
     field:
