@@ -34,7 +34,7 @@ product:
     button:
       save: 'Enregistrer'
     field:
-      save: 'Enregistré'
+      save: 'Enregistrer'
       label: 'Produit'
       packaging: 'Conditionnement'
       quantity: 'Quantité'
@@ -64,7 +64,7 @@ packaging:
     field:
       label: "label"
     button:
-      save: 'messages'
+      save: 'Enregistrer'
   form_filter:
     field:
       label: 'Conditionnement'
@@ -84,7 +84,7 @@ type_storage:
     title: 'messages'
   form_filter:
     button:
-      save: 'messages'
+      save: 'Enregistrer'
 home:
   button:
     register: 'Inscription'
