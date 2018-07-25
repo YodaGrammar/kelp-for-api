@@ -31,10 +31,7 @@ class UserType extends AbstractType
             ->add('username', TextType::class, [
                 'label' => 'register.form.field.username',
             ])
-            ->add(
-                'plainPassword',
-                RepeatedType::class,
-                [
+            ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
                     'first_options' => ['label' => 'register.form.field.password'],
                     'second_options' => ['label' => 'register.form.field.repeat_password'],
