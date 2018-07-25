@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Storage;
+use App\Factory\ProductFactory;
 use App\FormHandler\Filter\ProductFilterFormHandler;
 use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
@@ -48,22 +49,18 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Storage             $storage
-     * @param Request             $request
-     * @param ProductFormHandler  $formHandler
+     * @param Storage $storage
+     * @param Request $request
+     * @param ProductFactory $factory
+     * @param ProductFormHandler $formHandler
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \LogicException
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
-     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
-    public function createAction(Storage $storage, Request $request, ProductFormHandler $formHandler)
+    public function createAction(Storage $storage, Request $request, ProductFactory $factory, ProductFormHandler $formHandler)
     {
-        $product = new Product();
+        $product = $factory->create();
 
         if ($formHandler->process($request, $product, $storage)) {
             $this->addFlash(

@@ -35,27 +35,31 @@ class TypeProduct
     private $unit;
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
 
     /**
-     * @param mixed $label
+     * @param string $label
+     *
+     * @return self
      */
-    public function setLabel($label)
+    public function setLabel($label): self
     {
         $this->label = $label;
+
+        return $this;
     }
 
     /**
@@ -68,9 +72,13 @@ class TypeProduct
 
     /**
      * @param string $unit
+     *
+     * @return self
      */
-    public function setUnit(string $unit)
+    public function setUnit(string $unit): self
     {
         $this->unit = $unit;
+
+        return $this;
     }
 }

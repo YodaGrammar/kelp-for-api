@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Storage;
+use App\Factory\StorageFactory;
 use App\FormHandler\Filter\StorageFilterFormHandler;
 use App\Form\Handler\StorageFormHandler;
 use App\Repository\StorageRepository;
@@ -44,13 +45,14 @@ class StorageController extends Controller
 
     /**
      * @param Request $request
+     * @param StorageFactory $factory
      * @param StorageFormHandler $formHandler
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createAction(Request $request, StorageFormHandler $formHandler): Response {
-        $storage = new Storage();
+    public function createAction(Request $request, StorageFactory $factory, StorageFormHandler $formHandler): Response {
+        $storage = $factory->create();
 
         if ($formHandler->process($request, $storage)) {
             $this->addFlash(

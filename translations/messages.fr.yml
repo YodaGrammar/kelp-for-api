@@ -26,7 +26,7 @@ product:
         label: 'Produit'
         packaging: 'Conditionnement'
         quantity: 'Quantité'
-        datePeremption: 'Date de péremption'
+        expirationDate: 'Date de péremption'
         dateAdd: "Date d'ajout"
       empty:
         message: 'Pas de produit pour ce rangement'

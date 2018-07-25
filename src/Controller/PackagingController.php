@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Packaging;
+use App\Factory\PackagingFactory;
 use App\FormHandler\Filter\PackagingFilterFormHandler;
 use App\Form\Handler\PackagingFormHandler;
 use App\Repository\PackagingRepository;
@@ -44,13 +45,14 @@ class PackagingController extends Controller
 
     /**
      * @param Request $request
+     * @param PackagingFactory $factory
      * @param PackagingFormHandler $formHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createAction(Request $request, PackagingFormHandler $formHandler) {
-        $packaging = new Packaging();
+    public function createAction(Request $request, PackagingFactory $factory, PackagingFormHandler $formHandler) {
+        $packaging = $factory->create();
 
         if ($formHandler->process($request, $packaging)) {
             $this->addFlash(

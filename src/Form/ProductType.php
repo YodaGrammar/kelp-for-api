@@ -48,7 +48,7 @@ class ProductType extends AbstractType
                 ]
             )
             ->add(
-                'datePeremption',
+                'expirationDate',
                 DateType::class,
                 [
                     'widget'   => 'single_text',
