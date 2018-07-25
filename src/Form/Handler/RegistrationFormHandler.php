@@ -2,9 +2,7 @@
 
 namespace App\Form\Handler;
 
-
-use App\DTO\UserDTO;
-use App\Entity\User;
+use App\Factory\UserFactory;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -24,31 +22,33 @@ class RegistrationFormHandler
      * @var UserRepository
      */
     private $repository;
+    /**
+     * @var UserFactory
+     */
+    private $factory;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         UserPasswordEncoderInterface $passwordEncoder,
-        UserRepository $repository
+        UserRepository $repository,
+        UserFactory $factory
     ) {
         $this->form = $formFactory->create( UserType::class);
         $this->passwordEncoder = $passwordEncoder;
         $this->repository = $repository;
+        $this->factory = $factory;
     }
 
 
     public function process(Request $request): bool
     {
-        $userDTO = new UserDTO();
+        $registerUser = $this->factory->create();
 
-        $this->form->setData($userDTO);
+        $this->form->setData($registerUser);
         $this->form->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
-            $registerUser = new User();
-            $registerUser->setEmail($userDTO->email);
-            $registerUser->setFullName($userDTO->fullName);
-            $registerUser->setUsername($userDTO->username);
-            $password = $this->passwordEncoder->encodePassword($registerUser, $userDTO->plainPassword);
+            $password = $this->passwordEncoder->encodePassword($registerUser, $registerUser->getPlainPassword());
             $registerUser->setPassword($password);
 
             $this->repository->create($registerUser);
