@@ -1,8 +1,6 @@
 <?php
 
-namespace App\FormHandler;
-
-use App\DTO\ProductDTO;;
+namespace App\Form\Handler;
 
 use App\Entity\Product;
 use App\Form\ProductType;
@@ -31,10 +29,7 @@ class ProductFormHandler
      *
      * @throws InvalidOptionsException
      */
-    public function __construct(
-        FormFactoryInterface $formFactory,
-        ProductRepository $repository
-    ) {
+    public function __construct(FormFactoryInterface $formFactory, ProductRepository $repository) {
         $this->form = $formFactory->createNamed('kelp_product', ProductType::class);
         $this->repository = $repository;
     }

@@ -40,9 +40,9 @@ class TypeStorage
     private $class;
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -57,10 +57,14 @@ class TypeStorage
 
     /**
      * @param string $label
+     *
+     * @return self
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): self
     {
         $this->label = $label;
+
+        return $this;
     }
 
     /**
@@ -73,10 +77,14 @@ class TypeStorage
 
     /**
      * @param string $comment
+     *
+     * @return self
      */
-    public function setComment(string $comment)
+    public function setComment(string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
     }
 
     /**
@@ -88,10 +96,14 @@ class TypeStorage
     }
 
     /**
-     * @param mixed $class
+     * @param string $class
+     *
+     * @return self
      */
-    public function setClass($class)
+    public function setClass($class): self
     {
         $this->class = $class;
+
+        return $this;
     }
 }

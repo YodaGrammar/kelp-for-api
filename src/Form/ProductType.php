@@ -48,7 +48,7 @@ class ProductType extends AbstractType
                 ]
             )
             ->add(
-                'datePeremption',
+                'expirationDate',
                 DateType::class,
                 [
                     'widget'   => 'single_text',
@@ -63,6 +63,6 @@ class ProductType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => Product::class, ]);
+        $resolver->setDefaults(['data_class' => Product::class]);
     }
 }

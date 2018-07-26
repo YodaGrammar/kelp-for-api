@@ -31,9 +31,9 @@ class Packaging
     private $products;
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -48,14 +48,18 @@ class Packaging
 
     /**
      * @param string $label
+     *
+     * @return self
      */
-    public function setLabel(string $label): void
+    public function setLabel(string $label): self
     {
         $this->label = $label;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return iterable
      */
     public function getProducts()
     {
@@ -63,10 +67,14 @@ class Packaging
     }
 
     /**
-     * @param mixed $products
+     * @param iterable $products
+     *
+     * @return self
      */
-    public function setProduct($products): void
+    public function setProduct(iterable $products): self
     {
         $this->products = $products;
+
+        return $this;
     }
 }

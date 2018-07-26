@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\DTO\PackagingDTO;
+use App\Entity\Packaging;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,9 +27,6 @@ class PackagingType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => PackagingDTO::class,
-            'translation_domain' => 'messages',
-        ]);
+        $resolver->setDefaults(['data_class' => Packaging::class]);
     }
 }

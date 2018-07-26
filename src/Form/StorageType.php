@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\DTO\StorageDTO;
+use App\Entity\Storage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +28,6 @@ class StorageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data_class', StorageDTO::class);
+        $resolver->setDefault('data_class', Storage::class);
     }
 }

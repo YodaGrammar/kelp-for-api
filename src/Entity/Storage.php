@@ -43,9 +43,9 @@ class Storage
     private $products;
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -60,57 +60,73 @@ class Storage
 
     /**
      * @param string $label
+     *
+     * @return self
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): self
     {
         $this->label = $label;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
+     *
+     * @return self
      */
-    public function setUser($user)
+    public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return TypeStorage
      */
-    public function getTypeStorage()
+    public function getTypeStorage(): TypeStorage
     {
         return $this->typeStorage;
     }
 
     /**
-     * @param mixed $typeStorage
+     * @param TypeStorage $typeStorage
+     *
+     * @return self
      */
-    public function setTypeStorage($typeStorage)
+    public function setTypeStorage($typeStorage): self
     {
         $this->typeStorage = $typeStorage;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return iterable|null
      */
-    public function getProducts()
+    public function getProducts(): ?iterable
     {
         return $this->products;
     }
 
     /**
-     * @param mixed $products
+     * @param ?iterable $products
+     *
+     * @return self
      */
-    public function setProducts($products): void
+    public function setProducts(?iterable $products): self
     {
         $this->products = $products;
+
+        return $this;
     }
 }

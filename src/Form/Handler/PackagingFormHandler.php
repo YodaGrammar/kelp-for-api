@@ -1,8 +1,8 @@
 <?php
 
-namespace App\FormHandler;
+namespace App\Form\Handler;
 
-use App\DTO\PackagingDTO;
+use App\Entity\Packaging;
 use App\Form\PackagingType;
 use App\Repository\PackagingRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * Class StorageFormHandler.
  */
-class PackagingFormHandler implements FormHandlerInterface
+class PackagingFormHandler
 {
     use FormHandlerTrait;
 
@@ -36,29 +36,23 @@ class PackagingFormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Request           $request
-     * @param PackagingDTO|null $packagingDTO
-     *
+     * @param Request $request
+     * @param Packaging|null $packaging
      * @return bool
-     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
-     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function process(Request $request, PackagingDTO $packagingDTO = null): bool
+    public function process(Request $request, Packaging $packaging = null): bool
     {
-        $this->form->setData($packagingDTO);
+        $this->form->setData($packaging);
         $this->form->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
-            $function = 'edit';
-
-            if ($packagingDTO &&!$packagingDTO->id) {
-                $function = 'create';
-            }
-
-            if($this->repository->$function($packagingDTO)) {
+            if($this->repository->createOrUpdate($packaging)) {
                 return true;
             }
         }
+
         return false;
     }
 }

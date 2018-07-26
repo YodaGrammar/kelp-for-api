@@ -23,7 +23,7 @@ class Product
      *
      * @var int
      */
-    private $quantity;
+    private $quantity = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="Packaging", inversedBy="products")
@@ -49,7 +49,7 @@ class Product
      *
      * @var \DateTime
      */
-    private $datePeremption = null;
+    private $expirationDate;
 
     /**
      * @ORM\Column(type="datetime")
@@ -59,7 +59,7 @@ class Product
     private $dateAdd;
 
     /**
-     * @return mixed
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -69,81 +69,112 @@ class Product
     /**
      * @return int
      */
-    public function getQuantity(): ?int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
     /**
      * @param int $quantity
+     *
+     * @return self
      */
-    public function setQuantity(int $quantity): void
+    public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return Packaging
      */
-    public function getPackaging()
+    public function getPackaging(): Packaging
     {
         return $this->packaging;
     }
 
     /**
-     * @param mixed $packaging
+     * @param Packaging $packaging
+     *
+     * @return self
      */
-    public function setPackaging($packaging): void
+    public function setPackaging(Packaging $packaging): self
     {
         $this->packaging = $packaging;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
 
     /**
-     * @param mixed $label
+     * @param string $label
+     *
+     * @return self
      */
-    public function setLabel($label)
+    public function setLabel($label): self
     {
         $this->label = $label;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return Storage
      */
-    public function getStorage()
+    public function getStorage(): Storage
     {
         return $this->storage;
     }
 
     /**
-     * @param mixed $storage
+     * @param Storage $storage
+     *
+     * @return self
      */
-    public function setStorage($storage): void
+    public function setStorage(Storage $storage): self
     {
         $this->storage = $storage;
+
+        return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDatePeremption(): ?\DateTime
+    public function getExpirationDate(): ?\DateTime
     {
-        return $this->datePeremption;
+        return $this->expirationDate;
     }
 
     /**
-     * @param  $datePeremption
+     * @param \DateTime|null $expirationDate
+     *
+     * @return self
      */
-    public function setDatePeremption($datePeremption): void
+    public function setExpirationDate(?\DateTime $expirationDate): self
     {
-        $this->datePeremption = $datePeremption;
+        $this->expirationDate = $expirationDate;
+
+        return $this;
+    }
+
+    public function isExpired(): bool
+    {
+        if (null === $this->expirationDate) {
+            return false;
+        }
+
+        $today = new \DateTime();
+
+        return $this->expirationDate < $today;
     }
 
     /**
@@ -156,9 +187,13 @@ class Product
 
     /**
      * @param \DateTime $dateAdd
+     *
+     * @return self
      */
-    public function setDateAdd(\DateTime $dateAdd): void
+    public function setDateAdd(\DateTime $dateAdd): self
     {
         $this->dateAdd = $dateAdd;
+
+        return $this;
     }
 }

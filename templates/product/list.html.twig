@@ -21,7 +21,7 @@
                 <th width="10%"> {{ 'product.list.table.header.quantity'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.packaging'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.label'|trans }} </th>
-                <th width="10%"> {{ 'product.list.table.header.datePeremption'|trans }} </th>
+                <th width="10%"> {{ 'product.list.table.header.expirationDate'|trans }} </th>
                 <th width="10%"> {{ 'product.list.table.header.dateAdd'|trans }} </th>
                 <th width="10%" class="text-center"> Action </th>
             </tr>
@@ -39,12 +39,12 @@
                         {{ product.label }}
                     </td>
                     <td>
-                        {% if product.datePeremption %}
-                            {{ product.datePeremption|date('d/m/Y') }}
+                        {% if product.expirationDate %}
+                            {{ product.expirationDate|date('d/m/Y') }}
                         {% endif %}
                     </td>
                     <td>
-                        {% if not product.datePeremption %}
+                        {% if not product.expirationDate %}
                             {{ product.dateAdd|date('d/m/Y') }}
                         {% endif %}
                     </td>

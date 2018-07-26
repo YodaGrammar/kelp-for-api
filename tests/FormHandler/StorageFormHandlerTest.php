@@ -2,15 +2,17 @@
 
 namespace App\Tests\FormHandler;
 
-use App\DTO\StorageDTO;
-use App\Factory\Entity\StorageFactory;
-use App\FormHandler\StorageFormHandler;
+use App\Entity\Storage;
+use App\Entity\User;
+use App\Form\Handler\StorageFormHandler;
 use App\Repository\StorageRepository;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class StorageFormHandlerTest extends TestCase
 {
@@ -19,7 +21,7 @@ class StorageFormHandlerTest extends TestCase
     private $formFactoryProphecy;
     private $repositoryProphecy;
     private $storageFormHandler;
-    private $factoryProphecy;
+    private $tokenStorageProphecy;
 
     /**
      * @throws \Prophecy\Exception\Doubler\ClassNotFoundException
@@ -30,20 +32,21 @@ class StorageFormHandlerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->requestProphecy     = $this->prophesize(Request::class);
-        $this->formProphecy        = $this->prophesize(FormInterface::class);
-        $this->formFactoryProphecy = $this->prophesize(FormFactoryInterface::class);
-        $this->repositoryProphecy  = $this->prophesize(StorageRepository::class);
-        $this->factoryProphecy     = $this->prophesize(StorageFactory::class);
+        $this->requestProphecy      = $this->prophesize(Request::class);
+        $this->formProphecy         = $this->prophesize(FormInterface::class);
+        $this->formFactoryProphecy  = $this->prophesize(FormFactoryInterface::class);
+        $this->repositoryProphecy   = $this->prophesize(StorageRepository::class);
+        $this->tokenStorageProphecy = $this->prophesize(TokenStorageInterface::class);
+        $tokenProphecy = $this->prophesize(TokenInterface::class);
 
-        $this->formFactoryProphecy
-            ->createNamed(Argument::any(), Argument::any())
-            ->willReturn($this->formProphecy->reveal());
+        $tokenProphecy->getUser()->willReturn(new User());
+        $this->formFactoryProphecy->createNamed(Argument::any(), Argument::any())->willReturn($this->formProphecy->reveal());
+        $this->tokenStorageProphecy->getToken()->willReturn($tokenProphecy->reveal());
 
         $this->storageFormHandler = new StorageFormHandler(
             $this->formFactoryProphecy->reveal(),
             $this->repositoryProphecy->reveal(),
-            $this->factoryProphecy->reveal()
+            $this->tokenStorageProphecy->reveal()
         );
     }
 
@@ -68,31 +71,9 @@ class StorageFormHandlerTest extends TestCase
         $this->formProphecy->isValid()->willReturn(true);
         $this->formProphecy->isSubmitted()->willReturn(true);
 
-        $this->repositoryProphecy->create(Argument::type(StorageDTO::class))->shouldBeCalled();
+        $this->repositoryProphecy->createOrUpdate(Argument::type(Storage::class))->shouldBeCalled();
 
-        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new StorageDTO());
-
-        $this->assertTrue($result);
-    }
-
-    /**
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testShouldCallsEditIfFormIsValid(): void
-    {
-        $this->formProphecy->setData(Argument::any())->shouldBeCalled();
-        $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
-
-        $this->formProphecy->isValid()->willReturn(true);
-        $this->formProphecy->isSubmitted()->willReturn(true);
-
-        $this->repositoryProphecy->edit(Argument::type(StorageDTO::class))->shouldBeCalled();
-
-        $storage     = new StorageDTO();
-        $storage->id = 123;
-
-        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), $storage);
+        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new Storage());
 
         $this->assertTrue($result);
     }
@@ -109,7 +90,7 @@ class StorageFormHandlerTest extends TestCase
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
 
-        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new StorageDTO());
+        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new Storage());
 
         $this->assertFalse($result);
     }
@@ -126,7 +107,7 @@ class StorageFormHandlerTest extends TestCase
         $this->formProphecy->setData(Argument::any())->shouldBeCalled();
         $this->formProphecy->handleRequest(Argument::type(Request::class))->shouldBeCalled();
 
-        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new StorageDTO());
+        $result = $this->storageFormHandler->process($this->requestProphecy->reveal(), new Storage());
 
         $this->assertFalse($result);
     }
