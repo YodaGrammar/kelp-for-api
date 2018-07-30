@@ -1,0 +1,12 @@
+
+admin.user:
+  prefix: /admin
+  resource: admin/user.yaml
+
+admin.storage_type:
+  prefix: /admin
+  resource: admin/storage_type.yaml
+
+admin.packaging:
+  prefix: /admin
+  resource: admin/packaging.yaml

@@ -1,0 +1,15 @@
+dashboard:
+  label: 'Dashboard'
+
+storage:
+  label: 'Storage'
+
+admin:
+  label: 'Administration'
+  submenu:
+    storage_type: 'Type Stockage'
+    packaging: 'Packaging'
+    user: 'Utilisateurs'
+
+logout:
+  label: 'Déconnexion'

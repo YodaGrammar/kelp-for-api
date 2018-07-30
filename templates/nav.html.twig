@@ -1,3 +1,4 @@
+{% trans_default_domain 'navbar' %}
 {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -12,25 +13,26 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {% if currentPath == path('kelp.dashboard') %}active{% endif %}">
                     <a class="nav-link" href="{{ path('kelp.dashboard') }}">
-                        Dashboard<span class="sr-only">(current)</span>
+                        {{ 'dashboard.label'|trans }}<span class="sr-only">(current)</span>
 
                     </a>
                 </li>
                 <li class="nav-item {% if currentPath == path('kelp.storage.list') %}active{% endif %}">
-                    <a class="nav-link" href="{{ path('kelp.storage.list') }}">Storage</a>
+                    <a class="nav-link" href="{{ path('kelp.storage.list') }}">{{ 'storage.label'|trans }}</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown {% if currentPath == path('kelp.packaging.list') or
-                    currentPath == path('kelp.type_storage.list') %}active{% endif %}">
+                    currentPath == path('kelp.storage_type.list') %}active{% endif %}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropDownAdmin" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        Administration
+                        {{ 'admin.label'|trans }}
                     </a>
                     <div class="dropdown-menu kelp-dropdown-menu-no-padding" aria-labelledby="dropDownAdmin">
-                        <a class="dropdown-item" href="{{ path('kelp.type_storage.list') }}">Type Storage</a>
-                        <a class="dropdown-item" href="{{ path('kelp.packaging.list') }}">Packaging</a>
+                        <a class="dropdown-item" href="{{ path('kelp.storage_type.list') }}">{{ 'admin.submenu.storage_type'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('kelp.packaging.list') }}">{{ 'admin.submenu.packaging'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('kelp.user.list') }}">{{ 'admin.submenu.user'|trans }}</a>
 
                     </div>
                 </li>
@@ -39,14 +41,13 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownUser" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            {{ app.user.username|capitalize }}
+                            <i class="fa fa-user-circle" aria-hidden="true"></i> {{ app.user.username|capitalize }}
                         {% endif %}
                     </a>
                     <div class="dropdown-menu kelp-dropdown-menu-sm" aria-labelledby="dropdownUser">
-                        <a class="dropdown-item" href="{{ path('kelp.logout') }}">Logout</a>
+                        <a class="dropdown-item" href="{{ path('kelp.logout') }}">{{ 'logout.label'|trans }}</a>
                     </div>
                 </li>
-
 
             </ul>
         </div>

@@ -1,3 +1,4 @@
+
 storage:
   form:
     button:
@@ -79,12 +80,20 @@ packaging:
     modal:
       question: 'Etes-vous sûr de vouloir supprimer ce conditionnement ?'
       title: "Suppression d'un conditionnement"
+
 type_storage:
   list:
-    title: 'messages'
-  form_filter:
-    button:
-      save: 'Enregistrer'
+    title: 'Liste des Stockages'
+    empty_message: 'Pas de type storage disponible'
+    header:
+      label: 'Label'
+      class: 'Classe'
+      action: 'Action'
+  form:
+    filter:
+      field:
+        label: 'Rechercher'
+
 home:
   button:
     register: 'Inscription'
@@ -101,3 +110,17 @@ register:
       email: 'Adresse E-mail '
       password: 'Mot de passe'
       repeat_password: 'Confirmation'
+
+user:
+  list:
+    title: 'Liste des utilisateurs'
+    empty_message: 'Aucun utilisateur'
+    header:
+      fullname: 'Nom'
+      email: 'Email'
+      roles: 'Roles'
+      status: 'Statut'
+    label:
+      status_disabled: 'Suspendu'
+      status_enabled: 'Actif'
+

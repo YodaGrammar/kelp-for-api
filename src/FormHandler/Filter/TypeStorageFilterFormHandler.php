@@ -81,7 +81,7 @@ class TypeStorageFilterFormHandler implements FilterFormHandlerInterface
         $pagination = [
             'page' => $request->get('page', 1),
             'nbPages' => ceil(count($typeStorages) / self::MAX_PAGE),
-            'nomRoute' => 'kelp.type_storage.list',
+            'nomRoute' => 'kelp.storage_type.list',
             'paramsRoute' => [],
         ];
 
