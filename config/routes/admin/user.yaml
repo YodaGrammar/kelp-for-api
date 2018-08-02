@@ -1,0 +1,3 @@
+kelp.user.list:
+    path: /user
+    controller: App\Controller\UserController:indexAction

@@ -21,7 +21,7 @@ class FilterTypeStorageType extends AbstractType
             'required' => false,
             'attr' => ['class' => 'form-control-sm mr-2'],
             'label_attr' => ['class' => 'mr-2'],
-            'label' => 'type_storage.form_filter.field.label',
+            'label' => 'type_storage.form.filter.field.label',
         ]);
     }
 

@@ -1,0 +1,4 @@
+
+kelp.admin:
+  prefix: /admin
+  resource: 'admin/*.yaml'
