@@ -89,7 +89,7 @@ class Product
     /**
      * @return Packaging
      */
-    public function getPackaging(): Packaging
+    public function getPackaging(): ?Packaging
     {
         return $this->packaging;
     }
@@ -109,7 +109,7 @@ class Product
     /**
      * @return string
      */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
