@@ -7,7 +7,7 @@
         </div>
     </div>
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered table-sm">
             <thead>
             <tr>
                 <th>{{ 'user.list.header.fullname'|trans }}</th>
@@ -17,21 +17,23 @@
             </tr>
             </thead>
             <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td>{{ user.fullName }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.roles|join(', ') }}</td>
-                        <td class="text-center">{% if not user.active %}
-                                <span class="badge badge-danger">{{ 'user.list.label.status_disabled'|trans }}</span>
-                            {% else %}
-                                <span class="badge badge-success">{{ 'user.list.label.status_enabled'|trans }}</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr><td colspan="4">{{ 'user.list.empty_message'|trans }}</td></tr>
-                {% endfor %}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.fullName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles|join(', ') }}</td>
+                    <td class="text-center">{% if not user.active %}
+                            <span class="badge badge-danger">{{ 'user.list.label.status_disabled'|trans }}</span>
+                        {% else %}
+                            <span class="badge badge-success">{{ 'user.list.label.status_enabled'|trans }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">{{ 'user.list.empty_message'|trans }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
