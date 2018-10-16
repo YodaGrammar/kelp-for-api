@@ -75,6 +75,10 @@ db-validate-schema: .env vendor
 ## -----
 ##
 
+coverage: ## Run coverage unit tests
+coverage: vendor
+	$(EXEC_PHP) vendor/bin/phpunit --coverage-html --coverage-text
+
 test: ## Run unit and functional tests
 test: tu tf
 

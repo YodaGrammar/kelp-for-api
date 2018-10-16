@@ -77,7 +77,11 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
                     ->where('p.user = :user')
+                    ->andWhere('')
                     ->setParameter('user', $user)
-                    ->orderBy('p.date', 'DESC')->getQuery()->getResult();
+                    ->orderBy('p.expirationDate', 'DESC')
+                    ->getQuery()->getResult();
     }
+
+
 }
