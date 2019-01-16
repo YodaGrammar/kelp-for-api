@@ -24,8 +24,13 @@ class StorageFormHandler
     private $tokenStorage;
 
     /**
-     * @param FormFactoryInterface $formFactory
-     * @param StorageRepository    $repository
+     * StorageFormHandler constructor.
+     *
+     * @param FormFactoryInterface  $formFactory
+     * @param StorageRepository     $repository
+     * @param TokenStorageInterface $tokenStorage
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function __construct(FormFactoryInterface $formFactory, StorageRepository $repository, TokenStorageInterface $tokenStorage) {
         $this->form = $formFactory->createNamed('kelp_storage', StorageType::class);
@@ -40,6 +45,8 @@ class StorageFormHandler
      * @return bool
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
      */
     public function process(Request $request, Storage $storage): bool
     {
@@ -53,7 +60,6 @@ class StorageFormHandler
                 return true;
             }
         }
-
         return false;
     }
 }

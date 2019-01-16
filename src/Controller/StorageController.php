@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Storage;
+use App\Entity\TypeStorage;
 use App\Factory\StorageFactory;
 use App\FormHandler\Filter\StorageFilterFormHandler;
 use App\Form\Handler\StorageFormHandler;
@@ -44,15 +45,22 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param StorageFactory $factory
+     * @param TypeStorage        $typeStorage
+     * @param Request            $request
+     * @param StorageFactory     $factory
      * @param StorageFormHandler $formHandler
+     *
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
-    public function createAction(Request $request, StorageFactory $factory, StorageFormHandler $formHandler): Response {
+    public function createAction(TypeStorage $typeStorage, Request $request, StorageFactory $factory, StorageFormHandler $formHandler): Response {
         $storage = $factory->create();
+        $storage->setTypeStorage($typeStorage);
 
         if ($formHandler->process($request, $storage)) {
             $this->addFlash(
@@ -72,13 +80,17 @@ class StorageController extends Controller
     }
 
     /**
-     * @param Storage $storage
-     * @param Request $request
+     * @param Storage            $storage
+     * @param Request            $request
      * @param StorageFormHandler $formHandler
      *
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function editAction(Storage $storage, Request $request, StorageFormHandler $formHandler): Response {
         if ($formHandler->process($request, $storage)) {

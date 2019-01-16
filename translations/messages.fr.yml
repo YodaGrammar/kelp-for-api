@@ -42,10 +42,10 @@ product:
       date: 'Date de péremption'
   create:
     flash_message:
-      validated: messages
+      validated: "Votre produit a bien été ajouté"
   edit:
     flash_message:
-      validated: messages
+      validated: "Votre produit a bien été édité"
   delete:
     modal:
       title: "Suppression d'un produit"
