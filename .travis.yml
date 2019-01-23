@@ -9,4 +9,3 @@ before_script:
 script:
     - bin/console lint:twig ./templates
     - vendor/bin/phpunit
-    - vendor/bin/behat
