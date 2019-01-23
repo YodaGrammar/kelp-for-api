@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class TypeProduct.
  *
+ * @ApiResource()
  * @ORM\Entity
  * @ORM\Table(name="kelp_type_product")
  */

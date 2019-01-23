@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "ext-iconv": "*",
-        "php": "7.2.*",
+        "api-platform/api-pack": "^1.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/console": "^4.2",
         "symfony/flex": "^1.0",
